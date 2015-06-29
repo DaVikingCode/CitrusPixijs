@@ -1,0 +1,8 @@
+-js bin/js/App.js
+-main Main
+-cp src
+-lib pixijs
+-lib nape
+-lib howlerjs
+-lib actuate
+-D NAPE_RELEASE_BUILD
