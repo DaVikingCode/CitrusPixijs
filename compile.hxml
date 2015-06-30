@@ -7,3 +7,4 @@
 -lib actuate
 -D NAPE_RELEASE_BUILD
 -dce full
+-debug

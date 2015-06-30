@@ -1,4 +1,4 @@
 .project
 .hxtypes
 .settings
-bin/js/App.js
+bin/js/App*
