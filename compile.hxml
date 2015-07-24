@@ -1,10 +1,11 @@
 -js bin/js/App.js
 -main Main
 -cp src
+-lib actuate
+-lib ash
+-lib howlerjs
 -lib pixijs
 -lib nape
--lib howlerjs
--lib actuate
 -D NAPE_RELEASE_BUILD
 -dce full
 -debug
