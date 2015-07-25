@@ -4,13 +4,50 @@ import pixi.plugins.app.Application;
 
 class CitrusJS extends Application {
 	
+	public var state(get, set):State;
+	var _state:State;
+	
+	var _newState:State;
+	
 	public function new() {
 		super();
 		
 		onUpdate = _onUpdate;
 	}
 	
+	function get_state():State {
+		
+		if (_newState != null)
+			return _newState;
+		else
+			return _state;
+	}
+	
+	function set_state(value):State {
+		
+		return _newState = value;
+	}
+	
 	function _onUpdate(elapsedTime:Float) {
 		
+		if (_newState != null) {
+			
+			if (_state != null) {
+				
+				_state.destroy();
+				_stage.removeChild(_state);
+			}
+			
+			_state = _newState;
+			_newState = null;
+			
+			_stage.addChild(_state);
+			_state.initialize();
+		}
+		
+		if (_state != null) {
+			
+			_state.onUpdate(elapsedTime);
+		}
 	}
 }

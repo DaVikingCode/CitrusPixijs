@@ -10,7 +10,15 @@ class State extends Container {
 		super();
 	}
 	
-	function onUpdate(elapsedTime:Float) {
+	public function initialize() {
+		
+	}
+	
+	public function onUpdate(elapsedTime:Float) {
+		
+	}
+	
+	public function destroy() {
 		
 	}
 }

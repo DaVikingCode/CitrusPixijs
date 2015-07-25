@@ -1,0 +1,7 @@
+{
+	"build": {
+		"program":"haxe",
+		"hxml":"compile.hxml",
+		"livereload":"bin"
+	}
+}
