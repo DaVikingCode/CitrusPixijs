@@ -4,6 +4,7 @@ import ash.core.Engine;
 import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 
+import citrus.components.Audio;
 import citrus.components.Display;
 import citrus.components.GameState;
 import citrus.components.Motion;
@@ -60,7 +61,7 @@ class EntityCreator {
 		.add(MotionControls ).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
 		.add(Display).withInstance(new Display(container));
 
-		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0));
+		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0)).add(new Audio());
 
 		fsm.changeState("playing");
 

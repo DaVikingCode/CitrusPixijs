@@ -3,6 +3,7 @@ package;
 import ash.core.Engine;
 
 import citrus.core.State;
+import citrus.systems.AudioSystem;
 import citrus.systems.GameManager;
 import citrus.systems.MotionControlSystem;
 import citrus.systems.MovementSystem;
@@ -37,6 +38,7 @@ class TestState extends State {
 		_engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
 		_engine.addSystem(new MovementSystem(_config), SystemPriorities.move);
 		_engine.addSystem(new RenderSystem(this), SystemPriorities.render);
+		_engine.addSystem(new AudioSystem(), SystemPriorities.render);
 
 		_creator.createGame();
 	}
