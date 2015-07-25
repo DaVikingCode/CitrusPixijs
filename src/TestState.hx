@@ -4,6 +4,8 @@ import ash.core.Engine;
 
 import citrus.core.State;
 import citrus.systems.GameManager;
+import citrus.systems.MotionControlSystem;
+import citrus.systems.MovementSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
 
@@ -15,6 +17,7 @@ class TestState extends State {
 	var _engine:Engine;
 	var _config:GameConfig;
 	var _creator:EntityCreator;
+	var _keyPoll:KeyPoll;
 	
 	public function new() {
 		super();
@@ -25,11 +28,14 @@ class TestState extends State {
 		
 		_engine = new Engine();
 		_config = new GameConfig();
-		_config.width = width;//_citrusJS.width;
-		_config.height = height;//_citrusJS.height;
+		_config.width = 800;//_citrusJS.width;
+		_config.height = 600;//_citrusJS.height;
 		_creator = new EntityCreator(_engine, _config);
+		_keyPoll = new KeyPoll();
 
 		_engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
+		_engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
+		_engine.addSystem(new MovementSystem(_config), SystemPriorities.move);
 		_engine.addSystem(new RenderSystem(this), SystemPriorities.render);
 
 		_creator.createGame();
@@ -38,6 +44,6 @@ class TestState extends State {
 	override public function onUpdate(elapsedTime:Float) {
 		super.onUpdate(elapsedTime);
 
-		_engine.update(elapsedTime);
+		_engine.update(elapsedTime * 0.001);
 	}
 }

@@ -6,9 +6,14 @@ import ash.fsm.EntityStateMachine;
 
 import citrus.components.Display;
 import citrus.components.GameState;
+import citrus.components.Motion;
+import citrus.components.MotionControls;
 import citrus.components.Position;
 import citrus.components.Spaceship;
 
+import js.html.KeyboardEvent;
+
+import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
@@ -44,13 +49,18 @@ class EntityCreator {
 
 		var display = new Sprite(Texture.fromFrame("playerShip1_orange.png"));
 		display.anchor.set(0.5);
+		display.rotation = 90 * Math.PI / 180;
+		var container = new Container();
+		container.addChild(display);
 
 		var fsm = new EntityStateMachine(spaceship);
 
 		fsm.createState("playing")
-		.add(Display).withInstance(new Display(display));
+		.add(Motion).withInstance(new Motion(0, 0, 0, 15))
+		.add(MotionControls ).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
+		.add(Display).withInstance(new Display(container));
 
-		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height, 0));
+		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0));
 
 		fsm.changeState("playing");
 

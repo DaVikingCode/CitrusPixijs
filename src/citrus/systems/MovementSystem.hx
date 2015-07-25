@@ -26,7 +26,7 @@ class MovementSystem extends ListIteratingSystem<MovementNode> {
 			position.position.x += _config.width;
 
 		if (position.position.x > _config.width)
-			position.position.x -= _config.width
+			position.position.x -= _config.width;
 
 		if (position.position.y < 0)
 			position.position.y += _config.height;
