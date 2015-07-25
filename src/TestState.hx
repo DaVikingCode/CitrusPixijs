@@ -13,8 +13,8 @@ import pixi.core.sprites.Sprite;
 class TestState extends State {
 	
 	var _engine:Engine;
-	var _creator:EntityCreator;
 	var _config:GameConfig;
+	var _creator:EntityCreator;
 	
 	public function new() {
 		super();
@@ -24,10 +24,10 @@ class TestState extends State {
 		super.initialize();
 		
 		_engine = new Engine();
-		_creator = new EntityCreator(_engine);
 		_config = new GameConfig();
-		_config.width = width;
-		_config.height = height;
+		_config.width = width;//_citrusJS.width;
+		_config.height = height;//_citrusJS.height;
+		_creator = new EntityCreator(_engine, _config);
 
 		_engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
 		_engine.addSystem(new RenderSystem(this), SystemPriorities.render);

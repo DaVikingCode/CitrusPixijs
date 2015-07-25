@@ -2,6 +2,7 @@ package;
 
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
+import pixi.loaders.Loader;
 import pixi.plugins.app.Application;
 import haxe.Timer;
 
@@ -20,8 +21,14 @@ class Main extends CitrusJS {
 		width = 800;
 		height = 600;
 		super.start();
+
+		var loader = new Loader();
+		loader.baseUrl = "assets/spaceshooter/";
+		loader.add("sprites", "Sprites.json");
+		loader.load(function() {
+			state = new TestState();
+		});
 		
-		state = new TestState();
 	}
 	
 	public static function main() {

@@ -15,10 +15,12 @@ import pixi.core.sprites.Sprite;
 class EntityCreator {
 
 	var _engine:Engine;
+	var _config:GameConfig;
 
-	public function new(engine:Engine) {
+	public function new(engine:Engine, config:GameConfig) {
 
 		_engine = engine;
+		_config = config;
 	}
 
 	public function destroyEntity(entity:Entity) {
@@ -40,7 +42,7 @@ class EntityCreator {
 
 		var spaceship = new Entity();
 
-		var display = new Sprite(Texture.fromImage("assets/bunny.png"));
+		var display = new Sprite(Texture.fromFrame("playerShip1_orange.png"));
 		display.anchor.set(0.5);
 
 		var fsm = new EntityStateMachine(spaceship);
@@ -48,7 +50,7 @@ class EntityCreator {
 		fsm.createState("playing")
 		.add(Display).withInstance(new Display(display));
 
-		spaceship.add(new Spaceship(fsm)).add(new Position(50, 55, 0));
+		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height, 0));
 
 		fsm.changeState("playing");
 

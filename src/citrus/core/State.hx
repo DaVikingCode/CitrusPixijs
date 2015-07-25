@@ -8,6 +8,8 @@ class State extends Container {
 
 	public function new() {
 		super();
+
+		_citrusJS = CitrusJS.getInstance();
 	}
 	
 	public function initialize() {

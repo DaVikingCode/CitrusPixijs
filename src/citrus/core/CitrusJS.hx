@@ -4,6 +4,8 @@ import pixi.plugins.app.Application;
 
 class CitrusJS extends Application {
 	
+	static var _instance:CitrusJS;
+
 	public var state(get, set):State;
 	var _state:State;
 	
@@ -12,7 +14,14 @@ class CitrusJS extends Application {
 	public function new() {
 		super();
 		
+		_instance = this;
+
 		onUpdate = _onUpdate;
+	}
+
+	static public function getInstance():CitrusJS {
+
+		return _instance;
 	}
 	
 	function get_state():State {
