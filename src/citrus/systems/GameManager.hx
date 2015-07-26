@@ -4,7 +4,6 @@ import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
-import citrus.nodes.BulletCollisionNode;
 import citrus.nodes.GameNode;
 import citrus.nodes.SpaceshipNode;
 
@@ -17,7 +16,6 @@ class GameManager extends System {
 
 	var _gameNodes:NodeList<GameNode>;
 	var _spaceships:NodeList<SpaceshipNode>;
-	var _bullets:NodeList<BulletCollisionNode>;
 
 	public function new(creator:EntityCreator, config:GameConfig) {
 		super();
@@ -30,7 +28,6 @@ class GameManager extends System {
 
 		_gameNodes = engine.getNodeList(GameNode);
 		_spaceships = engine.getNodeList(SpaceshipNode);
-		_bullets = engine.getNodeList(BulletCollisionNode);
 	}
 
 	override public function update(time:Float) {
@@ -52,6 +49,5 @@ class GameManager extends System {
 		
 		_gameNodes = null;
 		_spaceships = null;
-		_bullets = null;
 	}
 }
