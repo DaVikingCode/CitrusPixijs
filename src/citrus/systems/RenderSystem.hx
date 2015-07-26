@@ -54,7 +54,7 @@ class RenderSystem extends System {
 
 			displayObject.x = position.position.x;
 			displayObject.y = position.position.y;
-			displayObject.rotation = position.rotation * Math.PI / 180;
+			displayObject.rotation = position.rotation;
 		}
 	}
 

@@ -5,8 +5,11 @@ import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 
 import citrus.components.Audio;
+import citrus.components.Bullet;
 import citrus.components.Display;
 import citrus.components.GameState;
+import citrus.components.Gun;
+import citrus.components.GunControls;
 import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Position;
@@ -59,6 +62,8 @@ class EntityCreator {
 		fsm.createState("playing")
 		.add(Motion).withInstance(new Motion(0, 0, 0, 15))
 		.add(MotionControls ).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
+		.add(Gun).withInstance(new Gun(55, 0, 0.3, 2))
+		.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
 		.add(Display).withInstance(new Display(container));
 
 		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0)).add(new Audio());
@@ -68,5 +73,27 @@ class EntityCreator {
 		_engine.addEntity(spaceship);
 
 		return spaceship;
+	}
+
+	public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
+
+		var cos = Math.cos(parentPosition.rotation);
+		var sin = Math.sin(parentPosition.rotation);
+
+		var display = new Sprite(Texture.fromFrame("Effects/fire01.png"));
+		display.anchor.set(0.5);
+		display.rotation = -90 * Math.PI / 180;
+		var container = new Container();
+		container.addChild(display);
+
+		var bullet = new Entity()
+		.add(new Bullet(gun.bulletLifetime))
+		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
+		.add(new Motion(cos * 150, sin * 150, 0, 0))
+		.add(new Display(container));
+
+		_engine.addEntity(bullet);
+
+		return bullet;
 	}
 }
