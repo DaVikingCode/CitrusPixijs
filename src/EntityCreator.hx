@@ -9,6 +9,7 @@ import citrus.components.Asteroid;
 import citrus.components.Audio;
 import citrus.components.Bullet;
 import citrus.components.Collision;
+import citrus.components.DeathThroes;
 import citrus.components.Display;
 import citrus.components.GameState;
 import citrus.components.Gun;
@@ -39,10 +40,6 @@ class EntityCreator {
 	public function destroyEntity(entity:Entity) {
 
 		_engine.removeEntity(entity);
-
-		if (entity.has(Asteroid))
-			ComponentPool.dispose(entity.get(Asteroid));
-
 	}
 
 	public function createGame():Entity {
@@ -56,17 +53,23 @@ class EntityCreator {
 
 	public function createAsteroid(radius:Float, x:Float, y:Float):Entity {
 
+		var asteroid:Entity = new Entity();
+
 		var indice = MathUtils.randomInt(1, 4);
 
 		var display = new Sprite(Texture.fromFrame("Meteors/meteorBrown_big" + indice + ".png"));
 		display.anchor.set(0.5);
 
-		var asteroid:Entity = new Entity()
-		.add(ComponentPool.get(Asteroid))
-		.add(new Position(x, y, 0))
-		.add(new Collision(radius))
-		.add(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
-		.add(new Display(display));
+		var fsm = new EntityStateMachine(asteroid);
+
+		fsm.createState("alive")
+		.add(Motion).withInstance(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
+		.add(Collision).withInstance(new Collision(radius))
+		.add(Display).withInstance(new Display(display));
+
+		asteroid.add(new Asteroid(fsm)).add(new Position(x, y, 0));
+
+		fsm.changeState("alive");
 
 		_engine.addEntity(asteroid);
 
@@ -83,6 +86,12 @@ class EntityCreator {
 		var container = new Container();
 		container.addChild(display);
 
+		var displayDeath = new Sprite(Texture.fromFrame("playerShip1_green.png"));
+		displayDeath.anchor.set(0.5);
+		displayDeath.rotation = 90 * Math.PI / 180;
+		var containerDeath = new Container();
+		containerDeath.addChild(displayDeath);
+
 		var fsm = new EntityStateMachine(spaceship);
 
 		fsm.createState("playing")
@@ -91,6 +100,10 @@ class EntityCreator {
 		.add(Gun).withInstance(new Gun(55, 0, 0.3, 2))
 		.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
 		.add(Display).withInstance(new Display(container));
+
+		fsm.createState("destroyed")
+		.add(DeathThroes).withInstance(new DeathThroes(5))
+		.add(Display).withInstance(new Display(containerDeath));
 
 		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0)).add(new Audio());
 
