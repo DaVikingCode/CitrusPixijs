@@ -10,12 +10,14 @@ class GunControlSystem extends ListIteratingSystem<GunControlNode> {
 
 	var _keyPoll:KeyPoll;
 	var _creator:EntityCreator;
+	var _sound:HowlOptions;
 
-	public function new(keyPoll:KeyPoll, creator:EntityCreator) {
+	public function new(keyPoll:KeyPoll, creator:EntityCreator, ?sound:HowlOptions) {
 		super(GunControlNode, _updateNode);
 
 		_keyPoll = keyPoll;
 		_creator = creator;
+		_sound = sound;
 	}
 
 	function _updateNode(node:GunControlNode, time:Float) {
@@ -30,11 +32,9 @@ class GunControlSystem extends ListIteratingSystem<GunControlNode> {
 		if (gun.shooting && gun.timeSinceLastShot >= gun.minimumShotInterval) {
 
 			_creator.createUserBullet(gun, position);
-
-			var options:HowlOptions = {};
-			options.urls = ["assets/spaceshooter/sound/sfx_laser1.ogg"];
-
-			node.audio.play(options);
+			
+			if (_sound != null)
+				node.audio.play(_sound);
 			
 			gun.timeSinceLastShot = 0;
 		}
