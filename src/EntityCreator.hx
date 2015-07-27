@@ -85,10 +85,10 @@ class EntityCreator {
 		display.rotation = -90 * Math.PI / 180;
 		var container = new Container();
 		container.addChild(display);
-
+		
 		var bullet = new Entity()
 		.add(new Bullet(gun.bulletLifetime))
-		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
+		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, parentPosition.rotation * 180 / Math.PI))
 		.add(new Motion(cos * 150, sin * 150, 0, 0))
 		.add(new Display(container));
 
