@@ -3,9 +3,12 @@ package;
 import ash.core.Engine;
 import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
+import ash.tools.ComponentPool;
 
+import citrus.components.Asteroid;
 import citrus.components.Audio;
 import citrus.components.Bullet;
+import citrus.components.Collision;
 import citrus.components.Display;
 import citrus.components.GameState;
 import citrus.components.Gun;
@@ -14,6 +17,7 @@ import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Position;
 import citrus.components.Spaceship;
+import citrus.math.MathUtils;
 
 import js.html.KeyboardEvent;
 
@@ -36,6 +40,9 @@ class EntityCreator {
 
 		_engine.removeEntity(entity);
 
+		if (entity.has(Asteroid))
+			ComponentPool.dispose(entity.get(Asteroid));
+
 	}
 
 	public function createGame():Entity {
@@ -45,6 +52,25 @@ class EntityCreator {
 		_engine.addEntity(gameEntity);
 
 		return gameEntity;
+	}
+
+	public function createAsteroid(radius:Float, x:Float, y:Float):Entity {
+
+		var indice = MathUtils.randomInt(1, 4);
+
+		var display = new Sprite(Texture.fromFrame("Meteors/meteorBrown_big" + indice + ".png"));
+		display.anchor.set(0.5);
+
+		var asteroid:Entity = new Entity()
+		.add(ComponentPool.get(Asteroid))
+		.add(new Position(x, y, 0))
+		.add(new Collision(radius))
+		.add(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
+		.add(new Display(display));
+
+		_engine.addEntity(asteroid);
+
+		return asteroid;
 	}
 
 	public function createSpaceship():Entity {

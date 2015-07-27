@@ -3,8 +3,11 @@ package;
 import ash.core.Engine;
 
 import citrus.core.State;
+import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
+import citrus.systems.CollisionSystem;
+import citrus.systems.DeathThroesSystem;
 import citrus.systems.GameManager;
 import citrus.systems.GunControlSystem;
 import citrus.systems.MotionControlSystem;
@@ -45,7 +48,10 @@ class TestState extends State {
 		_engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
 		_engine.addSystem(new GunControlSystem(_keyPoll, _creator, gunSound), SystemPriorities.update);
 		_engine.addSystem(new BulletAgeSystem(_creator), SystemPriorities.update);
+		_engine.addSystem(new DeathThroesSystem(_creator), SystemPriorities.update);
 		_engine.addSystem(new MovementSystem(_config), SystemPriorities.move);
+		_engine.addSystem(new CollisionSystem(_creator), SystemPriorities.resolveCollisions);
+		_engine.addSystem(new AnimationSystem(), SystemPriorities.animate);
 		_engine.addSystem(new RenderSystem(this), SystemPriorities.render);
 		_engine.addSystem(new AudioSystem(), SystemPriorities.render);
 
