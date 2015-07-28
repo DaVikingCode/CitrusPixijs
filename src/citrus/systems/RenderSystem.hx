@@ -26,10 +26,8 @@ class RenderSystem extends System {
 
 		_nodes = engine.getNodeList(RenderNode);
 
-		for (node in _nodes) {
-			trace(node);
+		for (node in _nodes)
 			_addToDisplay(node);
-		}
 
 		_nodes.nodeAdded.add(_addToDisplay);
 		_nodes.nodeRemoved.add(_removeFromDisplay);

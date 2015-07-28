@@ -2,6 +2,11 @@ package;
 
 import ash.core.Engine;
 
+import citrus.core.State;
+
+import net.richardlord.asteroids.EntityCreator;
+import net.richardlord.input.KeyPoll;
+import net.richardlord.asteroids.GameConfig;
 import net.richardlord.asteroids.systems.BulletAgeSystem;
 import net.richardlord.asteroids.systems.CollisionSystem;
 import net.richardlord.asteroids.systems.GameManager;
@@ -35,7 +40,7 @@ class TestState extends State {
 		
 		engine = new Engine();
         creator = new EntityCreator( engine );
-        keyPoll = new KeyPoll( container.stage );
+        keyPoll = new KeyPoll();
         config = new GameConfig();
         config.width = width;
         config.height = height;
@@ -48,7 +53,7 @@ class TestState extends State {
         engine.addSystem(new MovementSystem( config ), SystemPriorities.move);
         engine.addSystem(new CollisionSystem( creator ), SystemPriorities.resolveCollisions);
         engine.addSystem(new AnimationSystem(), SystemPriorities.animate);
-        engine.addSystem(new RenderSystem( container ), SystemPriorities.render);
+        engine.addSystem(new RenderSystem( this ), SystemPriorities.render);
 
         creator.createGame();
 	}
@@ -56,6 +61,6 @@ class TestState extends State {
 	override public function onUpdate(elapsedTime:Float) {
 		super.onUpdate(elapsedTime);
 
-		_engine.update(elapsedTime * 0.001);
+		engine.update(elapsedTime * 0.001);
 	}
 }
