@@ -1,6 +1,6 @@
 package citrus.components;
 
-import citrus.display.IAnimatable;
+import citrus.graphics.IAnimatable;
 
 class Animation {
 

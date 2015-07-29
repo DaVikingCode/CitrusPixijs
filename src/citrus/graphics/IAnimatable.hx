@@ -1,4 +1,4 @@
-package citrus.display;
+package citrus.graphics;
 
 interface IAnimatable {
 

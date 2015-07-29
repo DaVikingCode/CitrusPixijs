@@ -5,6 +5,7 @@ import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 import ash.tools.ComponentPool;
 
+import citrus.components.Animation;
 import citrus.components.Asteroid;
 import citrus.components.Audio;
 import citrus.components.Bullet;
@@ -18,6 +19,10 @@ import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Position;
 import citrus.components.Spaceship;
+import citrus.graphics.AsteroidView;
+import citrus.graphics.BulletView;
+import citrus.graphics.SpaceshipDeathView;
+import citrus.graphics.SpaceshipView;
 import citrus.math.MathUtils;
 
 import js.html.KeyboardEvent;
@@ -53,23 +58,12 @@ class EntityCreator {
 
 	public function createAsteroid(radius:Float, x:Float, y:Float):Entity {
 
-		var asteroid:Entity = new Entity();
-
-		var indice = MathUtils.randomInt(1, 4);
-
-		var display = new Sprite(Texture.fromFrame("Meteors/meteorBrown_big" + indice + ".png"));
-		display.anchor.set(0.5);
-
-		var fsm = new EntityStateMachine(asteroid);
-
-		fsm.createState("alive")
-		.add(Motion).withInstance(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
-		.add(Collision).withInstance(new Collision(radius))
-		.add(Display).withInstance(new Display(display));
-
-		asteroid.add(new Asteroid(fsm)).add(new Position(x, y, 0));
-
-		fsm.changeState("alive");
+		var asteroid = new Entity()
+		.add(new Asteroid())
+		.add(new Position(x, y, 0))
+		.add(new Collision(radius))
+		.add(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
+		.add(new Display(new AsteroidView(radius)));
 
 		_engine.addEntity(asteroid);
 
@@ -80,30 +74,21 @@ class EntityCreator {
 
 		var spaceship = new Entity();
 
-		var display = new Sprite(Texture.fromFrame("playerShip1_orange.png"));
-		display.anchor.set(0.5);
-		display.rotation = 90 * Math.PI / 180;
-		var container = new Container();
-		container.addChild(display);
-
-		var displayDeath = new Sprite(Texture.fromFrame("playerShip1_green.png"));
-		displayDeath.anchor.set(0.5);
-		displayDeath.rotation = 90 * Math.PI / 180;
-		var containerDeath = new Container();
-		containerDeath.addChild(displayDeath);
-
 		var fsm = new EntityStateMachine(spaceship);
 
 		fsm.createState("playing")
 		.add(Motion).withInstance(new Motion(0, 0, 0, 15))
 		.add(MotionControls ).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
-		.add(Gun).withInstance(new Gun(55, 0, 0.3, 2))
+		.add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
 		.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
-		.add(Display).withInstance(new Display(container));
+		.add(Collision).withInstance( new Collision(9))
+		.add(Display).withInstance(new Display(new SpaceshipView()));
 
+		var deathView = new SpaceshipDeathView();
 		fsm.createState("destroyed")
 		.add(DeathThroes).withInstance(new DeathThroes(5))
-		.add(Display).withInstance(new Display(containerDeath));
+		.add(Display).withInstance(new Display(deathView))
+		.add(Animation).withInstance(new Animation(deathView));
 
 		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0)).add(new Audio());
 
@@ -118,18 +103,12 @@ class EntityCreator {
 
 		var cos = Math.cos(parentPosition.rotation);
 		var sin = Math.sin(parentPosition.rotation);
-
-		var display = new Sprite(Texture.fromFrame("Effects/fire01.png"));
-		display.anchor.set(0.5);
-		display.rotation = -90 * Math.PI / 180;
-		var container = new Container();
-		container.addChild(display);
 		
 		var bullet = new Entity()
 		.add(new Bullet(gun.bulletLifetime))
-		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, parentPosition.rotation * 180 / Math.PI))
+		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
 		.add(new Motion(cos * 150, sin * 150, 0, 0))
-		.add(new Display(container));
+		.add(new Display(new BulletView()));
 
 		_engine.addEntity(bullet);
 
