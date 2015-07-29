@@ -42,8 +42,8 @@ class TestState extends State {
         creator = new EntityCreator( engine );
         keyPoll = new KeyPoll();
         config = new GameConfig();
-        config.width = 800;
-        config.height = 600;
+        config.width = _citrusJS.width;
+        config.height = _citrusJS.height;
 
         engine.addSystem(new GameManager( creator, config ), SystemPriorities.preUpdate);
         engine.addSystem(new MotionControlSystem( keyPoll ), SystemPriorities.update);

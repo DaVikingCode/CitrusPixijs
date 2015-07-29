@@ -36,8 +36,8 @@ class TestState extends State {
 		
 		_engine = new Engine();
 		_config = new GameConfig();
-		_config.width = 800;//_citrusJS.width;
-		_config.height = 600;//_citrusJS.height;
+		_config.width = _citrusJS.width;
+		_config.height = _citrusJS.height;
 		_creator = new EntityCreator(_engine, _config);
 		_keyPoll = new KeyPoll();
 		
