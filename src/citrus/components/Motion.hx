@@ -10,7 +10,7 @@ class Motion {
 
 	public function new(velocityX:Float, velocityY:Float, angularVelocity:Float, damping:Float) {
 
-		velocity = new Point(velocityY, velocityY);
+		velocity = new Point(velocityX, velocityY);
 		this.angularVelocity = angularVelocity;
 		this.damping = damping;
 	}
