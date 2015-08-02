@@ -16,7 +16,7 @@ class Main extends CitrusJS {
 	}
 
 	function _init() {
-		backgroundColor = 0x6699FF;
+		backgroundColor = 0x000000;
 		autoResize = false;
 		width = 800;
 		height = 600;

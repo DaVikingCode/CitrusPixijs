@@ -20,12 +20,14 @@ class CollisionSystem extends System {
     var _bullets:NodeList<BulletCollisionNode>;
 
     var _soundExplosionAsteroid:HowlOptions;
+    var _soundExplosionShip:HowlOptions;
 
-	public function new(creator:EntityCreator, ?soundExplosionAsteroid:HowlOptions) {
+	public function new(creator:EntityCreator, ?soundExplosionAsteroid:HowlOptions, ?soundExplosionShip:HowlOptions) {
 		super();
 
 		_creator = creator;
 		_soundExplosionAsteroid = soundExplosionAsteroid;
+		_soundExplosionShip = soundExplosionShip;
 	}
 
 	override public function addToEngine(engine:Engine) {
@@ -68,6 +70,10 @@ class CollisionSystem extends System {
 				if (Point.distance(asteroid.position.position, spaceship.position.position) <= asteroid.collision.radius + spaceship.collision.radius) {
 
 					spaceship.spaceship.fsm.changeState("destroyed");
+
+					if (_soundExplosionShip != null)
+						spaceship.audio.play(_soundExplosionShip);
+
 					break;
 				}
 			}
