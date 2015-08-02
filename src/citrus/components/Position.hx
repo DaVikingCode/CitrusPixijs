@@ -1,5 +1,7 @@
 package citrus.components;
 
+import citrus.math.MathUtils;
+
 import pixi.core.math.Point;
 
 class Position {
@@ -16,11 +18,11 @@ class Position {
 
 	function get_rotation():Float {
 
-		return _rotation * Math.PI / 180;
+		return MathUtils.rad2deg(_rotation);
 	}
 
 	function set_rotation(value:Float):Float {
 
-		return _rotation = value * 180 / Math.PI;
+		return _rotation = MathUtils.deg2rad(value);
 	}
 }

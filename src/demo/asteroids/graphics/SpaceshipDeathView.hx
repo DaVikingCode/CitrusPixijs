@@ -1,6 +1,7 @@
 package demo.asteroids.graphics;
 
 import citrus.graphics.IAnimatable;
+import citrus.math.MathUtils;
 
 import pixi.core.display.Container;
 import pixi.core.graphics.Graphics;
@@ -47,10 +48,10 @@ class SpaceshipDeathView extends Container implements IAnimatable {
 
         shape1.x += vel1.x * time;
         shape1.y += vel1.y * time;
-        shape1.rotation += rot1 * time * Math.PI / 180;
+        shape1.rotation += MathUtils.deg2rad(rot1 * time);
 
         shape2.x += vel2.x * time;
         shape2.y += vel2.y * time;
-        shape2.rotation += rot2 * time * Math.PI / 180;
+        shape2.rotation += MathUtils.deg2rad(rot2 * time);
     }
 }
