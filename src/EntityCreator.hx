@@ -15,6 +15,7 @@ import citrus.components.Display;
 import citrus.components.GameState;
 import citrus.components.Gun;
 import citrus.components.GunControls;
+import citrus.components.Hud;
 import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Position;
@@ -22,6 +23,7 @@ import citrus.components.Spaceship;
 import citrus.graphics.AsteroidDeathView;
 import citrus.graphics.AsteroidView;
 import citrus.graphics.BulletView;
+import citrus.graphics.HudView;
 import citrus.graphics.SpaceshipDeathView;
 import citrus.graphics.SpaceshipView;
 import citrus.math.MathUtils;
@@ -50,7 +52,9 @@ class EntityCreator {
 
 	public function createGame():Entity {
 
-		var gameEntity = new Entity().add(new GameState());
+		var hud = new citrus.graphics.HudView();
+
+		var gameEntity = new Entity().add(new GameState()).add(new Hud(hud)).add(new Display(hud)).add(new Position(0, 0, 0));
 
 		_engine.addEntity(gameEntity);
 

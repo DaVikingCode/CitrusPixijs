@@ -7,6 +7,7 @@ import ash.core.System;
 import citrus.math.Point;
 import citrus.nodes.AsteroidCollisionNode;
 import citrus.nodes.BulletCollisionNode;
+import citrus.nodes.GameNode;
 import citrus.nodes.SpaceshipCollisionNode;
 
 import howler.Howl;
@@ -15,6 +16,7 @@ class CollisionSystem extends System {
 
 	var _creator:EntityCreator;
 
+	var _games:NodeList<GameNode>;
 	var _spaceships:NodeList<SpaceshipCollisionNode>;
     var _asteroids:NodeList<AsteroidCollisionNode>;
     var _bullets:NodeList<BulletCollisionNode>;
@@ -32,6 +34,7 @@ class CollisionSystem extends System {
 
 	override public function addToEngine(engine:Engine) {
 
+		_games = engine.getNodeList(GameNode);
 		_spaceships = engine.getNodeList(SpaceshipCollisionNode);
 		_asteroids = engine.getNodeList(AsteroidCollisionNode);
 		_bullets = engine.getNodeList(BulletCollisionNode);
@@ -55,6 +58,9 @@ class CollisionSystem extends System {
 
 					asteroid.asteroid.fsm.changeState("destroyed");
 
+					if (_games.head != null)
+						++_games.head.state.points;
+
 					if (_soundExplosionAsteroid != null)
 						asteroid.audio.play(_soundExplosionAsteroid);
 
@@ -71,6 +77,9 @@ class CollisionSystem extends System {
 
 					spaceship.spaceship.fsm.changeState("destroyed");
 
+					if (_games.head != null)
+						--_games.head.state.lives;
+
 					if (_soundExplosionShip != null)
 						spaceship.audio.play(_soundExplosionShip);
 
@@ -82,6 +91,7 @@ class CollisionSystem extends System {
 
 	 override public function removeFromEngine(engine:Engine) {
 		
+		_games = null;
 		_spaceships = null;
 		_asteroids = null;
 		_bullets = null;

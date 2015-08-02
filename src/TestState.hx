@@ -10,6 +10,7 @@ import citrus.systems.CollisionSystem;
 import citrus.systems.DeathThroesSystem;
 import citrus.systems.GameManager;
 import citrus.systems.GunControlSystem;
+import citrus.systems.HudSystem;
 import citrus.systems.MotionControlSystem;
 import citrus.systems.MovementSystem;
 import citrus.systems.RenderSystem;
@@ -58,6 +59,7 @@ class TestState extends State {
 		_engine.addSystem(new MovementSystem(_config), SystemPriorities.move);
 		_engine.addSystem(new CollisionSystem(_creator, asteroidExplosionSound, shipExplosionSound), SystemPriorities.resolveCollisions);
 		_engine.addSystem(new AnimationSystem(), SystemPriorities.animate);
+		_engine.addSystem(new HudSystem(), SystemPriorities.animate);
 		_engine.addSystem(new RenderSystem(this), SystemPriorities.render);
 		_engine.addSystem(new AudioSystem(), SystemPriorities.render);
 

@@ -55,11 +55,8 @@ class GameManager extends System {
 						}
 					}
 
-					if (clearToAddSpaceship) {
-
+					if (clearToAddSpaceship)
 						_creator.createSpaceship();
-						--node.state.lives;
-					}
 
 				} else {
 
