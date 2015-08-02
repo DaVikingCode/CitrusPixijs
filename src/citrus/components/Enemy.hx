@@ -2,7 +2,7 @@ package citrus.components;
 
 import ash.fsm.EntityStateMachine;
 
-class Asteroid {
+class Enemy {
 
 	public var fsm:EntityStateMachine;
 

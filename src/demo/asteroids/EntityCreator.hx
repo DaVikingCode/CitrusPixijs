@@ -7,7 +7,7 @@ import ash.tools.ComponentPool;
 
 import citrus.core.AEntityCreator;
 import citrus.components.Animation;
-import citrus.components.Asteroid;
+import citrus.components.Enemy;
 import citrus.components.Audio;
 import citrus.components.Collision;
 import citrus.components.DeathThroes;
@@ -16,8 +16,8 @@ import citrus.components.Gun;
 import citrus.components.GunControls;
 import citrus.components.Motion;
 import citrus.components.MotionControls;
+import citrus.components.Player;
 import citrus.components.Position;
-import citrus.components.Spaceship;
 import citrus.math.MathUtils;
 
 import demo.asteroids.components.GameState;
@@ -93,7 +93,7 @@ class EntityCreator extends AEntityCreator {
 		.add(Display).withInstance(new Display(deathView))
 		.add(Animation).withInstance(new Animation(deathView));
 
-		asteroid.add(new Asteroid(fsm)).add(new Position(x, y, 0)).add(new Audio());
+		asteroid.add(new Enemy(fsm)).add(new Position(x, y, 0)).add(new Audio());
 
 		fsm.changeState("alive");
 
@@ -122,7 +122,7 @@ class EntityCreator extends AEntityCreator {
 		.add(Display).withInstance(new Display(deathView))
 		.add(Animation).withInstance(new Animation(deathView));
 
-		spaceship.add(new Spaceship(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0)).add(new Audio());
+		spaceship.add(new Player(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0)).add(new Audio());
 
 		fsm.changeState("playing");
 

@@ -4,7 +4,7 @@ import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
-import citrus.nodes.AsteroidCollisionNode;
+import citrus.nodes.EnemyCollisionNode;
 
 import demo.asteroids.EntityCreator;
 import demo.asteroids.nodes.GameNode;
@@ -17,7 +17,7 @@ class WaitForStartSystem extends System {
 
 	var _gameNodes:NodeList<GameNode>;
 	var _waitNodes:NodeList<WaitForStartNode>;
-	var _asteroids:NodeList<AsteroidCollisionNode>;
+	var _asteroids:NodeList<EnemyCollisionNode>;
 
 	public function new(creator:EntityCreator) {
 		super();
@@ -31,7 +31,7 @@ class WaitForStartSystem extends System {
 
 		_waitNodes = _engine.getNodeList(WaitForStartNode);
 		_gameNodes = _engine.getNodeList(GameNode);
-		_asteroids = _engine.getNodeList(AsteroidCollisionNode);
+		_asteroids = _engine.getNodeList(EnemyCollisionNode);
 	}
 
 	override public function update(time:Float) {

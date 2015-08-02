@@ -5,9 +5,9 @@ import ash.core.NodeList;
 import ash.core.System;
 
 import citrus.math.Point;
-import citrus.nodes.AsteroidCollisionNode;
+import citrus.nodes.EnemyCollisionNode;
 import citrus.nodes.BulletCollisionNode;
-import citrus.nodes.SpaceshipCollisionNode;
+import citrus.nodes.PlayerCollisionNode;
 
 import demo.asteroids.EntityCreator;
 import demo.asteroids.nodes.GameNode;
@@ -19,8 +19,8 @@ class CollisionSystem extends System {
 	var _creator:EntityCreator;
 
 	var _games:NodeList<GameNode>;
-	var _spaceships:NodeList<SpaceshipCollisionNode>;
-    var _asteroids:NodeList<AsteroidCollisionNode>;
+	var _spaceships:NodeList<PlayerCollisionNode>;
+    var _asteroids:NodeList<EnemyCollisionNode>;
     var _bullets:NodeList<BulletCollisionNode>;
 
     var _soundExplosionAsteroid:HowlOptions;
@@ -37,8 +37,8 @@ class CollisionSystem extends System {
 	override public function addToEngine(engine:Engine) {
 
 		_games = engine.getNodeList(GameNode);
-		_spaceships = engine.getNodeList(SpaceshipCollisionNode);
-		_asteroids = engine.getNodeList(AsteroidCollisionNode);
+		_spaceships = engine.getNodeList(PlayerCollisionNode);
+		_asteroids = engine.getNodeList(EnemyCollisionNode);
 		_bullets = engine.getNodeList(BulletCollisionNode);
 	}
 
@@ -58,7 +58,7 @@ class CollisionSystem extends System {
 						_creator.createAsteroid(asteroid.collision.radius - 10, asteroid.position.position.x + Math.random() * 10 - 5, asteroid.position.position.y + Math.random() * 10 - 5);
 					}
 
-					asteroid.asteroid.fsm.changeState("destroyed");
+					asteroid.enemy.fsm.changeState("destroyed");
 
 					if (_games.head != null)
 						++_games.head.state.points;
@@ -77,7 +77,7 @@ class CollisionSystem extends System {
 
 				if (Point.distance(asteroid.position.position, spaceship.position.position) <= asteroid.collision.radius + spaceship.collision.radius) {
 
-					spaceship.spaceship.fsm.changeState("destroyed");
+					spaceship.player.fsm.changeState("destroyed");
 
 					if (_games.head != null)
 						--_games.head.state.lives;

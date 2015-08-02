@@ -2,7 +2,7 @@ package citrus.components;
 
 import ash.fsm.EntityStateMachine;
 
-class Spaceship {
+class Player {
 
 	public var fsm:EntityStateMachine;
 

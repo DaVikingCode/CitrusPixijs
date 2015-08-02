@@ -5,9 +5,9 @@ import ash.core.NodeList;
 import ash.core.System;
 
 import citrus.math.Point;
-import citrus.nodes.AsteroidCollisionNode;
+import citrus.nodes.EnemyCollisionNode;
 import citrus.nodes.BulletCollisionNode;
-import citrus.nodes.SpaceshipNode;
+import citrus.nodes.PlayerNode;
 
 import demo.asteroids.EntityCreator;
 import demo.asteroids.GameConfig;
@@ -19,8 +19,8 @@ class GameManager extends System {
 	var _config:GameConfig;
 
 	var _gameNodes:NodeList<GameNode>;
-	var _spaceships:NodeList<SpaceshipNode>;
-	var _asteroids:NodeList<AsteroidCollisionNode>;
+	var _spaceships:NodeList<PlayerNode>;
+	var _asteroids:NodeList<EnemyCollisionNode>;
 	var _bullets:NodeList<BulletCollisionNode>;
 
 	public function new(creator:EntityCreator, config:GameConfig) {
@@ -33,8 +33,8 @@ class GameManager extends System {
 	override public function addToEngine(engine:Engine) {
 
 		_gameNodes = engine.getNodeList(GameNode);
-		_spaceships = engine.getNodeList(SpaceshipNode);
-		_asteroids = engine.getNodeList(AsteroidCollisionNode);
+		_spaceships = engine.getNodeList(PlayerNode);
+		_asteroids = engine.getNodeList(EnemyCollisionNode);
 		_bullets = engine.getNodeList(BulletCollisionNode);
 	}
 
