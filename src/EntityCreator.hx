@@ -20,12 +20,14 @@ import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Position;
 import citrus.components.Spaceship;
+import citrus.components.WaitForStart;
 import citrus.graphics.AsteroidDeathView;
 import citrus.graphics.AsteroidView;
 import citrus.graphics.BulletView;
 import citrus.graphics.HudView;
 import citrus.graphics.SpaceshipDeathView;
 import citrus.graphics.SpaceshipView;
+import citrus.graphics.WaitForStartView;
 import citrus.math.MathUtils;
 
 import js.html.KeyboardEvent;
@@ -38,6 +40,7 @@ class EntityCreator {
 
 	var _engine:Engine;
 	var _config:GameConfig;
+	var _waitEntity:Entity;
 
 	public function new(engine:Engine, config:GameConfig) {
 
@@ -54,11 +57,27 @@ class EntityCreator {
 
 		var hud = new citrus.graphics.HudView();
 
-		var gameEntity = new Entity().add(new GameState()).add(new Hud(hud)).add(new Display(hud)).add(new Position(0, 0, 0));
+		var gameEntity = new Entity("game").add(new GameState()).add(new Hud(hud)).add(new Display(hud)).add(new Position(0, 0, 0));
 
 		_engine.addEntity(gameEntity);
 
 		return gameEntity;
+	}
+
+	public function createWaitForClick():Entity {
+
+		if (_waitEntity == null) {
+
+			var waitView = new WaitForStartView();
+
+			_waitEntity = new Entity("wait").add(new WaitForStart(waitView)).add(new Display(waitView)).add(new Position(0, 0, 0));
+		}
+
+		_waitEntity.get(WaitForStart).startGame = false;
+
+		_engine.addEntity(_waitEntity);
+
+		return _waitEntity;
 	}
 
 	public function createAsteroid(radius:Float, x:Float, y:Float):Entity {

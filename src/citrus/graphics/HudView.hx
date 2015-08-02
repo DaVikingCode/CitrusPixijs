@@ -12,7 +12,7 @@ class HudView extends Container {
 		super();
 
 		_scores = _createTextField();
-		_scores.x = 480;
+		_scores.x = 680;
 		_scores.y = 5;
 		addChild(_scores);
 
@@ -37,7 +37,7 @@ class HudView extends Container {
 
 	function _createTextField():Text {
 
-		var tf = new Text("", {font:'18px Helvetica', fill:'white', align:'center'});
+		var tf = new Text("", {font:'bold 18px Helvetica', fill:'white', align:'center'});
 
 		return tf;
 	}

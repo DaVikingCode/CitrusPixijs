@@ -15,6 +15,7 @@ import citrus.systems.MotionControlSystem;
 import citrus.systems.MovementSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
+import citrus.systems.WaitForStartSystem;
 
 import howler.Howl;
 
@@ -51,6 +52,7 @@ class TestState extends State {
 		var shipExplosionSound:HowlOptions = {};
 		shipExplosionSound.urls = ["assets/spaceshooter/sound/sfx_lose.ogg"];
 
+		_engine.addSystem( new WaitForStartSystem(_creator), SystemPriorities.preUpdate);
 		_engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
 		_engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
 		_engine.addSystem(new GunControlSystem(_keyPoll, _creator, gunSound), SystemPriorities.update);
@@ -63,6 +65,7 @@ class TestState extends State {
 		_engine.addSystem(new RenderSystem(this), SystemPriorities.render);
 		_engine.addSystem(new AudioSystem(), SystemPriorities.render);
 
+		_creator.createWaitForClick();
 		_creator.createGame();
 	}
 	

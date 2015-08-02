@@ -37,7 +37,9 @@ class GameManager extends System {
 
 	override public function update(time:Float) {
 
-		for (node in _gameNodes) {
+		var node = _gameNodes.head;
+
+		if (node != null && node.state.playing) {
 
 			if (_spaceships.empty) {
 
@@ -60,7 +62,8 @@ class GameManager extends System {
 
 				} else {
 
-					// game over
+					node.state.playing = false;
+					_creator.createWaitForClick();
 				}
 			}
 
