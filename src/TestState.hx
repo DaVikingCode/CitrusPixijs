@@ -44,13 +44,16 @@ class TestState extends State {
 		var gunSound:HowlOptions = {};
 		gunSound.urls = ["assets/spaceshooter/sound/sfx_laser1.ogg"];
 
+		var asteroidExplosionSound:HowlOptions = {};
+		asteroidExplosionSound.urls = ["assets/spaceshooter/sound/sfx_twoTone.ogg"];
+
 		_engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
 		_engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
 		_engine.addSystem(new GunControlSystem(_keyPoll, _creator, gunSound), SystemPriorities.update);
 		_engine.addSystem(new BulletAgeSystem(_creator), SystemPriorities.update);
 		_engine.addSystem(new DeathThroesSystem(_creator), SystemPriorities.update);
 		_engine.addSystem(new MovementSystem(_config), SystemPriorities.move);
-		_engine.addSystem(new CollisionSystem(_creator), SystemPriorities.resolveCollisions);
+		_engine.addSystem(new CollisionSystem(_creator, asteroidExplosionSound), SystemPriorities.resolveCollisions);
 		_engine.addSystem(new AnimationSystem(), SystemPriorities.animate);
 		_engine.addSystem(new RenderSystem(this), SystemPriorities.render);
 		_engine.addSystem(new AudioSystem(), SystemPriorities.render);

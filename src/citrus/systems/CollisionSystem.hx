@@ -9,6 +9,8 @@ import citrus.nodes.AsteroidCollisionNode;
 import citrus.nodes.BulletCollisionNode;
 import citrus.nodes.SpaceshipCollisionNode;
 
+import howler.Howl;
+
 class CollisionSystem extends System {
 
 	var _creator:EntityCreator;
@@ -17,10 +19,13 @@ class CollisionSystem extends System {
     var _asteroids:NodeList<AsteroidCollisionNode>;
     var _bullets:NodeList<BulletCollisionNode>;
 
-	public function new(creator:EntityCreator) {
+    var _soundExplosionAsteroid:HowlOptions;
+
+	public function new(creator:EntityCreator, ?soundExplosionAsteroid:HowlOptions) {
 		super();
 
 		_creator = creator;
+		_soundExplosionAsteroid = soundExplosionAsteroid;
 	}
 
 	override public function addToEngine(engine:Engine) {
@@ -46,7 +51,11 @@ class CollisionSystem extends System {
 						_creator.createAsteroid(asteroid.collision.radius - 10, asteroid.position.position.x + Math.random() * 10 - 5, asteroid.position.position.y + Math.random() * 10 - 5);
 					}
 
-					_creator.destroyEntity(asteroid.entity);
+					asteroid.asteroid.fsm.changeState("destroyed");
+
+					if (_soundExplosionAsteroid != null)
+						asteroid.audio.play(_soundExplosionAsteroid);
+
 					break;
 				}
 			}

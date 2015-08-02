@@ -19,6 +19,7 @@ import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Position;
 import citrus.components.Spaceship;
+import citrus.graphics.AsteroidDeathView;
 import citrus.graphics.AsteroidView;
 import citrus.graphics.BulletView;
 import citrus.graphics.SpaceshipDeathView;
@@ -58,12 +59,25 @@ class EntityCreator {
 
 	public function createAsteroid(radius:Float, x:Float, y:Float):Entity {
 
-		var asteroid = new Entity()
-		.add(new Asteroid())
-		.add(new Position(x, y, 0))
-		.add(new Collision(radius))
-		.add(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
-		.add(new Display(new AsteroidView(radius)));
+		var asteroid = new Entity();
+
+		var fsm = new EntityStateMachine(asteroid);
+
+		fsm.createState("alive")
+		.add(Motion).withInstance(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
+		.add(Collision).withInstance(new Collision(radius))
+		.add(Display).withInstance(new Display(new AsteroidView(radius)));
+
+		var deathView = new AsteroidDeathView(radius);
+
+		fsm.createState("destroyed")
+		.add(DeathThroes).withInstance(new DeathThroes(3))
+		.add(Display).withInstance(new Display(deathView))
+		.add(Animation).withInstance(new Animation(deathView));
+
+		asteroid.add(new Asteroid(fsm)).add(new Position(x, y, 0)).add(new Audio());
+
+		fsm.changeState("alive");
 
 		_engine.addEntity(asteroid);
 
