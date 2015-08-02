@@ -2,9 +2,8 @@ package citrus.systems;
 
 import ash.tools.ListIteratingSystem;
 
+import citrus.input.KeyPoll;
 import citrus.nodes.MotionControlNode;
-
-import demo.asteroids.KeyPoll;
 
 class MotionControlSystem extends ListIteratingSystem<MotionControlNode> {
 

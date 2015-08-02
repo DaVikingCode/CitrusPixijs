@@ -3,10 +3,10 @@ package demo.asteroids;
 import ash.core.Engine;
 
 import citrus.core.State;
+import citrus.input.KeyPoll;
 import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
-import demo.asteroids.systems.CollisionSystem;
 import citrus.systems.DeathThroesSystem;
 import citrus.systems.GunControlSystem;
 import citrus.systems.MotionControlSystem;
@@ -14,6 +14,7 @@ import citrus.systems.MovementSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
 
+import demo.asteroids.systems.CollisionSystem;
 import demo.asteroids.systems.GameManager;
 import demo.asteroids.systems.HudSystem;
 import demo.asteroids.systems.WaitForStartSystem;

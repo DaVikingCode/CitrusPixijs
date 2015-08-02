@@ -3,9 +3,8 @@ package citrus.systems;
 import ash.tools.ListIteratingSystem;
 
 import citrus.core.AEntityCreator;
+import citrus.input.KeyPoll;
 import citrus.nodes.GunControlNode;
-
-import demo.asteroids.KeyPoll;
 
 import howler.Howl;
 

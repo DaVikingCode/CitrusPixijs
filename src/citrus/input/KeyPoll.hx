@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package demo.asteroids;
+package citrus.input;
 
 import haxe.io.Bytes;
 import haxe.Log;

@@ -9,7 +9,6 @@ import citrus.core.AEntityCreator;
 import citrus.components.Animation;
 import citrus.components.Asteroid;
 import citrus.components.Audio;
-import citrus.components.Bullet;
 import citrus.components.Collision;
 import citrus.components.DeathThroes;
 import citrus.components.Display;
@@ -133,16 +132,10 @@ class EntityCreator extends AEntityCreator {
 	}
 
 	override public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
-
-		var cos = Math.cos(parentPosition.rotation);
-		var sin = Math.sin(parentPosition.rotation);
 		
-		var bullet = new Entity()
-		.add(new Bullet(gun.bulletLifetime))
-		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
-		.add(new Collision(0))
-		.add(new Motion(cos * 150, sin * 150, 0, 0))
-		.add(new Display(new BulletView()));
+		var bullet = super.createUserBullet(gun, parentPosition);
+		
+		bullet.add(new Display(new BulletView()));
 
 		_engine.addEntity(bullet);
 
