@@ -1,12 +1,14 @@
-package citrus.systems;
+package demo.asteroids.systems;
 
 import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
 import citrus.nodes.AsteroidCollisionNode;
-import citrus.nodes.GameNode;
-import citrus.nodes.WaitForStartNode;
+
+import demo.asteroids.EntityCreator;
+import demo.asteroids.nodes.GameNode;
+import demo.asteroids.nodes.WaitForStartNode;
 
 class WaitForStartSystem extends System {
 

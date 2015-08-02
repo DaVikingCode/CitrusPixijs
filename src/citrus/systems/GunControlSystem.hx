@@ -2,17 +2,20 @@ package citrus.systems;
 
 import ash.tools.ListIteratingSystem;
 
+import citrus.core.AEntityCreator;
 import citrus.nodes.GunControlNode;
+
+import demo.asteroids.KeyPoll;
 
 import howler.Howl;
 
 class GunControlSystem extends ListIteratingSystem<GunControlNode> {
 
 	var _keyPoll:KeyPoll;
-	var _creator:EntityCreator;
+	var _creator:AEntityCreator;
 	var _sound:HowlOptions;
 
-	public function new(keyPoll:KeyPoll, creator:EntityCreator, ?sound:HowlOptions) {
+	public function new(keyPoll:KeyPoll, creator:AEntityCreator, ?sound:HowlOptions) {
 		super(GunControlNode, _updateNode);
 
 		_keyPoll = keyPoll;

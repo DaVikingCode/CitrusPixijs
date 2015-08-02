@@ -1,4 +1,5 @@
 .project
 .hxtypes
 .settings
+*.hxproj
 bin/js/App*

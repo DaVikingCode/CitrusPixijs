@@ -2,13 +2,14 @@ package citrus.systems;
 
 import ash.tools.ListIteratingSystem;
 
+import citrus.core.AEntityCreator;
 import citrus.nodes.DeathThroesNode;
 
 class DeathThroesSystem extends ListIteratingSystem<DeathThroesNode> {
 
-	var _creator:EntityCreator;
+	var _creator:AEntityCreator;
 
-	public function new(creator:EntityCreator) {
+	public function new(creator:AEntityCreator) {
 		super(DeathThroesNode, _updateNode);
 
 		_creator = creator;

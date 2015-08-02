@@ -1,11 +1,12 @@
-package;
+package citrus.core;
 
-class GameConfig {
-	
+class AGameConfig {
+
 	public var width:Float;
 	public var height:Float;
-
+	
 	public function new() {
 		
 	}
+	
 }

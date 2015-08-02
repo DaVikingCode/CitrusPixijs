@@ -1,4 +1,4 @@
-package citrus.graphics;
+package demo.asteroids.graphics;
 
 import pixi.core.display.Container;
 import pixi.core.text.Text;

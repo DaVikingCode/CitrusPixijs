@@ -1,8 +1,8 @@
-package citrus.nodes;
+package demo.asteroids.nodes;
 
 import ash.core.Node;
 
-import citrus.components.GameState;
+import demo.asteroids.components.GameState;
 
 class GameNode extends Node<GameNode> {
 

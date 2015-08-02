@@ -2,13 +2,14 @@ package citrus.systems;
 
 import ash.tools.ListIteratingSystem;
 
+import citrus.core.AEntityCreator;
 import citrus.nodes.BulletAgeNode;
 
 class BulletAgeSystem extends ListIteratingSystem<BulletAgeNode> {
 
-	var _creator:EntityCreator;
+	var _creator:AEntityCreator;
 
-	public function new(creator:EntityCreator) {
+	public function new(creator:AEntityCreator) {
 		super(BulletAgeNode, _updateNode);
 
 		_creator = creator;

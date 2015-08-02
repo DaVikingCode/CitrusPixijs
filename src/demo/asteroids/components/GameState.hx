@@ -1,4 +1,4 @@
-package citrus.components;
+package demo.asteroids.components;
 
 class GameState {
 	

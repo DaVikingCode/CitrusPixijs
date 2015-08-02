@@ -1,4 +1,4 @@
-package citrus.systems;
+package demo.asteroids.systems;
 
 import ash.core.Engine;
 import ash.core.NodeList;
@@ -7,8 +7,11 @@ import ash.core.System;
 import citrus.math.Point;
 import citrus.nodes.AsteroidCollisionNode;
 import citrus.nodes.BulletCollisionNode;
-import citrus.nodes.GameNode;
 import citrus.nodes.SpaceshipNode;
+
+import demo.asteroids.EntityCreator;
+import demo.asteroids.GameConfig;
+import demo.asteroids.nodes.GameNode;
 
 class GameManager extends System {
 

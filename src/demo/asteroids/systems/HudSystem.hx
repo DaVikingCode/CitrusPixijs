@@ -1,8 +1,8 @@
-package citrus.systems;
+package demo.asteroids.systems;
 
 import ash.tools.ListIteratingSystem;
 
-import citrus.nodes.HudNode;
+import demo.asteroids.nodes.HudNode;
 
 class HudSystem extends ListIteratingSystem<HudNode> {
 

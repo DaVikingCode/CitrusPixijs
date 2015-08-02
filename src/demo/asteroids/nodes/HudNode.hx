@@ -1,9 +1,9 @@
-package citrus.nodes;
+package demo.asteroids.nodes;
 
 import ash.core.Node;
 
-import citrus.components.GameState;
-import citrus.components.Hud;
+import demo.asteroids.components.GameState;
+import demo.asteroids.components.Hud;
 
 class HudNode extends Node<HudNode> {
 

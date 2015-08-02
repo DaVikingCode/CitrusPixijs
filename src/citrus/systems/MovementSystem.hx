@@ -2,13 +2,14 @@ package citrus.systems;
 
 import ash.tools.ListIteratingSystem;
 
+import citrus.core.AGameConfig;
 import citrus.nodes.MovementNode;
 
 class MovementSystem extends ListIteratingSystem<MovementNode> {
 
-	var _config:GameConfig;
+	var _config:AGameConfig;
 
-	public function new(config:GameConfig) {
+	public function new(config:AGameConfig) {
 		super(MovementNode, _updateNode);
 
 		_config = config;

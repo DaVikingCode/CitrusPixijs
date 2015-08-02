@@ -1,10 +1,11 @@
-package;
+package demo.asteroids;
 
-import ash.core.Engine;
 import ash.core.Entity;
+import ash.core.Engine;
 import ash.fsm.EntityStateMachine;
 import ash.tools.ComponentPool;
 
+import citrus.core.AEntityCreator;
 import citrus.components.Animation;
 import citrus.components.Asteroid;
 import citrus.components.Audio;
@@ -12,23 +13,24 @@ import citrus.components.Bullet;
 import citrus.components.Collision;
 import citrus.components.DeathThroes;
 import citrus.components.Display;
-import citrus.components.GameState;
 import citrus.components.Gun;
 import citrus.components.GunControls;
-import citrus.components.Hud;
 import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Position;
 import citrus.components.Spaceship;
-import citrus.components.WaitForStart;
-import citrus.graphics.AsteroidDeathView;
-import citrus.graphics.AsteroidView;
-import citrus.graphics.BulletView;
-import citrus.graphics.HudView;
-import citrus.graphics.SpaceshipDeathView;
-import citrus.graphics.SpaceshipView;
-import citrus.graphics.WaitForStartView;
 import citrus.math.MathUtils;
+
+import demo.asteroids.components.GameState;
+import demo.asteroids.components.Hud;
+import demo.asteroids.components.WaitForStart;
+import demo.asteroids.graphics.AsteroidDeathView;
+import demo.asteroids.graphics.AsteroidView;
+import demo.asteroids.graphics.BulletView;
+import demo.asteroids.graphics.HudView;
+import demo.asteroids.graphics.SpaceshipDeathView;
+import demo.asteroids.graphics.SpaceshipView;
+import demo.asteroids.graphics.WaitForStartView;
 
 import js.html.KeyboardEvent;
 
@@ -36,26 +38,20 @@ import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
-class EntityCreator {
+class EntityCreator extends AEntityCreator {
 
-	var _engine:Engine;
 	var _config:GameConfig;
 	var _waitEntity:Entity;
 
 	public function new(engine:Engine, config:GameConfig) {
-
-		_engine = engine;
+		super(engine);
+		
 		_config = config;
-	}
-
-	public function destroyEntity(entity:Entity) {
-
-		_engine.removeEntity(entity);
 	}
 
 	public function createGame():Entity {
 
-		var hud = new citrus.graphics.HudView();
+		var hud = new HudView();
 
 		var gameEntity = new Entity("game").add(new GameState()).add(new Hud(hud)).add(new Display(hud)).add(new Position(0, 0, 0));
 
@@ -136,7 +132,7 @@ class EntityCreator {
 		return spaceship;
 	}
 
-	public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
+	override public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
 
 		var cos = Math.cos(parentPosition.rotation);
 		var sin = Math.sin(parentPosition.rotation);

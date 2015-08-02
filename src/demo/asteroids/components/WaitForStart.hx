@@ -1,6 +1,6 @@
-package citrus.components;
+package demo.asteroids.components;
 
-import citrus.graphics.WaitForStartView;
+import demo.asteroids.graphics.WaitForStartView;
 
 class WaitForStart {
 

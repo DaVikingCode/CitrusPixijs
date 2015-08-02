@@ -1,8 +1,8 @@
-package citrus.nodes;
+package demo.asteroids.nodes;
 
 import ash.core.Node;
 
-import citrus.components.WaitForStart;
+import demo.asteroids.components.WaitForStart;
 
 class WaitForStartNode extends Node<WaitForStartNode> {
 

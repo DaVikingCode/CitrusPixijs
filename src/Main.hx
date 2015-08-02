@@ -1,10 +1,11 @@
 package;
 
+import demo.asteroids.Asteroids;
+
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import pixi.loaders.Loader;
 import pixi.plugins.app.Application;
-import haxe.Timer;
 
 import citrus.core.CitrusJS;
 
@@ -16,19 +17,27 @@ class Main extends CitrusJS {
 	}
 
 	function _init() {
+		
+		_asteroidsDemo();
+
+		/*var loader = new Loader();
+		loader.baseUrl = "assets/spaceshooter/";
+		loader.add("sprites", "Sprites.json");
+		loader.load(function() {
+			state = new demo.asteroids.Asteroids();
+		});*/
+		
+	}
+	
+	function _asteroidsDemo() {
+		
 		backgroundColor = 0x000000;
 		autoResize = false;
 		width = 800;
 		height = 600;
 		super.start();
-
-		var loader = new Loader();
-		loader.baseUrl = "assets/spaceshooter/";
-		loader.add("sprites", "Sprites.json");
-		loader.load(function() {
-			state = new TestState();
-		});
 		
+		state = new Asteroids();
 	}
 	
 	public static function main() {

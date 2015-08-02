@@ -1,4 +1,6 @@
-package citrus.graphics;
+package demo.asteroids.graphics;
+
+import citrus.graphics.IAnimatable;
 
 import pixi.core.display.Container;
 import pixi.core.graphics.Graphics;

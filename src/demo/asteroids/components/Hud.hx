@@ -1,6 +1,6 @@
-package citrus.components;
+package demo.asteroids.components;
 
-import citrus.graphics.HudView;
+import demo.asteroids.graphics.HudView;
 
 class Hud {
 

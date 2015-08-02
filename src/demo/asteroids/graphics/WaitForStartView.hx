@@ -1,4 +1,4 @@
-package citrus.graphics;
+package demo.asteroids.graphics;
 
 import ash.signals.Signal0;
 

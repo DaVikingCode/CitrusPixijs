@@ -1,4 +1,4 @@
-package;
+package demo.asteroids;
 
 import ash.core.Engine;
 
@@ -6,23 +6,24 @@ import citrus.core.State;
 import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
-import citrus.systems.CollisionSystem;
+import demo.asteroids.systems.CollisionSystem;
 import citrus.systems.DeathThroesSystem;
-import citrus.systems.GameManager;
 import citrus.systems.GunControlSystem;
-import citrus.systems.HudSystem;
 import citrus.systems.MotionControlSystem;
 import citrus.systems.MovementSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
-import citrus.systems.WaitForStartSystem;
+
+import demo.asteroids.systems.GameManager;
+import demo.asteroids.systems.HudSystem;
+import demo.asteroids.systems.WaitForStartSystem;
 
 import howler.Howl;
 
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
-class TestState extends State {
+class Asteroids extends State {
 	
 	var _engine:Engine;
 	var _config:GameConfig;
@@ -52,7 +53,7 @@ class TestState extends State {
 		var shipExplosionSound:HowlOptions = {};
 		shipExplosionSound.urls = ["assets/spaceshooter/sound/sfx_lose.ogg"];
 
-		_engine.addSystem( new WaitForStartSystem(_creator), SystemPriorities.preUpdate);
+		_engine.addSystem(new WaitForStartSystem(_creator), SystemPriorities.preUpdate);
 		_engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
 		_engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
 		_engine.addSystem(new GunControlSystem(_keyPoll, _creator, gunSound), SystemPriorities.update);

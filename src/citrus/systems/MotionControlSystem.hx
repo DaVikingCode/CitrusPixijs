@@ -4,6 +4,8 @@ import ash.tools.ListIteratingSystem;
 
 import citrus.nodes.MotionControlNode;
 
+import demo.asteroids.KeyPoll;
+
 class MotionControlSystem extends ListIteratingSystem<MotionControlNode> {
 
 	var _keyPoll:KeyPoll;
