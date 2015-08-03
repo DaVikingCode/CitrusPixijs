@@ -17,6 +17,8 @@ import citrus.components.Player;
 import citrus.components.Position;
 import citrus.math.MathUtils;
 
+import demo.topdown.components.GameState;
+
 import js.html.KeyboardEvent;
 
 import pixi.core.display.Container;

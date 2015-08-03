@@ -1,4 +1,4 @@
-package demo.topdown;
+package demo.topdown.components;
 
 class GameState {
 
