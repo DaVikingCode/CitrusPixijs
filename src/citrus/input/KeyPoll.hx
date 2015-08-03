@@ -11,18 +11,18 @@ class KeyPoll {
 
         _states = new Map<Int, Bool>();
 		
-        Browser.document.onkeydown = keyDownListener;
-        Browser.document.onkeyup = keyUpListener;
+        Browser.document.onkeydown = _keyDownListener;
+        Browser.document.onkeyup = _keyUpListener;
     }
 
-    private function keyDownListener(ev:KeyboardEvent):Void
-    {
-        _states.set(ev.keyCode, true);
+    function _keyDownListener(kEvt:KeyboardEvent) {
+
+        _states.set(kEvt.keyCode, true);
     }
 
-    private function keyUpListener(ev:KeyboardEvent):Void
-    {
-        _states.set(ev.keyCode, false);
+    function _keyUpListener(kEvt:KeyboardEvent) {
+
+        _states.set(kEvt.keyCode, false);
     }
 
     public function isDown(keyCode:Int):Bool {
@@ -42,6 +42,10 @@ class KeyPoll {
     public function getKeysDown():Array<Int> {
 
         var keyCodes:Array<Int> = new Array<Int>();
+
+        for (key in _states.keys())
+            if (isDown(key))
+                keyCodes.push(key);
 
         return keyCodes;
     }
