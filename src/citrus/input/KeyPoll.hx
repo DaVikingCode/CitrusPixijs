@@ -15,6 +15,14 @@ class KeyPoll {
         Browser.document.onkeyup = _keyUpListener;
     }
 
+    public function destroy() {
+
+        Browser.document.onkeydown = null;
+        Browser.document.onkeyup = null;
+
+        _states = null;
+    }
+
     function _keyDownListener(kEvt:KeyboardEvent) {
 
         _states.set(kEvt.keyCode, true);

@@ -3,7 +3,6 @@ package demo.asteroids;
 import ash.core.Entity;
 import ash.core.Engine;
 import ash.fsm.EntityStateMachine;
-import ash.tools.ComponentPool;
 
 import citrus.core.AEntityCreator;
 import citrus.components.Animation;
@@ -18,7 +17,6 @@ import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Player;
 import citrus.components.Position;
-import citrus.math.MathUtils;
 
 import demo.asteroids.components.GameState;
 import demo.asteroids.components.Hud;
@@ -32,10 +30,6 @@ import demo.asteroids.graphics.SpaceshipView;
 import demo.asteroids.graphics.WaitForStartView;
 
 import js.html.KeyboardEvent;
-
-import pixi.core.display.Container;
-import pixi.core.textures.Texture;
-import pixi.core.sprites.Sprite;
 
 class EntityCreator extends AEntityCreator {
 
@@ -110,10 +104,10 @@ class EntityCreator extends AEntityCreator {
 
 		fsm.createState("playing")
 		.add(Motion).withInstance(new Motion(0, 0, 0, 15))
-		.add(MotionControls ).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
+		.add(MotionControls).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
 		.add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
 		.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
-		.add(Collision).withInstance( new Collision(9))
+		.add(Collision).withInstance(new Collision(9))
 		.add(Display).withInstance(new Display(new SpaceshipView()));
 
 		var deathView = new SpaceshipDeathView();

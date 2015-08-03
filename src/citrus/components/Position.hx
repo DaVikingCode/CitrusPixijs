@@ -13,7 +13,7 @@ class Position {
 	public function new(x:Float, y:Float, rotation:Float) {
 
 		position = new Point(x, y);
-		_rotation = rotation;
+		this.rotation = rotation;
 	}
 
 	function get_rotation():Float {

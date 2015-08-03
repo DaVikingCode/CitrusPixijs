@@ -32,7 +32,7 @@ class CitrusJS extends Application {
 			return _state;
 	}
 	
-	function set_state(value):State {
+	function set_state(value:State):State {
 		
 		return _newState = value;
 	}

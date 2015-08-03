@@ -1,9 +1,6 @@
 package demo.asteroids;
 
-import ash.core.Engine;
-
 import citrus.core.State;
-import citrus.input.KeyPoll;
 import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
@@ -25,11 +22,9 @@ import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
 class Asteroids extends State {
-	
-	var _engine:Engine;
+
 	var _config:GameConfig;
 	var _creator:EntityCreator;
-	var _keyPoll:KeyPoll;
 	
 	public function new() {
 		super();
@@ -37,13 +32,11 @@ class Asteroids extends State {
 	
 	override public function initialize() {
 		super.initialize();
-		
-		_engine = new Engine();
+
 		_config = new GameConfig();
 		_config.width = _citrusJS.width;
 		_config.height = _citrusJS.height;
 		_creator = new EntityCreator(_engine, _config);
-		_keyPoll = new KeyPoll();
 		
 		var gunSound:HowlOptions = {};
 		gunSound.urls = ["assets/spaceshooter/sound/sfx_laser1.ogg"];
@@ -69,11 +62,5 @@ class Asteroids extends State {
 
 		_creator.createWaitForClick();
 		_creator.createGame();
-	}
-	
-	override public function onUpdate(elapsedTime:Float) {
-		super.onUpdate(elapsedTime);
-
-		_engine.update(elapsedTime * 0.001);
 	}
 }
