@@ -1,5 +1,7 @@
-.project
-.hxtypes
-.settings
+.idea
+*.iml
 *.hxproj
+.hxtypes
+.project
+.settings
 bin/js/App*
