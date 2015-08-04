@@ -10,6 +10,7 @@ import citrus.components.Collision;
 import citrus.components.Display;
 import citrus.components.Gun;
 import citrus.components.GunControls;
+import citrus.components.KillOutOfScreen;
 import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Player;
@@ -73,7 +74,8 @@ class EntityCreator extends AEntityCreator {
 
         bullet
             .add(new Display(new BulletView()))
-            .add(new Motion(Math.cos(parentPosition.rotation) * 500, Math.sin(parentPosition.rotation) * 500, 0, 0));
+            .add(new Motion(Math.cos(parentPosition.rotation) * 500, Math.sin(parentPosition.rotation) * 500, 0, 0))
+            .add(new KillOutOfScreen(true, false));
 
         _engine.addEntity(bullet);
 

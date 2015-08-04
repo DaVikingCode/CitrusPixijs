@@ -1,41 +1,33 @@
 package citrus.systems;
 
-import ash.core.Engine;
-import ash.core.NodeList;
-import ash.core.System;
+import ash.tools.ListIteratingSystem;
 
 import citrus.core.AEntityCreator;
 import citrus.core.AGameConfig;
-import citrus.nodes.BulletCollisionNode;
+import citrus.nodes.KillOutOfScreenNode;
 
-class KillOutOfScreenSystem extends System {
+class KillOutOfScreenSystem extends ListIteratingSystem<KillOutOfScreenNode>  {
 
     var _creator:AEntityCreator;
     var _config:AGameConfig;
 
-    var _bullets:NodeList<BulletCollisionNode>;
-
     public function new(creator:AEntityCreator, config:AGameConfig) {
-        super();
+        super(KillOutOfScreenNode, _updateNode);
 
         _creator = creator;
         _config = config;
     }
 
-    override public function addToEngine(engine:Engine) {
+    function _updateNode(node:KillOutOfScreenNode, time:Float) {
 
-        _bullets = engine.getNodeList(BulletCollisionNode);
-    }
+        var killOutOfScreen = node.killOutOfScreen;
+        var position = node.position;
 
-    override public function update(time:Float) {
+        if (killOutOfScreen.killOutX && (position.position.x < 0 || position.position.x > _config.width))
+            _creator.destroyEntity(node.entity);
 
-        for (bullet in _bullets)
-            if (bullet.position.position.x < 0 || bullet.position.position.x > _config.width || bullet.position.position.y < 0 || bullet.position.position.y > _config.height)
-                _creator.destroyEntity(bullet.entity);
-    }
 
-    override public function removeFromEngine(engine:Engine) {
-
-        _bullets = null;
+        if (killOutOfScreen.killOutY && (position.position.y < 0 || position.position.y > _config.height))
+            _creator.destroyEntity(node.entity);
     }
 }
