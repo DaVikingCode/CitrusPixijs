@@ -27,6 +27,12 @@ class MotionControlSystem extends ListIteratingSystem<MotionControlNode> {
 		if (_keyPoll.isDown(control.right))
 			position.rotation += control.rotationRate * time;
 
+		if (_keyPoll.isDown(control.up))
+			position.position.y -= control.accelerationRate * time;
+
+		if (_keyPoll.isDown(control.down))
+			position.position.y += control.accelerationRate * time;
+
 		if (_keyPoll.isDown(control.accelerate)) {
 
 			motion.velocity.x += Math.cos(position.rotation) * control.accelerationRate * time;

@@ -104,7 +104,7 @@ class EntityCreator extends AEntityCreator {
 
 		fsm.createState("playing")
 		.add(Motion).withInstance(new Motion(0, 0, 0, 15))
-		.add(MotionControls).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
+		.add(MotionControls).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, -1, -1, KeyboardEvent.DOM_VK_UP, 100, 3))
 		.add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
 		.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
 		.add(Collision).withInstance(new Collision(9))

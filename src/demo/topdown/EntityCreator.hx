@@ -1,6 +1,5 @@
 package demo.topdown;
 
-import pixi.core.sprites.Sprite;
 import ash.core.Engine;
 import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
@@ -18,12 +17,9 @@ import citrus.components.Position;
 import citrus.math.MathUtils;
 
 import demo.topdown.components.GameState;
+import demo.topdown.graphics.SpaceshipView;
 
 import js.html.KeyboardEvent;
-
-import pixi.core.display.Container;
-import pixi.core.textures.Texture;
-import pixi.core.sprites.Sprite;
 
 class EntityCreator extends AEntityCreator {
 
@@ -48,23 +44,17 @@ class EntityCreator extends AEntityCreator {
 
         var spaceship = new Entity();
 
-        var display = new Sprite(Texture.fromImage("playerShip1_blue.png"));
-        display.anchor.set(0.5);
-        display.rotation = MathUtils.deg2rad(90); // the ship is oriented to the North, rotate to the East as expected by the systems.
-        var container = new Container();
-        container.addChild(display);
-
         var fsm = new EntityStateMachine(spaceship);
 
         fsm.createState("playing")
         .add(Motion).withInstance(new Motion(0, 0, 0, 50))
-        .add(MotionControls ).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, KeyboardEvent.DOM_VK_UP, 100, 3))
+        .add(MotionControls).withInstance(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 200, 0))
         .add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
         .add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
         .add(Collision).withInstance(new Collision(9))
-        .add(Display).withInstance(new Display(container));
+        .add(Display).withInstance(new Display(new SpaceshipView()));
 
-        spaceship.add(new Player(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, MathUtils.deg2rad(90))).add(new Audio());
+        spaceship.add(new Player(fsm)).add(new Position(_config.width * 0.15, _config.height * 0.5, MathUtils.deg2rad(0))).add(new Audio());
 
         fsm.changeState("playing");
 

@@ -34,7 +34,6 @@ class Main extends CitrusJS {
 
 		backgroundColor = 0x000000;
 		autoResize = false;
-		width = 800;
 		height = 600;
 		super.start();
 
