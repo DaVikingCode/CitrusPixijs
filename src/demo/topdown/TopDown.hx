@@ -5,6 +5,7 @@ import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
 import citrus.systems.DeathThroesSystem;
 import citrus.systems.GunControlSystem;
+import citrus.systems.KillOutOfScreenSystem;
 import citrus.systems.MotionControlSystem;
 import citrus.systems.MovementSystem;
 import citrus.systems.SystemPriorities;
@@ -30,11 +31,12 @@ class TopDown extends State {
         _creator = new EntityCreator(_engine, _config);
 
         _engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
+        _engine.addSystem(new KillOutOfScreenSystem(_creator, _config), SystemPriorities.preUpdate);
         _engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
         _engine.addSystem(new GunControlSystem(_keyPoll, _creator), SystemPriorities.update);
         _engine.addSystem(new BulletAgeSystem(_creator), SystemPriorities.update);
         _engine.addSystem(new DeathThroesSystem(_creator), SystemPriorities.update);
-        _engine.addSystem(new MovementSystem(_config), SystemPriorities.move);
+        _engine.addSystem(new MovementSystem(_config, true), SystemPriorities.move);
         _engine.addSystem(new RenderSystem(this), SystemPriorities.render);
         _engine.addSystem(new AudioSystem(), SystemPriorities.render);
 

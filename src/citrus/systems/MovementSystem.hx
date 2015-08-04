@@ -8,11 +8,15 @@ import citrus.nodes.MovementNode;
 class MovementSystem extends ListIteratingSystem<MovementNode> {
 
 	var _config:AGameConfig;
+	var _limitX:Bool;
+	var _limitY:Bool;
 
-	public function new(config:AGameConfig) {
+	public function new(config:AGameConfig, limitX = false, limitY = false) {
 		super(MovementNode, _updateNode);
 
 		_config = config;
+		_limitX = limitX;
+		_limitY = limitY;
 	}
 
 	function _updateNode(node:MovementNode, time:Float) {
@@ -23,17 +27,23 @@ class MovementSystem extends ListIteratingSystem<MovementNode> {
 		position.position.x += motion.velocity.x * time;
 		position.position.y += motion.velocity.y * time;
 
-		if (position.position.x < 0)
-			position.position.x += _config.width;
+		if (!_limitX) {
 
-		if (position.position.x > _config.width)
-			position.position.x -= _config.width;
+			if (position.position.x < 0)
+				position.position.x += _config.width;
 
-		if (position.position.y < 0)
-			position.position.y += _config.height;
+			if (position.position.x > _config.width)
+				position.position.x -= _config.width;
+		}
 
-		if (position.position.y > _config.height)
-			position.position.y -= _config.height;
+		if (!_limitY) {
+
+			if (position.position.y < 0)
+				position.position.y += _config.height;
+
+			if (position.position.y > _config.height)
+				position.position.y -= _config.height;
+		}
 
 		position.rotation += motion.angularVelocity * time;
 

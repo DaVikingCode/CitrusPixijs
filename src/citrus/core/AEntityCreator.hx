@@ -32,6 +32,8 @@ class AEntityCreator {
 		.add(new Bullet(gun.bulletLifetime))
 		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
 		.add(new Collision(0));
+
+		// think to add on your EntityCreator a Display & Motion components
 		
 		return bullet;
 	}
