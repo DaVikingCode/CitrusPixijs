@@ -76,18 +76,21 @@ class EntityCreator extends AEntityCreator {
 		var fsm = new EntityStateMachine(asteroid);
 
 		fsm.createState("alive")
-		.add(Motion).withInstance(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
-		.add(Collision).withInstance(new Collision(radius))
-		.add(Display).withInstance(new Display(new AsteroidView(radius)));
+			.add(Motion).withInstance(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
+			.add(Collision).withInstance(new Collision(radius))
+			.add(Display).withInstance(new Display(new AsteroidView(radius)));
 
 		var deathView = new AsteroidDeathView(radius);
 
 		fsm.createState("destroyed")
-		.add(DeathThroes).withInstance(new DeathThroes(3))
-		.add(Display).withInstance(new Display(deathView))
-		.add(Animation).withInstance(new Animation(deathView));
+			.add(DeathThroes).withInstance(new DeathThroes(3))
+			.add(Display).withInstance(new Display(deathView))
+			.add(Animation).withInstance(new Animation(deathView));
 
-		asteroid.add(new Enemy(fsm)).add(new Position(x, y, 0)).add(new Audio());
+		asteroid
+			.add(new Enemy(fsm))
+			.add(new Position(x, y, 0))
+			.add(new Audio());
 
 		fsm.changeState("alive");
 
@@ -103,20 +106,23 @@ class EntityCreator extends AEntityCreator {
 		var fsm = new EntityStateMachine(spaceship);
 
 		fsm.createState("playing")
-		.add(Motion).withInstance(new Motion(0, 0, 0, 15))
-		.add(MotionControls).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, -1, -1, KeyboardEvent.DOM_VK_UP, 100, 3))
-		.add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
-		.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
-		.add(Collision).withInstance(new Collision(9))
-		.add(Display).withInstance(new Display(new SpaceshipView()));
+			.add(Motion).withInstance(new Motion(0, 0, 0, 15))
+			.add(MotionControls).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, -1, -1, KeyboardEvent.DOM_VK_UP, 100, 3))
+			.add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
+			.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
+			.add(Collision).withInstance(new Collision(9))
+			.add(Display).withInstance(new Display(new SpaceshipView()));
 
 		var deathView = new SpaceshipDeathView();
 		fsm.createState("destroyed")
-		.add(DeathThroes).withInstance(new DeathThroes(5))
-		.add(Display).withInstance(new Display(deathView))
-		.add(Animation).withInstance(new Animation(deathView));
+			.add(DeathThroes).withInstance(new DeathThroes(5))
+			.add(Display).withInstance(new Display(deathView))
+			.add(Animation).withInstance(new Animation(deathView));
 
-		spaceship.add(new Player(fsm)).add(new Position(_config.width * 0.5, _config.height * 0.5, 0)).add(new Audio());
+		spaceship
+			.add(new Player(fsm))
+			.add(new Position(_config.width * 0.5, _config.height * 0.5, 0))
+			.add(new Audio());
 
 		fsm.changeState("playing");
 
@@ -129,7 +135,9 @@ class EntityCreator extends AEntityCreator {
 		
 		var bullet = super.createUserBullet(gun, parentPosition);
 		
-		bullet.add(new Display(new BulletView()));
+		bullet
+			.add(new Display(new BulletView()))
+			.add(new Motion(Math.cos(parentPosition.rotation) * 150, Math.sin(parentPosition.rotation) * 150, 0, 0));
 
 		_engine.addEntity(bullet);
 
