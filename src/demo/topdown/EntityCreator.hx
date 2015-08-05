@@ -8,6 +8,7 @@ import citrus.core.AEntityCreator;
 import citrus.components.Audio;
 import citrus.components.Collision;
 import citrus.components.Display;
+import citrus.components.Enemy;
 import citrus.components.Gun;
 import citrus.components.GunControls;
 import citrus.components.KillOutOfScreen;
@@ -18,6 +19,7 @@ import citrus.components.Position;
 import citrus.math.MathUtils;
 
 import demo.topdown.components.GameState;
+import demo.topdown.graphics.BasicEnemyView;
 import demo.topdown.graphics.BulletView;
 import demo.topdown.graphics.SpaceshipView;
 
@@ -66,6 +68,23 @@ class EntityCreator extends AEntityCreator {
         _engine.addEntity(spaceship);
 
         return spaceship;
+    }
+
+    public function createBasicEnemy():Entity {
+
+        var enemy = new Entity();
+        enemy
+            .add(new Enemy(new EntityStateMachine(enemy)))
+            .add(new Collision(50))
+            .add(new Position(_config.width, Math.random() * _config.height, 0))
+            .add(new Motion(-250, 0, 0, 0))
+            .add(new KillOutOfScreen(true, false))
+            .add(new Audio())
+            .add(new Display(new BasicEnemyView()));
+
+        _engine.addEntity(enemy);
+
+        return enemy;
     }
 
     override public function createUserBullet(gun:Gun, parentPosition:Position):Entity {

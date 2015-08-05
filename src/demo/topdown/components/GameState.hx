@@ -6,6 +6,7 @@ class GameState {
     public var level:Int;
     public var points:Int = 0;
     public var playing:Bool;
+    public var wave:Int = 0;
 
     public function new() {
 

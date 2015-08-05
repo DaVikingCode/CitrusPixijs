@@ -6,7 +6,6 @@ import ash.core.Entity;
 import citrus.components.Bullet;
 import citrus.components.Collision;
 import citrus.components.Gun;
-import citrus.components.Motion;
 import citrus.components.Position;
 
 class AEntityCreator {
