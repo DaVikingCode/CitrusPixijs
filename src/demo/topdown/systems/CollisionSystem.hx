@@ -42,7 +42,7 @@ class CollisionSystem extends System {
 
                 if (Point.distance(player.position.position, enemy.position.position) <= player.collision.radius + enemy.collision.radius) {
 
-                    _creator.destroyEntity(enemy.entity);
+                    enemy.enemy.fsm.changeState("destroyed");
 
                     break;
                 }
@@ -56,7 +56,7 @@ class CollisionSystem extends System {
 
                 if (Point.distance(bullet.position.position, enemy.position.position) <= enemy.collision.radius) {
 
-                    _creator.destroyEntity(enemy.entity);
+                    enemy.enemy.fsm.changeState("destroyed");
                     _creator.destroyEntity(bullet.entity);
 
                     break;

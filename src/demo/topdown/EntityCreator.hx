@@ -5,8 +5,10 @@ import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 
 import citrus.core.AEntityCreator;
+import citrus.components.Animation;
 import citrus.components.Audio;
 import citrus.components.Collision;
+import citrus.components.DeathThroes;
 import citrus.components.Display;
 import citrus.components.Enemy;
 import citrus.components.Gun;
@@ -51,12 +53,12 @@ class EntityCreator extends AEntityCreator {
         var fsm = new EntityStateMachine(spaceship);
 
         fsm.createState("playing")
-        .add(Motion).withInstance(new Motion(0, 0, 0, 50))
-        .add(MotionControls).withInstance(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 200, 0))
-        .add(Gun).withInstance(new Gun(60, 0, 0.5, 5))
-        .add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
-        .add(Collision).withInstance(new Collision(9))
-        .add(Display).withInstance(new Display(new SpaceshipView()));
+            .add(Motion).withInstance(new Motion(0, 0, 0, 50))
+            .add(MotionControls).withInstance(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 300, 0))
+            .add(Gun).withInstance(new Gun(60, 0, 0.5, 5))
+            .add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
+            .add(Collision).withInstance(new Collision(30))
+            .add(Display).withInstance(new Display(new SpaceshipView()));
 
         spaceship
             .add(new Player(fsm))
@@ -73,14 +75,27 @@ class EntityCreator extends AEntityCreator {
     public function createBasicEnemy():Entity {
 
         var enemy = new Entity();
+
+        var fsm = new EntityStateMachine(enemy);
+
+        var display = new BasicEnemyView();
+
+        fsm.createState("playing")
+            .add(Collision).withInstance(new Collision(50))
+            .add(Motion).withInstance(new Motion(-250, 0, 0, 0))
+            .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false));
+
+        fsm.createState("destroyed")
+            .add(DeathThroes).withInstance(new DeathThroes(0.5))
+            .add(Animation).withInstance(new Animation(display));
+
         enemy
-            .add(new Enemy(new EntityStateMachine(enemy)))
-            .add(new Collision(50))
-            .add(new Position(_config.width, Math.random() * _config.height, 0))
-            .add(new Motion(-250, 0, 0, 0))
-            .add(new KillOutOfScreen(true, false))
+            .add(new Enemy(fsm))
+            .add(new Position(_config.width, 50 + Math.random() * (_config.height - 50), 0))
             .add(new Audio())
-            .add(new Display(new BasicEnemyView()));
+            .add(new Display(display));
+
+        fsm.changeState("playing");
 
         _engine.addEntity(enemy);
 
