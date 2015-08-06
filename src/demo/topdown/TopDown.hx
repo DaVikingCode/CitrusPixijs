@@ -26,6 +26,8 @@ class TopDown extends State {
     var _config:GameConfig;
     var _creator:EntityCreator;
 
+    var _bg:TilingSprite;
+
     public function new() {
         super();
     }
@@ -41,7 +43,8 @@ class TopDown extends State {
         _config.height = _citrusJS.height;
         _creator = new EntityCreator(_engine, _config);
 
-        addChild(new TilingSprite(Texture.fromImage("Backgrounds/blue.png"), _config.width, _config.height));
+        _bg = new TilingSprite(Texture.fromImage("Backgrounds/blue.png"), _config.width, _config.height);
+        addChild(_bg);
 
         _engine.addSystem(new WaveManager(_creator, _config), SystemPriorities.preUpdate);
         _engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
@@ -58,5 +61,11 @@ class TopDown extends State {
         _engine.addSystem(new AudioSystem(), SystemPriorities.render);
 
         _creator.createGame();
+    }
+
+    override public function onUpdate(elapsedTime:Float) {
+        super.onUpdate(elapsedTime);
+
+        _bg.tilePosition.x -= 0.2 * elapsedTime;
     }
 }
