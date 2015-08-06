@@ -28,7 +28,7 @@ class AEntityCreator {
 		var sin = Math.sin(parentPosition.rotation);
 		
 		var bullet = new Entity()
-			.add(new Bullet(gun.bulletLifetime))
+			.add(new Bullet(gun.bulletLifetime, "enemy"))
 			.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
 			.add(new Collision(0));
 
@@ -43,7 +43,7 @@ class AEntityCreator {
 		var sin = Math.sin(parentPosition.rotation);
 
 		var bullet = new Entity()
-			.add(new Bullet(gun.bulletLifetime))
+			.add(new Bullet(gun.bulletLifetime, "player"))
 			.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
 			.add(new Collision(0));
 

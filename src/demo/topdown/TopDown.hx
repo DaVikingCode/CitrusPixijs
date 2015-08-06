@@ -17,6 +17,9 @@ import demo.topdown.systems.CollisionSystem;
 import demo.topdown.systems.GameManager;
 import demo.topdown.systems.WaveManager;
 
+import pixi.core.textures.Texture;
+import pixi.extras.TilingSprite;
+
 class TopDown extends State {
 
     var _config:GameConfig;
@@ -33,6 +36,8 @@ class TopDown extends State {
         _config.width = _citrusJS.width;
         _config.height = _citrusJS.height;
         _creator = new EntityCreator(_engine, _config);
+
+        addChild(new TilingSprite(Texture.fromImage("Backgrounds/blue.png"), _config.width, _config.height));
 
         _engine.addSystem(new WaveManager(_creator, _config), SystemPriorities.preUpdate);
         _engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);

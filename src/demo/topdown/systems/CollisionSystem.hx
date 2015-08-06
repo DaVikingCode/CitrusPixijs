@@ -48,25 +48,7 @@ class CollisionSystem extends System {
                 if (Point.distance(player.position.position, enemy.position.position) <= player.collision.radius + enemy.collision.radius) {
 
                     enemy.enemy.fsm.changeState("destroyed");
-
-                    player.player.fsm.changeState("hurt");
-
-                    ++_games.head.state.hurt;
-
-                    if (_games.head.state.hurt > 3)
-                        trace("game over");
-
-                    else {
-
-                        if (_games.head.state.hurt > 1)
-                            player.entity.get(Display).displayObject.removeChildAt(1);
-
-                        var sprite = new Sprite(Texture.fromImage("Damage/playerShip1_damage" + _games.head.state.hurt + ".png"));
-                        sprite.anchor.set(0.5, 0.5);
-                        sprite.rotation = MathUtils.deg2rad(90);
-
-                        player.entity.get(Display).displayObject.addChild(sprite);
-                    }
+                    _hurtPlayer(player);
 
                     break;
                 }
@@ -76,19 +58,54 @@ class CollisionSystem extends System {
 
         for (bullet in _bullets) {
 
-            for (enemy in _enemies) {
+            if (bullet.bullet.target == "enemy")
+                for (enemy in _enemies) {
 
-                if (Point.distance(bullet.position.position, enemy.position.position) <= enemy.collision.radius) {
+                    if (Point.distance(bullet.position.position, enemy.position.position) <= enemy.collision.radius) {
 
-                    enemy.enemy.fsm.changeState("destroyed");
-                    _creator.destroyEntity(bullet.entity);
+                        enemy.enemy.fsm.changeState("destroyed");
+                        _creator.destroyEntity(bullet.entity);
 
-                    break;
+                        break;
+                    }
                 }
-            }
+
+            else if (bullet.bullet.target == "player")
+                for (player in _players) {
+
+                    if (Point.distance(bullet.position.position, player.position.position) <= player.collision.radius) {
+
+                        _hurtPlayer(player);
+                        _creator.destroyEntity(bullet.entity);
+
+                        break;
+                    }
+                }
 
         }
 
+    }
+
+    function _hurtPlayer(player:PlayerCollisionNode) {
+
+        player.player.fsm.changeState("hurt");
+
+        ++_games.head.state.hurt;
+
+        if (_games.head.state.hurt > 3)
+            trace("game over");
+
+        else {
+
+            if (_games.head.state.hurt > 1)
+                player.entity.get(Display).displayObject.removeChildAt(1);
+
+            var sprite = new Sprite(Texture.fromImage("Damage/playerShip1_damage" + _games.head.state.hurt + ".png"));
+            sprite.anchor.set(0.5, 0.5);
+            sprite.rotation = MathUtils.deg2rad(90);
+
+            player.entity.get(Display).displayObject.addChild(sprite);
+        }
     }
 
     override public function removeFromEngine(engine:Engine) {
