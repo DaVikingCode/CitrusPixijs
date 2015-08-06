@@ -10,6 +10,7 @@ import citrus.math.Point;
 import citrus.nodes.BulletCollisionNode;
 import citrus.nodes.PlayerCollisionNode;
 import citrus.nodes.EnemyCollisionNode;
+import citrus.physics.CollisionCategories;
 
 import demo.topdown.nodes.GameNode;
 
@@ -58,7 +59,7 @@ class CollisionSystem extends System {
 
         for (bullet in _bullets) {
 
-            if (bullet.bullet.target == "enemy")
+            if (bullet.bullet.collisionCategories == CollisionCategories.get(["Enemy"]))
                 for (enemy in _enemies) {
 
                     if (Point.distance(bullet.position.position, enemy.position.position) <= enemy.collision.radius) {
@@ -70,7 +71,7 @@ class CollisionSystem extends System {
                     }
                 }
 
-            else if (bullet.bullet.target == "player")
+            else if (bullet.bullet.collisionCategories == CollisionCategories.get(["Player"]))
                 for (player in _players) {
 
                     if (Point.distance(bullet.position.position, player.position.position) <= player.collision.radius) {

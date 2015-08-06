@@ -131,9 +131,9 @@ class EntityCreator extends AEntityCreator {
 		return spaceship;
 	}
 
-	override public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
+	override public function createUserBullet(gun:Gun, parentPosition:Position, collisionCategories:UInt = 0):Entity {
 		
-		var bullet = super.createUserBullet(gun, parentPosition);
+		var bullet = super.createUserBullet(gun, parentPosition, collisionCategories);
 		
 		bullet
 			.add(new Display(new BulletView()))

@@ -1,6 +1,7 @@
 package demo.topdown;
 
 import citrus.core.State;
+import citrus.physics.CollisionCategories;
 import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
@@ -31,6 +32,9 @@ class TopDown extends State {
 
     override public function initialize() {
         super.initialize();
+
+        CollisionCategories.add("Player");
+        CollisionCategories.add("Enemy");
 
         _config = new GameConfig();
         _config.width = _citrusJS.width;

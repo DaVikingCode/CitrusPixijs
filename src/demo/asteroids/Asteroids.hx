@@ -1,6 +1,7 @@
 package demo.asteroids;
 
 import citrus.core.State;
+import citrus.physics.CollisionCategories;
 import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
@@ -18,9 +19,6 @@ import demo.asteroids.systems.WaitForStartSystem;
 
 import howler.Howl;
 
-import pixi.core.textures.Texture;
-import pixi.core.sprites.Sprite;
-
 class Asteroids extends State {
 
 	var _config:GameConfig;
@@ -37,6 +35,8 @@ class Asteroids extends State {
 		_config.width = _citrusJS.width;
 		_config.height = _citrusJS.height;
 		_creator = new EntityCreator(_engine, _config);
+
+		CollisionCategories.add("Enemy");
 		
 		var gunSound:HowlOptions = {};
 		gunSound.urls = ["assets/spaceshooter/sound/sfx_laser1.ogg"];

@@ -22,13 +22,13 @@ class AEntityCreator {
 		_engine.removeEntity(entity);
 	}
 	
-	public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
+	public function createUserBullet(gun:Gun, parentPosition:Position, collisionCategories:UInt = 0):Entity {
 		
 		var cos = Math.cos(parentPosition.rotation);
 		var sin = Math.sin(parentPosition.rotation);
 		
 		var bullet = new Entity()
-			.add(new Bullet(gun.bulletLifetime, "enemy"))
+			.add(new Bullet(gun.bulletLifetime, collisionCategories))
 			.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
 			.add(new Collision(0));
 
@@ -37,13 +37,13 @@ class AEntityCreator {
 		return bullet;
 	}
 
-	public function createEnemyBullet(gun:Gun, parentPosition:Position):Entity {
+	public function createEnemyBullet(gun:Gun, parentPosition:Position, collisionCategories:UInt = 0):Entity {
 
 		var cos = Math.cos(parentPosition.rotation);
 		var sin = Math.sin(parentPosition.rotation);
 
 		var bullet = new Entity()
-			.add(new Bullet(gun.bulletLifetime, "player"))
+			.add(new Bullet(gun.bulletLifetime, collisionCategories))
 			.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
 			.add(new Collision(0));
 

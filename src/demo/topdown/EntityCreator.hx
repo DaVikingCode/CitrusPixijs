@@ -126,7 +126,7 @@ class EntityCreator extends AEntityCreator {
             .add(Collision).withInstance(new Collision(50))
             .add(Motion).withInstance(new Motion(-250, 0, 0, 0))
             .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false))
-            .add(Gun).withInstance(new Gun(-60, 0, 1.5, 5, true))
+            .add(Gun).withInstance(new Gun(-60, 0, 2, 5, true))
             .add(GunControls).withInstance(new GunControls());
 
         fsm.createState("destroyed")
@@ -146,9 +146,9 @@ class EntityCreator extends AEntityCreator {
         return enemy;
     }
 
-    override public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
+    override public function createUserBullet(gun:Gun, parentPosition:Position, collisionCategories:UInt = 0):Entity {
 
-        var bullet = super.createUserBullet(gun, parentPosition);
+        var bullet = super.createUserBullet(gun, parentPosition, collisionCategories);
 
         bullet
             .add(new Display(new BulletView("laserBlue01")))
@@ -160,9 +160,9 @@ class EntityCreator extends AEntityCreator {
         return bullet;
     }
 
-    override public function createEnemyBullet(gun:Gun, parentPosition:Position):Entity {
+    override public function createEnemyBullet(gun:Gun, parentPosition:Position, collisionCategories:UInt = 0):Entity {
 
-        var bullet = super.createEnemyBullet(gun, parentPosition);
+        var bullet = super.createEnemyBullet(gun, parentPosition, collisionCategories);
 
         bullet
             .add(new Display(new BulletView("laserGreen16")))
