@@ -18,6 +18,7 @@ import citrus.components.Motion;
 import citrus.components.MotionControls;
 import citrus.components.Player;
 import citrus.components.Position;
+import citrus.components.TimeOutChangeState;
 import citrus.math.MathUtils;
 
 import demo.topdown.components.GameState;
@@ -57,12 +58,18 @@ class EntityCreator extends AEntityCreator {
             .add(MotionControls).withInstance(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 300, 0))
             .add(Gun).withInstance(new Gun(60, 0, 0.5, 5))
             .add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
-            .add(Collision).withInstance(new Collision(30))
-            .add(Display).withInstance(new Display(new SpaceshipView()));
+            .add(Collision).withInstance(new Collision(30));
+
+        fsm.createState("hurt")
+            .add(TimeOutChangeState).withInstance(new TimeOutChangeState(1, fsm, "playing"));
+
+
+        fsm.changeState("playing");
 
         spaceship
             .add(new Player(fsm))
             .add(new Position(_config.width * 0.15, _config.height * 0.5, MathUtils.deg2rad(0)))
+            .add(new Display(new SpaceshipView()))
             .add(new Audio());
 
         fsm.changeState("playing");

@@ -9,8 +9,9 @@ import citrus.systems.GunControlSystem;
 import citrus.systems.KillOutOfScreenSystem;
 import citrus.systems.MotionControlSystem;
 import citrus.systems.MovementSystem;
-import citrus.systems.SystemPriorities;
 import citrus.systems.RenderSystem;
+import citrus.systems.SystemPriorities;
+import citrus.systems.TimeOutChangeStateSystem;
 
 import demo.topdown.systems.CollisionSystem;
 import demo.topdown.systems.GameManager;
@@ -40,6 +41,7 @@ class TopDown extends State {
         _engine.addSystem(new GunControlSystem(_keyPoll, _creator), SystemPriorities.update);
         _engine.addSystem(new BulletAgeSystem(_creator), SystemPriorities.update);
         _engine.addSystem(new DeathThroesSystem(_creator), SystemPriorities.update);
+        _engine.addSystem(new TimeOutChangeStateSystem(), SystemPriorities.update);
         _engine.addSystem(new CollisionSystem(_creator), SystemPriorities.resolveCollisions);
         _engine.addSystem(new MovementSystem(_config, true), SystemPriorities.move);
         _engine.addSystem(new AnimationSystem(), SystemPriorities.animate);

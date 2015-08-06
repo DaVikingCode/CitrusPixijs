@@ -4,12 +4,17 @@ import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
+import citrus.components.Display;
+import citrus.math.MathUtils;
 import citrus.math.Point;
 import citrus.nodes.BulletCollisionNode;
 import citrus.nodes.PlayerCollisionNode;
 import citrus.nodes.EnemyCollisionNode;
 
 import demo.topdown.nodes.GameNode;
+
+import pixi.core.textures.Texture;
+import pixi.core.sprites.Sprite;
 
 class CollisionSystem extends System {
 
@@ -43,6 +48,25 @@ class CollisionSystem extends System {
                 if (Point.distance(player.position.position, enemy.position.position) <= player.collision.radius + enemy.collision.radius) {
 
                     enemy.enemy.fsm.changeState("destroyed");
+
+                    player.player.fsm.changeState("hurt");
+
+                    ++_games.head.state.hurt;
+
+                    if (_games.head.state.hurt > 3)
+                        trace("game over");
+
+                    else {
+
+                        if (_games.head.state.hurt > 1)
+                            player.entity.get(Display).displayObject.removeChildAt(1);
+
+                        var sprite = new Sprite(Texture.fromImage("Damage/playerShip1_damage" + _games.head.state.hurt + ".png"));
+                        sprite.anchor.set(0.5, 0.5);
+                        sprite.rotation = MathUtils.deg2rad(90);
+
+                        player.entity.get(Display).displayObject.addChild(sprite);
+                    }
 
                     break;
                 }

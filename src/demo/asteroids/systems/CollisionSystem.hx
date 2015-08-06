@@ -4,6 +4,7 @@ import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
+import citrus.components.Audio;
 import citrus.math.Point;
 import citrus.nodes.EnemyCollisionNode;
 import citrus.nodes.BulletCollisionNode;
@@ -64,7 +65,7 @@ class CollisionSystem extends System {
 						++_games.head.state.points;
 
 					if (_soundExplosionAsteroid != null)
-						asteroid.audio.play(_soundExplosionAsteroid);
+						asteroid.entity.get(Audio).play(_soundExplosionAsteroid);
 
 					break;
 				}
@@ -83,7 +84,7 @@ class CollisionSystem extends System {
 						--_games.head.state.lives;
 
 					if (_soundExplosionShip != null)
-						spaceship.audio.play(_soundExplosionShip);
+						spaceship.entity.get(Audio).play(_soundExplosionShip);
 
 					break;
 				}

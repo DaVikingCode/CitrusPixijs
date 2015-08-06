@@ -1,14 +1,11 @@
 package;
 
+import citrus.core.CitrusJS;
+
 import demo.asteroids.Asteroids;
 import demo.topdown.TopDown;
 
-import pixi.core.textures.Texture;
-import pixi.core.sprites.Sprite;
 import pixi.loaders.Loader;
-import pixi.plugins.app.Application;
-
-import citrus.core.CitrusJS;
 
 class Main extends CitrusJS {
 

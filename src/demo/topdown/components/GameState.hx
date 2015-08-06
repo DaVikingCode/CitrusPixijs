@@ -3,6 +3,7 @@ package demo.topdown.components;
 class GameState {
 
     public var lives:Int = 0;
+    public var hurt:Int = 0;
     public var level:Int;
     public var points:Int = 0;
     public var playing:Bool;
@@ -14,6 +15,7 @@ class GameState {
 
     public function setForStart() {
 
+        hurt = 0;
         lives = 3;
         level = 0;
         points = 0;

@@ -12,5 +12,4 @@ class PlayerCollisionNode extends Node<PlayerCollisionNode> {
 	public var player:Player;
 	public var position:Position;
 	public var collision:Collision;
-	public var audio:Audio;
 }
