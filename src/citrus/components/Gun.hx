@@ -9,11 +9,13 @@ class Gun {
 	public var timeSinceLastShot:Float = 0;
 	public var minimumShotInterval:Float;
 	public var bulletLifetime:Float;
+	public var shootAtStart = false;
 
-	public function new(offsetX:Float, offsetY:Float, minimumShotInterval:Float, bulletLifetime:Float) {
+	public function new(offsetX:Float, offsetY:Float, minimumShotInterval:Float, bulletLifetime:Float, shootAtStart:Bool = false) {
 
 		offsetFromParent = new Point(offsetX, offsetY);
 		this.minimumShotInterval = minimumShotInterval;
 		this.bulletLifetime = bulletLifetime;
+		this.shootAtStart = shootAtStart;
 	}
 }

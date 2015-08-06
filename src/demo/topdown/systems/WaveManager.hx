@@ -32,7 +32,7 @@ class WaveManager extends System {
     override public function update(time:Float) {
 
         if (_enemies.empty)
-            _creator.createBasicEnemy();
+            _creator.createRandomEnemy();
     }
 
     override public function removeFromEngine(engine:Engine) {

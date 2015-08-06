@@ -28,12 +28,27 @@ class AEntityCreator {
 		var sin = Math.sin(parentPosition.rotation);
 		
 		var bullet = new Entity()
-		.add(new Bullet(gun.bulletLifetime))
-		.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
-		.add(new Collision(0));
+			.add(new Bullet(gun.bulletLifetime))
+			.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
+			.add(new Collision(0));
 
 		// think to add on your EntityCreator a Display & Motion components
 		
+		return bullet;
+	}
+
+	public function createEnemyBullet(gun:Gun, parentPosition:Position):Entity {
+
+		var cos = Math.cos(parentPosition.rotation);
+		var sin = Math.sin(parentPosition.rotation);
+
+		var bullet = new Entity()
+			.add(new Bullet(gun.bulletLifetime))
+			.add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, 0))
+			.add(new Collision(0));
+
+		// think to add on your EntityCreator a Display & Motion components
+
 		return bullet;
 	}
 }

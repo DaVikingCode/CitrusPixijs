@@ -9,10 +9,10 @@ import pixi.core.textures.Texture;
 
 class BasicEnemyView extends Container implements IAnimatable {
 
-    public function new() {
+    public function new(color:String) {
         super();
 
-        var display = new Sprite(Texture.fromImage("Enemies/enemyBlack" + MathUtils.randomInt(1, 5) + ".png"));
+        var display = new Sprite(Texture.fromImage("Enemies/enemy" + color + MathUtils.randomInt(1, 5) + ".png"));
         display.anchor.set(0.5);
         display.rotation = MathUtils.deg2rad(90); // the ship is oriented to the South, rotate to the West as expected by systems.
 

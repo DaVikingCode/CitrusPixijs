@@ -79,13 +79,18 @@ class EntityCreator extends AEntityCreator {
         return spaceship;
     }
 
+    public function createRandomEnemy() {
+
+        Math.random() > 0.5 ? createBasicEnemy() : createOneBulletEnemy();
+    }
+
     public function createBasicEnemy():Entity {
 
         var enemy = new Entity();
 
         var fsm = new EntityStateMachine(enemy);
 
-        var display = new BasicEnemyView();
+        var display = new BasicEnemyView("Black");
 
         fsm.createState("playing")
             .add(Collision).withInstance(new Collision(50))
@@ -109,13 +114,59 @@ class EntityCreator extends AEntityCreator {
         return enemy;
     }
 
+    public function createOneBulletEnemy():Entity {
+
+        var enemy = new Entity();
+
+        var fsm = new EntityStateMachine(enemy);
+
+        var display = new BasicEnemyView("Green");
+
+        fsm.createState("playing")
+            .add(Collision).withInstance(new Collision(50))
+            .add(Motion).withInstance(new Motion(-250, 0, 0, 0))
+            .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false))
+            .add(Gun).withInstance(new Gun(-60, 0, 1.5, 5, true))
+            .add(GunControls).withInstance(new GunControls());
+
+        fsm.createState("destroyed")
+            .add(DeathThroes).withInstance(new DeathThroes(0.5))
+            .add(Animation).withInstance(new Animation(display));
+
+        enemy
+            .add(new Enemy(fsm))
+            .add(new Position(_config.width, 50 + Math.random() * (_config.height - 50), 0))
+            .add(new Audio())
+            .add(new Display(display));
+
+        fsm.changeState("playing");
+
+        _engine.addEntity(enemy);
+
+        return enemy;
+    }
+
     override public function createUserBullet(gun:Gun, parentPosition:Position):Entity {
 
         var bullet = super.createUserBullet(gun, parentPosition);
 
         bullet
-            .add(new Display(new BulletView()))
-            .add(new Motion(Math.cos(parentPosition.rotation) * 500, Math.sin(parentPosition.rotation) * 500, 0, 0))
+            .add(new Display(new BulletView("laserBlue01")))
+            .add(new Motion(500, 0, 0, 0))
+            .add(new KillOutOfScreen(true, false));
+
+        _engine.addEntity(bullet);
+
+        return bullet;
+    }
+
+    override public function createEnemyBullet(gun:Gun, parentPosition:Position):Entity {
+
+        var bullet = super.createEnemyBullet(gun, parentPosition);
+
+        bullet
+            .add(new Display(new BulletView("laserGreen16")))
+            .add(new Motion(-400, 0, 0, 0))
             .add(new KillOutOfScreen(true, false));
 
         _engine.addEntity(bullet);
