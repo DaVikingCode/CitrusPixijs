@@ -22,6 +22,8 @@ import citrus.components.TimeOutChangeState;
 import citrus.math.MathUtils;
 
 import demo.topdown.components.GameState;
+import demo.topdown.entities.BasicEnemyEntity;
+import demo.topdown.entities.OneBulletEnemyEntity;
 import demo.topdown.graphics.BasicEnemyView;
 import demo.topdown.graphics.BulletView;
 import demo.topdown.graphics.SpaceshipView;
@@ -86,28 +88,7 @@ class EntityCreator extends AEntityCreator {
 
     public function createBasicEnemy():Entity {
 
-        var enemy = new Entity();
-
-        var fsm = new EntityStateMachine(enemy);
-
-        var display = new BasicEnemyView("Black");
-
-        fsm.createState("playing")
-            .add(Collision).withInstance(new Collision(50))
-            .add(Motion).withInstance(new Motion(-250, 0, 0, 0))
-            .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false));
-
-        fsm.createState("destroyed")
-            .add(DeathThroes).withInstance(new DeathThroes(0.5))
-            .add(Animation).withInstance(new Animation(display));
-
-        enemy
-            .add(new Enemy(fsm))
-            .add(new Position(_config.width, 50 + Math.random() * (_config.height - 50), 0))
-            .add(new Audio())
-            .add(new Display(display));
-
-        fsm.changeState("playing");
+        var enemy = new BasicEnemyEntity("", "Black");
 
         _engine.addEntity(enemy);
 
@@ -116,30 +97,7 @@ class EntityCreator extends AEntityCreator {
 
     public function createOneBulletEnemy():Entity {
 
-        var enemy = new Entity();
-
-        var fsm = new EntityStateMachine(enemy);
-
-        var display = new BasicEnemyView("Green");
-
-        fsm.createState("playing")
-            .add(Collision).withInstance(new Collision(50))
-            .add(Motion).withInstance(new Motion(-250, 0, 0, 0))
-            .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false))
-            .add(Gun).withInstance(new Gun(-60, 0, 2, 5, true))
-            .add(GunControls).withInstance(new GunControls());
-
-        fsm.createState("destroyed")
-            .add(DeathThroes).withInstance(new DeathThroes(0.5))
-            .add(Animation).withInstance(new Animation(display));
-
-        enemy
-            .add(new Enemy(fsm))
-            .add(new Position(_config.width, 50 + Math.random() * (_config.height - 50), 0))
-            .add(new Audio())
-            .add(new Display(display));
-
-        fsm.changeState("playing");
+        var enemy = new OneBulletEnemyEntity("", "Green");
 
         _engine.addEntity(enemy);
 
