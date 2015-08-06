@@ -1,27 +1,48 @@
 package citrus.core;
 
+import js.Browser;
+import js.html.Event;
+
 import pixi.plugins.app.Application;
 
 class CitrusJS extends Application {
 	
 	static var _instance:CitrusJS;
 
+	public var playing = true;
+
 	public var state(get, set):State;
 	var _state:State;
 	
 	var _newState:State;
-	
+	var _supportBrowserFocusEvent = true;
+
 	public function new() {
 		super();
 		
 		_instance = this;
 
 		onUpdate = _onUpdate;
+
+		if (_supportBrowserFocusEvent) {
+			Browser.window.onfocus = _windowGetFocus;
+			Browser.window.onblur = _windowLostFocus;
+		}
 	}
 
 	static public function getInstance():CitrusJS {
 
 		return _instance;
+	}
+
+	function _windowGetFocus(evt:Event) {
+
+		playing = true;
+	}
+
+	function _windowLostFocus(evt:Event) {
+
+		playing = false;
 	}
 	
 	function get_state():State {
@@ -54,7 +75,7 @@ class CitrusJS extends Application {
 			_state.initialize();
 		}
 		
-		if (_state != null) {
+		if (_state != null && playing) {
 			
 			_state.onUpdate(elapsedTime);
 		}
