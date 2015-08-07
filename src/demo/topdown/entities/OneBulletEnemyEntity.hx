@@ -8,8 +8,8 @@ import citrus.components.Motion;
 
 class OneBulletEnemyEntity extends BasicEnemyEntity {
 
-    public function new(name:String = "", color:String = "") {
-        super(name, color);
+    public function new(name:String = "", color:String = "", posY:Float = 0) {
+        super(name, color, posY);
     }
 
     override function _addPlayingState() {

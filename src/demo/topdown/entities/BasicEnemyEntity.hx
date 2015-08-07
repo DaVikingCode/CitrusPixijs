@@ -21,7 +21,7 @@ class BasicEnemyEntity extends Entity {
     public var fsm:EntityStateMachine;
     public var display:EnemyView;
 
-    public function new(name:String = "", color:String = "") {
+    public function new(name:String = "", color:String = "", posY:Float = 0) {
         super(name);
 
         fsm = new EntityStateMachine(this);
@@ -38,7 +38,7 @@ class BasicEnemyEntity extends Entity {
 
         this
             .add(new Enemy(fsm))
-            .add(new Position(ce.width, 50 + Math.random() * (ce.height - 50), 0))
+            .add(new Position(ce.width, posY, 0))
             .add(new Audio())
             .add(new Display(display));
 
@@ -49,7 +49,7 @@ class BasicEnemyEntity extends Entity {
 
         fsm.createState("playing")
             .add(Collision).withInstance(new Collision(50))
-            .add(Motion).withInstance(new Motion(-250, 0, 0, 0))
+            .add(Motion).withInstance(new Motion(-450, 0, 0, 0))
             .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false));
     }
 }

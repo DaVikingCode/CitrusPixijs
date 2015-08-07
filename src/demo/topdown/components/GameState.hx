@@ -8,6 +8,7 @@ class GameState {
     public var points:Int = 0;
     public var playing:Bool;
     public var wave:Int = 0;
+    public var numMaxEnemies = 3;
 
     public function new() {
 

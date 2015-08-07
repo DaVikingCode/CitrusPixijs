@@ -58,7 +58,7 @@ class EntityCreator extends AEntityCreator {
             .add(MotionControls).withInstance(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 300, 0))
             .add(Gun).withInstance(new Gun(60, 0, 0.5, 5))
             .add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
-            .add(Collision).withInstance(new Collision(30));
+            .add(Collision).withInstance(new Collision(40));
 
         fsm.createState("hurt")
             .add(TimeOutChangeState).withInstance(new TimeOutChangeState(1, fsm, "playing"));
@@ -79,39 +79,39 @@ class EntityCreator extends AEntityCreator {
         return spaceship;
     }
 
-    public function createRandomEnemy() {
+    public function createRandomEnemy(posY:Float) {
 
         var rdm = Math.random();
 
         if (rdm < 0.33)
-            createBasicEnemy()
+            createBasicEnemy(posY)
         else if (rdm < 0.66)
-            createOneBulletEnemy();
+            createOneBulletEnemy(posY);
         else
-            createThreesBulletEnemy();
+            createThreesBulletEnemy(posY);
     }
 
-    public function createBasicEnemy():Entity {
+    public function createBasicEnemy(posY):Entity {
 
-        var enemy = new BasicEnemyEntity("", "Black");
+        var enemy = new BasicEnemyEntity("", "Black", posY);
 
         _engine.addEntity(enemy);
 
         return enemy;
     }
 
-    public function createOneBulletEnemy():Entity {
+    public function createOneBulletEnemy(posY):Entity {
 
-        var enemy = new OneBulletEnemyEntity("", "Green");
+        var enemy = new OneBulletEnemyEntity("", "Green", posY);
 
         _engine.addEntity(enemy);
 
         return enemy;
     }
 
-    public function createThreesBulletEnemy():Entity {
+    public function createThreesBulletEnemy(posY):Entity {
 
-        var enemy = new ThreeBulletsEnemyEntity("", "Red");
+        var enemy = new ThreeBulletsEnemyEntity("", "Red", posY);
 
         _engine.addEntity(enemy);
 

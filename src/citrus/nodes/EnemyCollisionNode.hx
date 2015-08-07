@@ -2,7 +2,6 @@ package citrus.nodes;
 
 import ash.core.Node;
 
-import citrus.components.Audio;
 import citrus.components.Enemy;
 import citrus.components.Collision;
 import citrus.components.Position;
