@@ -7,7 +7,7 @@ import pixi.core.display.Container;
 import pixi.core.sprites.Sprite;
 import pixi.core.textures.Texture;
 
-class BasicEnemyView extends Container implements IAnimatable {
+class EnemyView extends Container implements IAnimatable {
 
     public function new(color:String) {
         super();

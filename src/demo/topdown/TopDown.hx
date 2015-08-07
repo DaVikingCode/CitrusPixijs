@@ -6,7 +6,6 @@ import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
 import citrus.systems.DeathThroesSystem;
-import citrus.systems.GunControlSystem;
 import citrus.systems.KillOutOfScreenSystem;
 import citrus.systems.MotionControlSystem;
 import citrus.systems.MovementSystem;
@@ -16,6 +15,7 @@ import citrus.systems.TimeOutChangeStateSystem;
 
 import demo.topdown.systems.CollisionSystem;
 import demo.topdown.systems.GameManager;
+import demo.topdown.systems.GunControlSystem;
 import demo.topdown.systems.WaveManager;
 
 import pixi.core.textures.Texture;

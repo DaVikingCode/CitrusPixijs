@@ -5,12 +5,10 @@ import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 
 import citrus.core.AEntityCreator;
-import citrus.components.Animation;
 import citrus.components.Audio;
+import citrus.components.Bullet;
 import citrus.components.Collision;
-import citrus.components.DeathThroes;
 import citrus.components.Display;
-import citrus.components.Enemy;
 import citrus.components.Gun;
 import citrus.components.GunControls;
 import citrus.components.KillOutOfScreen;
@@ -24,7 +22,7 @@ import citrus.math.MathUtils;
 import demo.topdown.components.GameState;
 import demo.topdown.entities.BasicEnemyEntity;
 import demo.topdown.entities.OneBulletEnemyEntity;
-import demo.topdown.graphics.BasicEnemyView;
+import demo.topdown.entities.ThreeBulletsEnemyEntity;
 import demo.topdown.graphics.BulletView;
 import demo.topdown.graphics.SpaceshipView;
 
@@ -83,7 +81,14 @@ class EntityCreator extends AEntityCreator {
 
     public function createRandomEnemy() {
 
-        Math.random() > 0.5 ? createBasicEnemy() : createOneBulletEnemy();
+        var rdm = Math.random();
+
+        if (rdm < 0.33)
+            createBasicEnemy()
+        else if (rdm < 0.66)
+            createOneBulletEnemy();
+        else
+            createThreesBulletEnemy();
     }
 
     public function createBasicEnemy():Entity {
@@ -98,6 +103,15 @@ class EntityCreator extends AEntityCreator {
     public function createOneBulletEnemy():Entity {
 
         var enemy = new OneBulletEnemyEntity("", "Green");
+
+        _engine.addEntity(enemy);
+
+        return enemy;
+    }
+
+    public function createThreesBulletEnemy():Entity {
+
+        var enemy = new ThreeBulletsEnemyEntity("", "Red");
 
         _engine.addEntity(enemy);
 
@@ -125,6 +139,24 @@ class EntityCreator extends AEntityCreator {
         bullet
             .add(new Display(new BulletView("laserGreen16")))
             .add(new Motion(-400, 0, 0, 0))
+            .add(new KillOutOfScreen(true, false));
+
+        _engine.addEntity(bullet);
+
+        return bullet;
+    }
+
+    public function createEnemyThreeBullets(gun:Gun, parentPosition:Position, collisionCategories:UInt, angle:Float):Entity {
+
+        var cos = Math.cos(parentPosition.rotation);
+        var sin = Math.sin(parentPosition.rotation);
+
+        var bullet = new Entity()
+            .add(new Bullet(gun.bulletLifetime, collisionCategories))
+            .add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, angle))
+            .add(new Collision(0))
+            .add(new Display(new BulletView("laserRed08")))
+            .add(new Motion(-300, angle * 5, 0, 0))
             .add(new KillOutOfScreen(true, false));
 
         _engine.addEntity(bullet);

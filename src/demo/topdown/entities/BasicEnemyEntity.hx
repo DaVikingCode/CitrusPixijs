@@ -14,19 +14,19 @@ import citrus.components.Motion;
 import citrus.components.Position;
 import citrus.core.CitrusJS;
 
-import demo.topdown.graphics.BasicEnemyView;
+import demo.topdown.graphics.EnemyView;
 
 class BasicEnemyEntity extends Entity {
 
     public var fsm:EntityStateMachine;
-    public var display:BasicEnemyView;
+    public var display:EnemyView;
 
     public function new(name:String = "", color:String = "") {
         super(name);
 
         fsm = new EntityStateMachine(this);
 
-        display = new BasicEnemyView(color);
+        display = new EnemyView(color);
 
         var ce = CitrusJS.getInstance();
 

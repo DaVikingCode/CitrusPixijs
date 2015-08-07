@@ -1,14 +1,11 @@
 package citrus.systems;
 
-import citrus.components.Enemy;
 import ash.tools.ListIteratingSystem;
 
 import citrus.core.AEntityCreator;
 import citrus.components.Audio;
-import citrus.components.Player;
 import citrus.input.KeyPoll;
 import citrus.nodes.GunControlNode;
-import citrus.physics.CollisionCategories;
 
 import howler.Howl;
 
@@ -51,12 +48,7 @@ class GunControlSystem extends ListIteratingSystem<GunControlNode> {
 
 	function _shoot(node:GunControlNode) {
 
-		if (node.entity.has(Player))
-			_creator.createUserBullet(node.gun, node.position, CollisionCategories.get(["Enemy"]));
-
-		else if (node.entity.has(Enemy))
-			_creator.createEnemyBullet(node.gun, node.position, CollisionCategories.get(["Player"]));
-
+		_creator.createUserBullet(node.gun, node.position);
 
 		if (_sound != null)
 			node.entity.get(Audio).play(_sound);
