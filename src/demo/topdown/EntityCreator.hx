@@ -5,6 +5,7 @@ import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 
 import citrus.core.AEntityCreator;
+import citrus.components.Animation;
 import citrus.components.Audio;
 import citrus.components.Bullet;
 import citrus.components.Collision;
@@ -53,15 +54,16 @@ class EntityCreator extends AEntityCreator {
 
         var fsm = new EntityStateMachine(spaceship);
 
+        var display = new SpaceshipView();
+
         fsm.createState("playing")
-            .add(Motion).withInstance(new Motion(0, 0, 0, 50))
-            .add(MotionControls).withInstance(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 300, 0))
             .add(Gun).withInstance(new Gun(60, 0, 0.5, 5))
             .add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
             .add(Collision).withInstance(new Collision(40));
 
         fsm.createState("hurt")
-            .add(TimeOutChangeState).withInstance(new TimeOutChangeState(1, fsm, "playing"));
+            .add(TimeOutChangeState).withInstance(new TimeOutChangeState(1, fsm, "playing"))
+            .add(Animation).withInstance(new Animation(display));
 
 
         fsm.changeState("playing");
@@ -69,7 +71,9 @@ class EntityCreator extends AEntityCreator {
         spaceship
             .add(new Player(fsm))
             .add(new Position(_config.width * 0.15, _config.height * 0.5, MathUtils.deg2rad(0)))
-            .add(new Display(new SpaceshipView()))
+            .add(new Motion(0, 0, 0, 50))
+            .add(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 300, 0))
+            .add(new Display(display))
             .add(new Audio());
 
         fsm.changeState("playing");

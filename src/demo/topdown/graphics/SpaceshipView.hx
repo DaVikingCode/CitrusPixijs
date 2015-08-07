@@ -1,12 +1,13 @@
 package demo.topdown.graphics;
 
+import citrus.graphics.IAnimatable;
 import citrus.math.MathUtils;
 
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
-class SpaceshipView extends Container {
+class SpaceshipView extends Container implements IAnimatable {
 
     public function new() {
         super();
@@ -16,5 +17,18 @@ class SpaceshipView extends Container {
         display.rotation = MathUtils.deg2rad(90); // the ship is oriented to the North, rotate to the East as expected by systems.
 
         addChild(display);
+    }
+
+    public function animate(time:Float) {
+
+        alpha += time * 5;
+    }
+
+    public function animationStarted() {
+    }
+
+    public function animationEnded() {
+
+        alpha = 1;
     }
 }

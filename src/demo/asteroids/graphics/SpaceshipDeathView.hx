@@ -54,4 +54,10 @@ class SpaceshipDeathView extends Container implements IAnimatable {
         shape2.y += vel2.y * time;
         shape2.rotation += MathUtils.deg2rad(rot2 * time);
     }
+
+    public function animationStarted() {
+    }
+
+    public function animationEnded() {
+    }
 }

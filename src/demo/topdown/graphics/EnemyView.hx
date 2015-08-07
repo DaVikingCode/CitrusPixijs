@@ -23,4 +23,10 @@ class EnemyView extends Container implements IAnimatable {
 
         alpha -= time * 5;
     }
+
+    public function animationStarted() {
+    }
+
+    public function animationEnded() {
+    }
 }

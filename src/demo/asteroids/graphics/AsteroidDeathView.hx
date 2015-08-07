@@ -33,6 +33,12 @@ class AsteroidDeathView extends Container implements IAnimatable {
 			dot.image.y += dot.velocity.y * time;
 		}
 	}
+
+	public function animationStarted() {
+	}
+
+	public function animationEnded() {
+	}
 }
 
 
