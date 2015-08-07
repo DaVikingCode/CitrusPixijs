@@ -30,7 +30,7 @@ class WaitForStartView extends Container {
 
 	function addedToStage() {
 
-		tap = click =_onButtonDown;
+		tap = click = _onButtonDown;
 	}
 
 	function removedFromStage() {

@@ -16,6 +16,7 @@ import citrus.systems.TimeOutChangeStateSystem;
 import demo.topdown.systems.CollisionSystem;
 import demo.topdown.systems.GameManager;
 import demo.topdown.systems.GunControlSystem;
+import demo.topdown.systems.TouchSystem;
 import demo.topdown.systems.WaveManager;
 
 import pixi.core.textures.Texture;
@@ -50,6 +51,7 @@ class TopDown extends State {
         _engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
         _engine.addSystem(new KillOutOfScreenSystem(_creator, _config), SystemPriorities.preUpdate);
         _engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
+        _engine.addSystem(new TouchSystem(), SystemPriorities.update);
         _engine.addSystem(new GunControlSystem(_keyPoll, _creator), SystemPriorities.update);
         _engine.addSystem(new BulletAgeSystem(_creator), SystemPriorities.update);
         _engine.addSystem(new DeathThroesSystem(_creator), SystemPriorities.update);

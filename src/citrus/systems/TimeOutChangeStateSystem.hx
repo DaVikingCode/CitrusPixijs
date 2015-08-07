@@ -1,6 +1,5 @@
 package citrus.systems;
 
-import citrus.components.Player;
 import ash.fsm.EntityStateMachine;
 import ash.tools.ListIteratingSystem;
 
