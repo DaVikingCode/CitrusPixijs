@@ -36,8 +36,6 @@ class TouchSystem extends ListIteratingSystem<MotionControlNode> {
 
     function _onButtonDown(target:EventTarget) {
 
-        trace(target.data.global.y);
-
         _node.position.position.y = target.data.global.y;
     }
 }
