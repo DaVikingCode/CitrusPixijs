@@ -3,7 +3,6 @@ package demo.topdown;
 import citrus.core.State;
 import citrus.physics.CollisionCategories;
 import citrus.systems.AnimationSystem;
-import citrus.systems.AudioSystem;
 import citrus.systems.BulletAgeSystem;
 import citrus.systems.DeathThroesSystem;
 import citrus.systems.KillOutOfScreenSystem;
@@ -61,7 +60,6 @@ class TopDown extends State {
         _engine.addSystem(new AnimationSystem(), SystemPriorities.animate);
         _engine.addSystem(new HudSystem(), SystemPriorities.animate);
         _engine.addSystem(new RenderSystem(this), SystemPriorities.render);
-        _engine.addSystem(new AudioSystem(), SystemPriorities.render);
 
         _creator.createGame();
     }
