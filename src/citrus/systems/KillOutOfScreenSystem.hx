@@ -3,19 +3,20 @@ package citrus.systems;
 import ash.tools.ListIteratingSystem;
 
 import citrus.core.AEntityCreator;
-import citrus.core.AGameConfig;
 import citrus.nodes.KillOutOfScreenNode;
+
+import pixi.core.math.shapes.Rectangle;
 
 class KillOutOfScreenSystem extends ListIteratingSystem<KillOutOfScreenNode>  {
 
     var _creator:AEntityCreator;
-    var _config:AGameConfig;
+    var _screenLimit:Rectangle;
 
-    public function new(creator:AEntityCreator, config:AGameConfig) {
+    public function new(creator:AEntityCreator, screenLimit:Rectangle) {
         super(KillOutOfScreenNode, _updateNode);
 
         _creator = creator;
-        _config = config;
+        _screenLimit = screenLimit;
     }
 
     function _updateNode(node:KillOutOfScreenNode, time:Float) {
@@ -23,11 +24,11 @@ class KillOutOfScreenSystem extends ListIteratingSystem<KillOutOfScreenNode>  {
         var killOutOfScreen = node.killOutOfScreen;
         var position = node.position;
 
-        if (killOutOfScreen.killOutX && (position.position.x < 0 || position.position.x > _config.width))
+        if (killOutOfScreen.killOutX && (position.position.x < _screenLimit.x || position.position.x > _screenLimit.width))
             _creator.destroyEntity(node.entity);
 
 
-        if (killOutOfScreen.killOutY && (position.position.y < 0 || position.position.y > _config.height))
+        if (killOutOfScreen.killOutY && (position.position.y < _screenLimit.y || position.position.y > _screenLimit.height))
             _creator.destroyEntity(node.entity);
     }
 }

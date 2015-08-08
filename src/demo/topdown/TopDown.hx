@@ -19,6 +19,7 @@ import demo.topdown.systems.GunControlSystem;
 import demo.topdown.systems.HudSystem;
 import demo.topdown.systems.WaveManager;
 
+import pixi.core.math.shapes.Rectangle;
 import pixi.core.textures.Texture;
 import pixi.extras.TilingSprite;
 
@@ -49,7 +50,7 @@ class TopDown extends State {
 
         _engine.addSystem(new WaveManager(_creator, _config), SystemPriorities.preUpdate);
         _engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);
-        _engine.addSystem(new KillOutOfScreenSystem(_creator, _config), SystemPriorities.preUpdate);
+        _engine.addSystem(new KillOutOfScreenSystem(_creator, new Rectangle(0, 0, _config.width, _config.height)), SystemPriorities.preUpdate);
         _engine.addSystem(new MotionControlSystem(_keyPoll), SystemPriorities.update);
         _engine.addSystem(new GunControlSystem(_keyPoll, _creator), SystemPriorities.update);
         _engine.addSystem(new BulletAgeSystem(_creator), SystemPriorities.update);
