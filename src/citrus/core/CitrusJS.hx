@@ -3,7 +3,6 @@ package citrus.core;
 import js.Browser;
 import js.html.Event;
 
-import pixi.core.display.Container;
 import pixi.plugins.app.Application;
 
 class CitrusJS extends Application {
@@ -36,11 +35,6 @@ class CitrusJS extends Application {
 		return _instance;
 	}
 
-	public function getStage():Container {
-
-		return _stage;
-	}
-
 	function _windowGetFocus(evt:Event) {
 
 		playing = true;
@@ -71,13 +65,13 @@ class CitrusJS extends Application {
 			if (_state != null) {
 				
 				_state.destroy();
-				_stage.removeChild(_state);
+				stage.removeChild(_state);
 			}
 			
 			_state = _newState;
 			_newState = null;
 			
-			_stage.addChild(_state);
+			stage.addChild(_state);
 			_state.initialize();
 		}
 		

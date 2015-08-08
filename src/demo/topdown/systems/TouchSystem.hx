@@ -17,7 +17,7 @@ class TouchSystem extends ListIteratingSystem<MotionControlNode> {
     public function new() {
         super(MotionControlNode, null, _addNode, _removeNode);
 
-        _stage = CitrusJS.getInstance().getStage();
+        _stage = CitrusJS.getInstance().stage;
     }
 
     function _addNode(node:MotionControlNode) {
