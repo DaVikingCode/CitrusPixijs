@@ -21,10 +21,12 @@ import citrus.components.TimeOutChangeState;
 import citrus.math.MathUtils;
 
 import demo.topdown.components.GameState;
+import demo.topdown.components.Hud;
 import demo.topdown.entities.BasicEnemyEntity;
 import demo.topdown.entities.OneBulletEnemyEntity;
 import demo.topdown.entities.ThreeBulletsEnemyEntity;
 import demo.topdown.graphics.BulletView;
+import demo.topdown.graphics.HudView;
 import demo.topdown.graphics.SpaceshipView;
 
 import js.html.KeyboardEvent;
@@ -32,6 +34,7 @@ import js.html.KeyboardEvent;
 class EntityCreator extends AEntityCreator {
 
     var _config:GameConfig;
+    var _waitEntity:Entity;
 
     public function new(engine:Engine, config:GameConfig) {
         super(engine);
@@ -41,7 +44,9 @@ class EntityCreator extends AEntityCreator {
 
     public function createGame():Entity {
 
-        var gameEntity = new Entity("game").add(new GameState());
+        var hud = new HudView();
+
+        var gameEntity = new Entity("game").add(new GameState()).add(new Hud(hud)).add(new Display(hud)).add(new Position(0, 0, 0));
 
         _engine.addEntity(gameEntity);
 

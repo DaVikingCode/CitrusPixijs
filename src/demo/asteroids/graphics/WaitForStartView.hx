@@ -2,6 +2,8 @@ package demo.asteroids.graphics;
 
 import ash.signals.Signal0;
 
+import citrus.core.CitrusJS;
+
 import pixi.core.display.Container;
 import pixi.core.text.Text;
 import pixi.interaction.EventTarget;
@@ -12,6 +14,7 @@ class WaitForStartView extends Container {
 
 	var _gameOver:Text;
 	var _clickToStart:Text;
+	var _stage:Container;
 
 	public function new() {
 		super();
@@ -22,7 +25,7 @@ class WaitForStartView extends Container {
 		_clickToStart = _createClickToStart();
 		addChild(_clickToStart);
 
-		interactive = buttonMode = true;
+		_stage = CitrusJS.getInstance().stage;
 
 		addListener("added", addedToStage);
 		addListener("removed", removedFromStage);
@@ -30,12 +33,15 @@ class WaitForStartView extends Container {
 
 	function addedToStage() {
 
-		tap = click = _onButtonDown;
+		_stage.interactive = _stage.buttonMode = true;
+		_stage.tap = _stage.click = _onButtonDown;
 	}
 
 	function removedFromStage() {
 
-		tap = click = null;
+		_stage.interactive = _stage.buttonMode = false;
+
+		_stage.tap = _stage.click = null;
 
 		_gameOver.text = "GAME OVER";
 	}

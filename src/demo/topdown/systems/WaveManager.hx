@@ -6,6 +6,7 @@ import ash.core.System;
 
 import citrus.nodes.EnemyCollisionNode;
 
+import demo.topdown.components.GameState;
 import demo.topdown.nodes.GameNode;
 
 class WaveManager extends System {
@@ -35,7 +36,7 @@ class WaveManager extends System {
 
     override public function update(time:Float) {
 
-        if (_gameNodes.head.state.playing && _numEnemies < _gameNodes.head.state.numMaxEnemies) {
+        if (_gameNodes.head.state.playing && _numEnemies < GameState.numMaxEnemies) {
 
             ++_numEnemies;
 

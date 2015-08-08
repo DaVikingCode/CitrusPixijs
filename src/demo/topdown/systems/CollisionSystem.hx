@@ -51,6 +51,8 @@ class CollisionSystem extends System {
                     enemy.enemy.fsm.changeState("destroyed");
                     _hurtPlayer(player);
 
+                    ++_games.head.state.points;
+
                     break;
                 }
 
@@ -66,6 +68,8 @@ class CollisionSystem extends System {
 
                         enemy.enemy.fsm.changeState("destroyed");
                         _creator.destroyEntity(bullet.entity);
+
+                        ++_games.head.state.points;
 
                         break;
                     }
@@ -92,11 +96,9 @@ class CollisionSystem extends System {
         player.player.fsm.changeState("hurt");
 
         ++_games.head.state.hurt;
+        --_games.head.state.lives;
 
-        if (_games.head.state.hurt > 3)
-            trace("game over");
-
-        else {
+        if (_games.head.state.hurt <= 3) {
 
             if (_games.head.state.hurt > 1)
                 player.entity.get(Display).displayObject.removeChildAt(1);
