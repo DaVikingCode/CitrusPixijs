@@ -4,6 +4,7 @@ import ash.core.Engine;
 import ash.core.Entity;
 
 import citrus.components.Display;
+import citrus.components.Nape;
 import citrus.components.Position;
 import citrus.core.AEntityCreator;
 
@@ -21,6 +22,10 @@ class EntityCreator extends AEntityCreator {
         var bg = new Entity()
             .add(new Position(0, 0, 0))
             .add(new Display(new Sprite(Texture.fromImage("background.jpg"))));
+
+        var nape = new Entity()
+            .add(new Nape());
+
 
         _engine.addEntity(bg);
     }
