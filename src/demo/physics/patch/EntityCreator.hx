@@ -3,9 +3,9 @@ package demo.physics.patch;
 import ash.core.Engine;
 import ash.core.Entity;
 
-import citrus.core.AEntityCreator;
 import citrus.components.Display;
 import citrus.components.Position;
+import citrus.core.AEntityCreator;
 
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
