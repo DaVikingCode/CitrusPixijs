@@ -7,5 +7,5 @@
 -lib pixijs
 -lib nape
 -D NAPE_RELEASE_BUILD
-#-dce full
+-dce full
 -debug

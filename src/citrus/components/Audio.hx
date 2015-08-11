@@ -9,6 +9,7 @@ class Audio {
 	public function new() {
 	}
 
+	@:keep
 	public function play(sound:HowlOptions) {
 
 		toPlay.push(sound);
