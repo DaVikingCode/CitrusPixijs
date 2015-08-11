@@ -4,11 +4,9 @@ import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
-import citrus.components.Position;
 import citrus.nodes.RenderNode;
 
 import pixi.core.display.Container;
-import pixi.core.display.DisplayObject;
 
 class RenderSystem extends System {
 
@@ -47,8 +45,8 @@ class RenderSystem extends System {
 
 		for (node in _nodes) {
 
-			var displayObject:DisplayObject = node.displayObject;
-			var position:Position = node.position;
+			var displayObject = node.displayObject;
+			var position = node.position;
 
 			displayObject.x = position.position.x;
 			displayObject.y = position.position.y;

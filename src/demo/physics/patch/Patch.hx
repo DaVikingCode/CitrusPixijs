@@ -1,6 +1,7 @@
 package demo.physics.patch;
 
 import citrus.core.State;
+import citrus.systems.PhysicsSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
 
@@ -17,6 +18,7 @@ class Patch extends State {
 
         _creator = new EntityCreator(_engine);
 
+        _engine.addSystem(new PhysicsSystem(), SystemPriorities.update);
         _engine.addSystem(new RenderSystem(this), SystemPriorities.render);
 
         _creator.createGame();

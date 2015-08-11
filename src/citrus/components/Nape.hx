@@ -13,7 +13,7 @@ class Nape {
     public var velocityIterations:Int;
     public var positionIterations:Int;
 
-    public function new(?gravity:Vec2, ?broadphase:Broadphase, deltaTime = 1 /60, velocityIterations = 10, positionIterations = 10) {
+    public function new(?gravity:Vec2, ?broadphase:Broadphase, deltaTime = 1 / 60, velocityIterations = 10, positionIterations = 10) {
 
         this.gravity = gravity;
         this.broadphase = broadphase;
