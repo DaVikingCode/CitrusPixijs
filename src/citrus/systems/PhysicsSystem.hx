@@ -31,38 +31,40 @@ class PhysicsSystem extends System {
 
     function _addToNape(node:PhysicsNode) {
 
-        for (nape in _napes)
-            node.physics.body.space = nape.nape.space;
+        var nape = _napes.head;
+
+        node.physics.body.space = nape.nape.space;
     }
 
     function _removeFromNape(node:PhysicsNode) {
 
-        for (nape in _napes)
-            nape.nape.space.bodies.remove(node.physics.body);
+        var nape = _napes.head;
+
+        nape.nape.space.bodies.remove(node.physics.body);
     }
 
     override public function update(time:Float) {
 
-        for (nape in _napes) {
+        var nape = _napes.head;
 
-            nape.nape.space.step(nape.nape.deltaTime, nape.nape.velocityIterations, nape.nape.positionIterations);
+        nape.nape.space.step(nape.nape.deltaTime, nape.nape.velocityIterations, nape.nape.positionIterations);
 
-            for (physicsObject in _physicsObjects) {
+        for (physicsObject in _physicsObjects) {
 
-                var position = physicsObject.position;
-                var physics = physicsObject.physics;
+            var position = physicsObject.position;
+            var physics = physicsObject.physics;
 
-                position.position.x = physics.body.position.x;
-                position.position.y = physics.body.position.y;
-                position.rotation = MathUtils.rad2deg(physics.body.rotation);
-            }
+            position.position.x = physics.body.position.x;
+            position.position.y = physics.body.position.y;
+            position.rotation = MathUtils.rad2deg(physics.body.rotation);
         }
     }
 
     override public function removeFromEngine(engine:Engine) {
 
-        for (nape in _napes)
-            nape.nape.space.clear();
+        var nape = _napes.head;
+
+        nape.nape.space.clear();
 
         _napes = null;
         _physicsObjects = null;

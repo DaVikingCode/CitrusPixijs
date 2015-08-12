@@ -42,7 +42,7 @@ class EntityCreator extends AEntityCreator {
 
         var floor = new Entity()
             .add(new Physics(floorBody))
-            .add(new Position(0, 0, 0));
+            .add(new Position());
 
         _engine.addEntity(floor);
 
@@ -57,7 +57,7 @@ class EntityCreator extends AEntityCreator {
         var ball = new Entity()
             .add(new Physics(pball))
             .add(new Display(dball))
-            .add(new Position(0, 0, 0));
+            .add(new Position());
 
         _engine.addEntity(ball);
     }
