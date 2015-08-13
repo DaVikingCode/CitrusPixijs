@@ -9,11 +9,11 @@ class AnimationSequence extends Container {
     var _mcSequences:Map<String, MovieClip>;
     var _previousAnimation:String;
 
-    var _animations:Array<String>;
+    var _animations:Array<AnimationData>;
     var _firstAnimation:String;
     var _defaultAnimationSpeed:Float;
 
-    public function new(animations:Array<String>, firstAnimation:String, ?defaultAnimationSpeed:Float = 1) {
+    public function new(animations:Array<AnimationData>, firstAnimation:String, ?defaultAnimationSpeed:Float = 1) {
         super();
         _mcSequences = new Map<String, MovieClip>();
 
@@ -30,12 +30,13 @@ class AnimationSequence extends Container {
         var textures:Array<Texture>;
         for (animation in animations) {
 
-            textures = _getTexturesForName(textureCache, animation);
+            textures = _getTexturesForName(textureCache, animation.name);
 
             mc = new MovieClip(textures);
-            mc.animationSpeed = defaultAnimationSpeed;
+            mc.animationSpeed = animation.animationSpeed;
+            mc.loop = animation.loop;
 
-            _mcSequences.set(animation, mc);
+            _mcSequences.set(animation.name, mc);
         }
 
         var firstMc = _mcSequences.get(firstAnimation);
@@ -46,6 +47,9 @@ class AnimationSequence extends Container {
     }
 
     function _removedFromStage() {
+
+        for (sequence in _mcSequences.keys())
+            _mcSequences.get(sequence).destroy();
 
         _mcSequences = null;
     }
