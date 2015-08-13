@@ -10,6 +10,8 @@ import citrus.components.Physics;
 import citrus.components.Position;
 import citrus.core.AEntityCreator;
 
+import demo.physics.patch.entities.Hero;
+
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyType;
@@ -71,5 +73,8 @@ class EntityCreator extends AEntityCreator {
             .add(new Position());
 
         _engine.addEntity(oneWay);
+
+        var hero = new Hero(50, 100);
+        _engine.addEntity(hero);
     }
 }
