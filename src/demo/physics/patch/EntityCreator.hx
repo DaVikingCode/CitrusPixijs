@@ -5,6 +5,7 @@ import ash.core.Entity;
 
 import citrus.components.Display;
 import citrus.components.Nape;
+import citrus.components.physics.OneWay;
 import citrus.components.Physics;
 import citrus.components.Position;
 import citrus.core.AEntityCreator;
@@ -60,5 +61,15 @@ class EntityCreator extends AEntityCreator {
             .add(new Position());
 
         _engine.addEntity(ball);
+
+        var oneWayBody = new Body(BodyType.STATIC);
+        oneWayBody.shapes.add(new Polygon(Polygon.rect(0, 200, 800, 50)));
+
+        var oneWay = new Entity()
+            .add(new Physics(oneWayBody))
+            .add(new OneWay(false, false, true))
+            .add(new Position());
+
+        _engine.addEntity(oneWay);
     }
 }
