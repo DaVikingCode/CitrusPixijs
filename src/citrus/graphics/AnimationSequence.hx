@@ -11,15 +11,13 @@ class AnimationSequence extends Container {
 
     var _animations:Array<AnimationData>;
     var _firstAnimation:String;
-    var _defaultAnimationSpeed:Float;
 
-    public function new(animations:Array<AnimationData>, firstAnimation:String, ?defaultAnimationSpeed:Float = 1) {
+    public function new(animations:Array<AnimationData>, firstAnimation:String) {
         super();
         _mcSequences = new Map<String, MovieClip>();
 
         _animations = animations;
         _previousAnimation = _firstAnimation = firstAnimation;
-        _defaultAnimationSpeed = defaultAnimationSpeed;
 
         var textureCache = new Array<String>();
 
@@ -33,6 +31,7 @@ class AnimationSequence extends Container {
             textures = _getTexturesForName(textureCache, animation.name);
 
             mc = new MovieClip(textures);
+            mc.anchor = animation.anchor;
             mc.animationSpeed = animation.animationSpeed;
             mc.loop = animation.loop;
 
