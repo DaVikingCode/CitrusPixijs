@@ -1,6 +1,6 @@
 package demo.topdown;
 
-import citrus.core.State;
+import citrus.core.Scene;
 import citrus.physics.CollisionCategories;
 import citrus.systems.AnimationSystem;
 import citrus.systems.BulletAgeSystem;
@@ -22,7 +22,7 @@ import pixi.core.math.shapes.Rectangle;
 import pixi.core.textures.Texture;
 import pixi.extras.TilingSprite;
 
-class TopDown extends State {
+class TopDown extends Scene {
 
     var _config:GameConfig;
     var _creator:EntityCreator;

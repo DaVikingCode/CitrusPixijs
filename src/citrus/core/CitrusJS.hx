@@ -11,10 +11,10 @@ class CitrusJS extends Application {
 
 	public var playing = true;
 
-	public var state(get, set):State;
-	var _state:State;
+	public var scene(get, set):Scene;
+	var _scene:Scene;
 	
-	var _newState:State;
+	var _newScene:Scene;
 	var _supportBrowserFocusEvent = true;
 
 	public function new() {
@@ -45,39 +45,39 @@ class CitrusJS extends Application {
 		playing = false;
 	}
 	
-	function get_state():State {
+	function get_scene():Scene {
 		
-		if (_newState != null)
-			return _newState;
+		if (_newScene != null)
+			return _newScene;
 		else
-			return _state;
+			return _scene;
 	}
 	
-	function set_state(value:State):State {
+	function set_scene(value:Scene):Scene {
 		
-		return _newState = value;
+		return _newScene = value;
 	}
 	
 	function _onUpdate(elapsedTime:Float) {
 		
-		if (_newState != null) {
+		if (_newScene != null) {
 			
-			if (_state != null) {
-				
-				_state.destroy();
-				stage.removeChild(_state);
+			if (_scene != null) {
+
+				_scene.destroy();
+				stage.removeChild(_scene);
 			}
+
+			_scene = _newScene;
+			_newScene = null;
 			
-			_state = _newState;
-			_newState = null;
-			
-			stage.addChild(_state);
-			_state.initialize();
+			stage.addChild(_scene);
+			_scene.initialize();
 		}
 		
-		if (_state != null && playing) {
-			
-			_state.onUpdate(elapsedTime);
+		if (_scene != null && playing) {
+
+			_scene.onUpdate(elapsedTime);
 		}
 	}
 }

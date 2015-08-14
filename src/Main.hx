@@ -26,7 +26,7 @@ class Main extends CitrusJS {
 		height = 600;
 		super.start();
 		
-		state = new Asteroids();
+		scene = new Asteroids();
 	}
 
 	function _topdownDemo() {
@@ -40,7 +40,7 @@ class Main extends CitrusJS {
 		loader.baseUrl = "assets/spaceshooter/";
 		loader.add("sprites", "Sprites.json");
 		loader.load(function() {
-			state = new TopDown();
+			scene = new TopDown();
 		});
 	}
 
@@ -56,7 +56,7 @@ class Main extends CitrusJS {
 		loader.baseUrl = "assets/patch/";
 		loader.add("sprites", "Sprites.json");
 		loader.load(function() {
-			state = new Patch();
+			scene = new Patch();
 		});
 	}
 

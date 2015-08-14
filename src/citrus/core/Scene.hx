@@ -6,7 +6,7 @@ import citrus.input.KeyPoll;
 
 import pixi.core.display.Container;
 
-class State extends Container {
+class Scene extends Container {
 	
 	var _citrusJS:CitrusJS;
 

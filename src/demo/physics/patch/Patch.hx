@@ -1,12 +1,12 @@
 package demo.physics.patch;
 
-import citrus.core.State;
+import citrus.core.Scene;
 import citrus.systems.physics.OneWaySystem;
 import citrus.systems.PhysicsSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
 
-class Patch extends State {
+class Patch extends Scene {
 
     var _creator:EntityCreator;
 

@@ -1,6 +1,6 @@
 package demo.asteroids;
 
-import citrus.core.State;
+import citrus.core.Scene;
 import citrus.physics.CollisionCategories;
 import citrus.systems.AnimationSystem;
 import citrus.systems.AudioSystem;
@@ -19,7 +19,7 @@ import demo.asteroids.systems.WaitForStartSystem;
 
 import howler.Howl;
 
-class Asteroids extends State {
+class Asteroids extends Scene {
 
 	var _config:GameConfig;
 	var _creator:EntityCreator;
