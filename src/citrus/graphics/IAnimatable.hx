@@ -5,4 +5,5 @@ interface IAnimatable {
 	function animationStarted():Void;
 	function animate(time:Float):Void;
 	function animationEnded():Void;
+	function changeAnimation(animation:String):Void;
 }

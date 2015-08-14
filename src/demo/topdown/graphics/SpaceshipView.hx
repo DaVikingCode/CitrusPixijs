@@ -31,4 +31,7 @@ class SpaceshipView extends Container implements IAnimatable {
 
         alpha = 1;
     }
+
+    public function changeAnimation(animation:String) {
+    }
 }

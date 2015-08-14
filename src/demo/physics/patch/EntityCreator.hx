@@ -41,7 +41,7 @@ class EntityCreator extends AEntityCreator {
         _engine.addEntity(nape);
 
         var floorBody = new Body(BodyType.STATIC);
-        floorBody.shapes.add(new Polygon(Polygon.rect(0, 400, 800, 50)));
+        floorBody.shapes.add(new Polygon(Polygon.rect(0, 380, 800, 50)));
 
         var floor = new Entity()
             .add(new Physics(floorBody))
@@ -56,23 +56,12 @@ class EntityCreator extends AEntityCreator {
         pball.shapes.add(new Circle(10));
         pball.position.setxy(300, 100);
 
-
         var ball = new Entity()
             .add(new Physics(pball))
             .add(new Display(dball))
             .add(new Position());
 
         _engine.addEntity(ball);
-
-        var oneWayBody = new Body(BodyType.STATIC);
-        oneWayBody.shapes.add(new Polygon(Polygon.rect(0, 200, 800, 50)));
-
-        var oneWay = new Entity()
-            .add(new Physics(oneWayBody))
-            .add(new OneWay(false, false, true))
-            .add(new Position());
-
-        _engine.addEntity(oneWay);
 
         var hero = new Hero(50, 100);
         _engine.addEntity(hero);

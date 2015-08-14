@@ -39,6 +39,9 @@ class AsteroidDeathView extends Container implements IAnimatable {
 
 	public function animationEnded() {
 	}
+
+	public function changeAnimation(animation:String) {
+	}
 }
 
 

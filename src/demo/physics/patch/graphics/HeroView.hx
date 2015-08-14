@@ -11,7 +11,7 @@ class HeroView extends Container {
     public function new() {
         super();
 
-        var anim = new AnimationSequence([new AnimationData("Patch/walk", new Point(0.5), true, 0.5), new AnimationData("Patch/idle", new Point(0.5), 0.5)], "Patch/idle");
+        var anim = new AnimationSequence([new AnimationData("Patch/walk", new Point(0.5, 0.5), true, 0.5), new AnimationData("Patch/idle", new Point(0.5, 0.5), 0.5)], "Patch/idle");
 
         addChild(anim);
     }

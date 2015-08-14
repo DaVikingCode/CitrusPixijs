@@ -35,9 +35,7 @@ class KeyPoll {
 
     public function isDown(keyCode:Int):Bool {
 
-        var result = _states.get(keyCode);
-
-        return result == true;
+        return _states.get(keyCode);
     }
 
     public function isUp(keyCode:Int):Bool {
