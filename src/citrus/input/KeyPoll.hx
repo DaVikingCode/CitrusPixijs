@@ -5,12 +5,19 @@ import js.html.KeyboardEvent;
 
 class KeyPoll {
 
-    var _states:Map<Int, Bool>;
+    inline static public var JUST_PRESSED = 0;
+    inline static public var DOWN = 1;
+    inline static public var JUST_RELEASED = 2;
+    inline static public var UP = 3;
+
+    var _keys:Map<Int, Int>;
+    var _keysReleased:Array<Int>;
 
     public function new() {
 
-        _states = new Map<Int, Bool>();
-		
+        _keys = new Map<Int, Int>();
+        _keysReleased = new Array<Int>();
+
         Browser.document.onkeydown = _keyDownListener;
         Browser.document.onkeyup = _keyUpListener;
     }
@@ -20,39 +27,55 @@ class KeyPoll {
         Browser.document.onkeydown = null;
         Browser.document.onkeyup = null;
 
-        _states = null;
+        _keys = null;
+        _keysReleased = null;
+    }
+
+    public function update() {
+
+        for (key in _keys.keys())
+            if (_keys.get(key) == JUST_PRESSED)
+                _keys.set(key, DOWN);
+
+        _keysReleased = [];
     }
 
     function _keyDownListener(kEvt:KeyboardEvent) {
 
-        _states.set(kEvt.keyCode, true);
+        if (!_keys.exists(kEvt.keyCode))
+            _keys.set(kEvt.keyCode, JUST_PRESSED);
     }
 
     function _keyUpListener(kEvt:KeyboardEvent) {
 
-        _states.set(kEvt.keyCode, false);
+        _keys.remove(kEvt.keyCode);
+        _keysReleased.push(kEvt.keyCode);
     }
 
     public function isDown(keyCode:Int):Bool {
 
-        return _states.get(keyCode);
+        return _keys.get(keyCode) == DOWN;
     }
 
-    public function isUp(keyCode:Int):Bool {
+    public function justPressed(keyCode:Int):Bool {
 
-        var result = _states.get(keyCode);
-
-        return result == false;
+        return _keys.get(keyCode) == JUST_PRESSED;
     }
 
-    public function getKeysDown():Array<Int> {
+    public function justReleased(keyCode:Int):Bool {
 
-        var keyCodes:Array<Int> = new Array<Int>();
+        return _keysReleased.indexOf(keyCode) != -1;
+    }
 
-        for (key in _states.keys())
-            if (isDown(key))
-                keyCodes.push(key);
+    public function getState(keyCode:Int):UInt {
 
-        return keyCodes;
+        if (_keys.exists(keyCode))
+            return _keys.get(keyCode);
+
+        else if (_keysReleased.indexOf(keyCode) != -1)
+            return JUST_RELEASED;
+
+        else
+            return UP;
     }
 }

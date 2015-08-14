@@ -28,6 +28,7 @@ class Scene extends Container {
 	public function onUpdate(elapsedTime:Float) {
 
 		_engine.update(elapsedTime * 0.001);
+		_keyPoll.update();
 	}
 	
 	public function destroy() {
