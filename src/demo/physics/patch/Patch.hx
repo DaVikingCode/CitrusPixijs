@@ -4,7 +4,7 @@ import citrus.core.Scene;
 import citrus.systems.PhysicsSystem;
 import citrus.systems.physics.MotionControlSystem;
 import citrus.systems.physics.OneWaySystem;
-import citrus.systems.physics.platformer2D.AnimationSystem;
+import citrus.systems.physics.platformer.AnimationSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
 

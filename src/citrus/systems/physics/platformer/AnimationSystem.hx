@@ -1,4 +1,4 @@
-package citrus.systems.physics.platformer2D;
+package citrus.systems.physics.platformer;
 
 import ash.tools.ListIteratingSystem;
 
@@ -19,13 +19,15 @@ class AnimationSystem extends ListIteratingSystem<AnimationNode> {
         if (physics.body.velocity.y > 1 || physics.body.velocity.y < -1)
             animation.animation.changeAnimation("jump");
 
-        else if (physics.body.velocity.x > motion.velocity.x)
+        else if (physics.body.velocity.x > motion.velocity.x) {
             animation.animation.changeAnimation("walk");
+            animation.animation.flipX(false);
 
-        else if (physics.body.velocity.x < -motion.velocity.x)
+        } else if (physics.body.velocity.x < -motion.velocity.x) {
             animation.animation.changeAnimation("walk");
+            animation.animation.flipX(true);
 
-        else
+        } else
             animation.animation.changeAnimation("idle");
     }
 }

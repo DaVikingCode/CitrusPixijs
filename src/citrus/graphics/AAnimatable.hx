@@ -19,4 +19,14 @@ class AAnimatable extends Container implements IAnimatable {
 
     public function changeAnimation(animation:String) {
     }
+
+    public function flipX(invert:Bool) {
+
+        scale.x = invert ? -1 : 1;
+    }
+
+    public function flipY(invert:Bool) {
+
+        scale.y = invert ? -1 : 1;
+    }
 }
