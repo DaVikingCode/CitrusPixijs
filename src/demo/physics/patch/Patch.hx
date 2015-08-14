@@ -2,9 +2,9 @@ package demo.physics.patch;
 
 import citrus.core.Scene;
 import citrus.systems.CameraSystem;
-import citrus.systems.PhysicsSystem;
 import citrus.systems.physics.MotionControlSystem;
 import citrus.systems.physics.OneWaySystem;
+import citrus.systems.physics.PhysicsSystem;
 import citrus.systems.physics.platformer.AnimationSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;

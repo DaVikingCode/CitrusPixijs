@@ -4,7 +4,7 @@ import ash.core.Node;
 
 import citrus.components.Animation;
 import citrus.components.Motion;
-import citrus.components.Physics;
+import citrus.components.physics.Physics;
 
 class AnimationNode extends Node<AnimationNode> {
 

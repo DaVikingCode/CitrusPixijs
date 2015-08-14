@@ -1,11 +1,11 @@
-package citrus.systems;
+package citrus.systems.physics;
 
 import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
-import citrus.nodes.NapeNode;
-import citrus.nodes.PhysicsNode;
+import citrus.nodes.physics.NapeNode;
+import citrus.nodes.physics.PhysicsNode;
 
 class PhysicsSystem extends System {
 

@@ -7,7 +7,7 @@ import citrus.components.Animation;
 import citrus.components.Display;
 import citrus.components.Motion;
 import citrus.components.MotionControls;
-import citrus.components.Physics;
+import citrus.components.physics.Physics;
 import citrus.components.Player;
 import citrus.components.Position;
 

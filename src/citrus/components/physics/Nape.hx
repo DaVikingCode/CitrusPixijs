@@ -1,4 +1,4 @@
-package citrus.components;
+package citrus.components.physics;
 
 import nape.geom.Vec2;
 import nape.space.Broadphase;

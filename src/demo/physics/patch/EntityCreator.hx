@@ -5,9 +5,9 @@ import ash.core.Entity;
 
 import citrus.components.Camera;
 import citrus.components.Display;
-import citrus.components.Nape;
+import citrus.components.physics.Nape;
 import citrus.components.physics.OneWay;
-import citrus.components.Physics;
+import citrus.components.physics.Physics;
 import citrus.components.Position;
 import citrus.core.AEntityCreator;
 import citrus.math.Rectangle;

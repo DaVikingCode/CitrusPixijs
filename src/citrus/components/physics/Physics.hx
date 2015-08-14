@@ -1,4 +1,4 @@
-package citrus.components;
+package citrus.components.physics;
 
 import nape.phys.Body;
 
