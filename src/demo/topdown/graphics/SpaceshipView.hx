@@ -1,13 +1,12 @@
 package demo.topdown.graphics;
 
-import citrus.graphics.IAnimatable;
+import citrus.graphics.AAnimatable;
 import citrus.math.MathUtils;
 
-import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
-class SpaceshipView extends Container implements IAnimatable {
+class SpaceshipView extends AAnimatable {
 
     public function new() {
         super();
@@ -19,19 +18,13 @@ class SpaceshipView extends Container implements IAnimatable {
         addChild(display);
     }
 
-    public function animate(time:Float) {
+    override public function animate(time:Float) {
 
         alpha += time * 5;
     }
 
-    public function animationStarted() {
-    }
-
-    public function animationEnded() {
+    override public function animationEnded() {
 
         alpha = 1;
-    }
-
-    public function changeAnimation(animation:String) {
     }
 }

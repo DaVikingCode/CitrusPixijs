@@ -3,6 +3,7 @@ package demo.physics.patch.entities;
 import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 
+import citrus.components.Animation;
 import citrus.components.Display;
 import citrus.components.Motion;
 import citrus.components.MotionControls;
@@ -42,8 +43,9 @@ class Hero extends Entity {
             .add(new Player(fsm))
             .add(new Physics(body))
             .add(new Position())
-            .add(new Motion(15, 200))
-            .add(new Display(display));
+            .add(new Motion(15, 300))
+            .add(new Display(display))
+            .add(new Animation(display));
 
         fsm.changeState("playing");
     }

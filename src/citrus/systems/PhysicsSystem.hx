@@ -56,7 +56,7 @@ class PhysicsSystem extends System {
 
             position.position.x = physics.body.position.x;
             position.position.y = physics.body.position.y;
-            position.rotation = MathUtils.rad2deg(physics.body.rotation);
+            position.rotation = physics.body.rotation;
         }
     }
 

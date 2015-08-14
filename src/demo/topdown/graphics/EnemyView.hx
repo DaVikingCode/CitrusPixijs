@@ -1,13 +1,12 @@
 package demo.topdown.graphics;
 
-import citrus.graphics.IAnimatable;
+import citrus.graphics.AAnimatable;
 import citrus.math.MathUtils;
 
-import pixi.core.display.Container;
 import pixi.core.sprites.Sprite;
 import pixi.core.textures.Texture;
 
-class EnemyView extends Container implements IAnimatable {
+class EnemyView extends AAnimatable {
 
     public function new(color:String) {
         super();
@@ -19,17 +18,8 @@ class EnemyView extends Container implements IAnimatable {
         addChild(display);
     }
 
-    public function animate(time:Float) {
+    override public function animate(time:Float) {
 
         alpha -= time * 5;
-    }
-
-    public function animationStarted() {
-    }
-
-    public function animationEnded() {
-    }
-
-    public function changeAnimation(animation:String) {
     }
 }

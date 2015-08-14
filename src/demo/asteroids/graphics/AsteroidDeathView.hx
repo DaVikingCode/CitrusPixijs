@@ -1,12 +1,11 @@
 package demo.asteroids.graphics;
 
-import citrus.graphics.IAnimatable;
+import citrus.graphics.AAnimatable;
 
-import pixi.core.display.Container;
 import pixi.core.graphics.Graphics;
 import pixi.core.math.Point;
 
-class AsteroidDeathView extends Container implements IAnimatable {
+class AsteroidDeathView extends AAnimatable {
 
 	static inline var _numDots = 8;
 
@@ -25,22 +24,13 @@ class AsteroidDeathView extends Container implements IAnimatable {
 		}
 	}
 
-	public function animate(time:Float) {
+	override public function animate(time:Float) {
 
 		for (dot in _dots) {
 
 			dot.image.x += dot.velocity.x * time;
 			dot.image.y += dot.velocity.y * time;
 		}
-	}
-
-	public function animationStarted() {
-	}
-
-	public function animationEnded() {
-	}
-
-	public function changeAnimation(animation:String) {
 	}
 }
 

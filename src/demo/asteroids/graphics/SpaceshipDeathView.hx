@@ -1,13 +1,12 @@
 package demo.asteroids.graphics;
 
-import citrus.graphics.IAnimatable;
+import citrus.graphics.AAnimatable;
 import citrus.math.MathUtils;
 
-import pixi.core.display.Container;
 import pixi.core.graphics.Graphics;
 import pixi.core.math.Point;
 
-class SpaceshipDeathView extends Container implements IAnimatable {
+class SpaceshipDeathView extends AAnimatable {
 
     var shape1:Graphics;
     var shape2:Graphics;
@@ -44,7 +43,7 @@ class SpaceshipDeathView extends Container implements IAnimatable {
         rot2 = Math.random() * 300 - 150;
     }
 
-    public function animate(time:Float):Void {
+    override public function animate(time:Float):Void {
 
         shape1.x += vel1.x * time;
         shape1.y += vel1.y * time;
@@ -53,14 +52,5 @@ class SpaceshipDeathView extends Container implements IAnimatable {
         shape2.x += vel2.x * time;
         shape2.y += vel2.y * time;
         shape2.rotation += MathUtils.deg2rad(rot2 * time);
-    }
-
-    public function animationStarted() {
-    }
-
-    public function animationEnded() {
-    }
-
-    public function changeAnimation(animation:String) {
     }
 }

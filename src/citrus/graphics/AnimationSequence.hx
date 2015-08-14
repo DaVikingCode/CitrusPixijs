@@ -64,6 +64,8 @@ class AnimationSequence extends Container {
         mc.play();
 
         addChild(mc);
+
+        _previousAnimation = animation;
     }
 
     function _getTexturesForName(textureCache:Array<String>, name:String):Array<Texture> {

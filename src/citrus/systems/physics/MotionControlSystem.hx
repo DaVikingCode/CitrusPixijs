@@ -27,7 +27,7 @@ class MotionControlSystem extends ListIteratingSystem<MotionControlNode> {
         if (_keyPoll.isDown(control.right))
             physics.body.velocity.x += motion.velocity.x;
 
-        if (_keyPoll.justReleased(control.up))
+        if (_keyPoll.justPressed(control.up))
             physics.body.velocity.y = - motion.velocity.y;
     }
 }
