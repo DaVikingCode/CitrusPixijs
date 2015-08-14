@@ -44,7 +44,7 @@ class EntityCreator extends AEntityCreator {
         _engine.addEntity(nape);
 
         var floorBody = new Body(BodyType.STATIC);
-        floorBody.shapes.add(new Polygon(Polygon.rect(0, 380, 800, 50)));
+        floorBody.shapes.add(new Polygon(Polygon.rect(0, 380, 1000, 50)));
 
         var floor = new Entity()
             .add(new Physics(floorBody))
@@ -68,6 +68,25 @@ class EntityCreator extends AEntityCreator {
 
         var hero = new Hero(50, 100);
         _engine.addEntity(hero);
+
+        var oneWayBody = new Body(BodyType.STATIC);
+        oneWayBody.shapes.add(new Polygon(Polygon.rect(1000, 240, 180, 20)));
+
+        var oneWay = new Entity()
+            .add(new Physics(oneWayBody))
+            .add(new OneWay(false, false, false, false))
+            .add(new Position());
+
+        _engine.addEntity(oneWay);
+
+        var floor2Body = new Body(BodyType.STATIC);
+        floor2Body.shapes.add(new Polygon(Polygon.rect(960, 340, 580, 30)));
+
+        var floor2 = new Entity()
+            .add(new Physics(floor2Body))
+            .add(new Position());
+
+        _engine.addEntity(floor2);
 
         var camera = new Entity()
             .add(new Camera(hero.get(Position).position, new Point(320, 315), new Rectangle(0, 0, 1550, 450), new Point(0.25, 0.05)));
