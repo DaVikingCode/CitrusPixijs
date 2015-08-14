@@ -3,12 +3,14 @@ package demo.physics.patch;
 import ash.core.Engine;
 import ash.core.Entity;
 
+import citrus.components.Camera;
 import citrus.components.Display;
 import citrus.components.Nape;
 import citrus.components.physics.OneWay;
 import citrus.components.Physics;
 import citrus.components.Position;
 import citrus.core.AEntityCreator;
+import citrus.math.Rectangle;
 
 import demo.physics.patch.entities.Hero;
 
@@ -18,6 +20,7 @@ import nape.phys.BodyType;
 import nape.shape.Circle;
 import nape.shape.Polygon;
 
+import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
@@ -65,5 +68,10 @@ class EntityCreator extends AEntityCreator {
 
         var hero = new Hero(50, 100);
         _engine.addEntity(hero);
+
+        var camera = new Entity()
+            .add(new Camera(hero.get(Position).position, new Point(320, 315), new Rectangle(0, 0, 1550, 450), new Point(0.25, 0.05)));
+
+        _engine.addEntity(camera);
     }
 }

@@ -4,7 +4,6 @@ import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
-import citrus.math.MathUtils;
 import citrus.nodes.NapeNode;
 import citrus.nodes.PhysicsNode;
 
