@@ -10,12 +10,12 @@ import pixi.core.display.DisplayObject;
 class RenderNode extends Node<RenderNode> {
 
 	public var position:Position;
-	var _display:Display;
+	public var display:Display;
 
 	public var displayObject(get, never):DisplayObject;
 
 	inline function get_displayObject():DisplayObject {
 
-		return _display.displayObject;
+		return display.displayObject;
 	}
 }

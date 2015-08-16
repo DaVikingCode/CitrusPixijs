@@ -4,20 +4,21 @@ import ash.core.Engine;
 import ash.core.NodeList;
 import ash.core.System;
 
+import citrus.components.Display;
 import citrus.nodes.RenderNode;
 
 import pixi.core.display.Container;
 
 class RenderSystem extends System {
 
-	public var container:Container;
+	var _container:Container;
 
 	var _nodes:NodeList<RenderNode>;
 	
 	public function new(container:Container) {
 		super();
 
-		this.container = container;
+		_container = container;
 	}
 
 	override public function addToEngine(engine:Engine) {
@@ -33,12 +34,12 @@ class RenderSystem extends System {
 
 	function _addToDisplay(node:RenderNode) {
 
-		container.addChild(node.displayObject);
+		_updateLayerForDisplayObject(node.display);
 	}
 
 	function _removeFromDisplay(node:RenderNode) {
 
-		container.removeChild(node.displayObject);
+		cast (_container.getChildAt(node.display.layer), Container).removeChild(node.displayObject);
 	}
 
 	override public function update(time:Float) {
@@ -51,7 +52,20 @@ class RenderSystem extends System {
 			displayObject.x = position.position.x;
 			displayObject.y = position.position.y;
 			displayObject.rotation = position.rotation;
+
+			if (node.display._layerChanged)
+				_updateLayerForDisplayObject(node.display);
 		}
+	}
+
+	function _updateLayerForDisplayObject(display:Display) {
+
+		while (display.layer >= _container.children.length)
+			_container.addChild(new Container());
+
+		cast (_container.getChildAt(display.layer), Container).addChild(display.displayObject);
+
+		display._layerChanged = false;
 	}
 
 	override public function removeFromEngine(engine:Engine) {
