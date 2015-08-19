@@ -17,7 +17,7 @@ class OneBulletEnemyEntity extends BasicEnemyEntity {
 
         fsm.createState("playing")
             .add(Collision).withInstance(new Collision(50))
-            .add(Motion).withInstance(new Motion(-250, 0, 0, 0))
+            .add(Motion).withInstance(new Motion(-250))
             .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false))
             .add(Gun).withInstance(new Gun(-60, 0, 2, 5, true))
             .add(GunControls).withInstance(new GunControls());

@@ -76,7 +76,7 @@ class EntityCreator extends AEntityCreator {
 		var fsm = new EntityStateMachine(asteroid);
 
 		fsm.createState("alive")
-			.add(Motion).withInstance(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0))
+			.add(Motion).withInstance(new Motion((Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1))
 			.add(Collision).withInstance(new Collision(radius))
 			.add(Display).withInstance(new Display(new AsteroidView(radius)));
 
@@ -105,8 +105,11 @@ class EntityCreator extends AEntityCreator {
 
 		var fsm = new EntityStateMachine(spaceship);
 
+		var motion = new Motion();
+		motion.damping = 15;
+
 		fsm.createState("playing")
-			.add(Motion).withInstance(new Motion(0, 0, 0, 15))
+			.add(Motion).withInstance(motion)
 			.add(MotionControls).withInstance(new MotionControls(KeyboardEvent.DOM_VK_LEFT, KeyboardEvent.DOM_VK_RIGHT, -1, -1, KeyboardEvent.DOM_VK_UP, 100, 3))
 			.add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
 			.add(GunControls).withInstance(new GunControls(KeyboardEvent.DOM_VK_SPACE))
@@ -137,7 +140,7 @@ class EntityCreator extends AEntityCreator {
 		
 		bullet
 			.add(new Display(new BulletView()))
-			.add(new Motion(Math.cos(parentPosition.rotation) * 150, Math.sin(parentPosition.rotation) * 150, 0, 0));
+			.add(new Motion(Math.cos(parentPosition.rotation) * 150, Math.sin(parentPosition.rotation) * 150));
 
 		_engine.addEntity(bullet);
 

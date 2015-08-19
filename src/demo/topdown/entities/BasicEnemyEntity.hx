@@ -49,7 +49,7 @@ class BasicEnemyEntity extends Entity {
 
         fsm.createState("playing")
             .add(Collision).withInstance(new Collision(50))
-            .add(Motion).withInstance(new Motion(-450, 0, 0, 0))
+            .add(Motion).withInstance(new Motion(-450))
             .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false));
     }
 }

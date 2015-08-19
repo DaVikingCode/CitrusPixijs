@@ -76,7 +76,7 @@ class EntityCreator extends AEntityCreator {
         spaceship
             .add(new Player(fsm))
             .add(new Position(_config.width * 0.15, _config.height * 0.5, MathUtils.deg2rad(0)))
-            .add(new Motion(0, 0, 0, 50))
+            .add(new Motion())
             .add(new MotionControls(-1, -1, KeyboardEvent.DOM_VK_UP, KeyboardEvent.DOM_VK_DOWN, -1, 300, 0))
             .add(new Display(display))
             .add(new Audio());
@@ -133,7 +133,7 @@ class EntityCreator extends AEntityCreator {
 
         bullet
             .add(new Display(new BulletView("laserBlue01")))
-            .add(new Motion(500, 0, 0, 0))
+            .add(new Motion(500))
             .add(new KillOutOfScreen(true, false));
 
         _engine.addEntity(bullet);
@@ -147,7 +147,7 @@ class EntityCreator extends AEntityCreator {
 
         bullet
             .add(new Display(new BulletView("laserGreen16")))
-            .add(new Motion(-400, 0, 0, 0))
+            .add(new Motion(-400))
             .add(new KillOutOfScreen(true, false));
 
         _engine.addEntity(bullet);
@@ -165,7 +165,7 @@ class EntityCreator extends AEntityCreator {
             .add(new Position(cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x, sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y, angle))
             .add(new Collision(0))
             .add(new Display(new BulletView("laserRed08")))
-            .add(new Motion(-300, angle * 5, 0, 0))
+            .add(new Motion(-300, angle * 5))
             .add(new KillOutOfScreen(true, false));
 
         _engine.addEntity(bullet);

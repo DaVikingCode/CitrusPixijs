@@ -17,7 +17,7 @@ class ThreeBulletsEnemyEntity extends BasicEnemyEntity {
 
         fsm.createState("playing")
             .add(Collision).withInstance(new Collision(50))
-            .add(Motion).withInstance(new Motion(-200, 0, 0, 0))
+            .add(Motion).withInstance(new Motion(-200))
             .add(KillOutOfScreen).withInstance(new KillOutOfScreen(true, false))
             .add(Gun).withInstance(new Gun(-60, 0, 3.5, 5, true, 1))
             .add(GunControls).withInstance(new GunControls());

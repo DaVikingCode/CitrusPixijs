@@ -21,13 +21,24 @@ class MotionControlSystem extends ListIteratingSystem<MotionControlNode> {
         var physics = node.physics;
         var motion = node.motion;
 
+        var velocity = physics.body.velocity;
+
         if (_keyPoll.isDown(control.left))
-            physics.body.velocity.x -= motion.velocity.x;
+            velocity.x -= motion.velocity.x;
 
         if (_keyPoll.isDown(control.right))
-            physics.body.velocity.x += motion.velocity.x;
+            velocity.x += motion.velocity.x;
 
         if (_keyPoll.justPressed(control.up))
-            physics.body.velocity.y = - motion.velocity.y;
+            velocity.y = - motion.velocity.y;
+
+        if (motion.maxVelocity.x != -1) {
+
+            if (velocity.x > motion.maxVelocity.x)
+                velocity.x = motion.maxVelocity.x;
+
+            else if (velocity.x < -motion.maxVelocity.x)
+                velocity.x = -motion.maxVelocity.x;
+        }
     }
 }

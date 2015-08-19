@@ -48,7 +48,7 @@ class Hero extends Entity {
             .add(new Player(fsm))
             .add(new Physics(body))
             .add(new Position())
-            .add(new Motion(30, 330))
+            .add(new Motion(30, 330, 400))
             .add(new Display(display))
             .add(new Animation(display));
 
