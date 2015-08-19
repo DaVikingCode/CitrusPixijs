@@ -17,6 +17,7 @@ import demo.physics.patch.entities.Hero;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyType;
+import nape.phys.Material;
 import nape.shape.Circle;
 import nape.shape.Polygon;
 
@@ -43,8 +44,10 @@ class EntityCreator extends AEntityCreator {
 
         _engine.addEntity(nape);
 
+        var floorMaterial = new Material(0.65, 0.57, 1.2, 1, 0);
+        floorMaterial.elasticity = 0;
         var floorBody = new Body(BodyType.STATIC);
-        floorBody.shapes.add(new Polygon(Polygon.rect(0, 380, 1000, 50)));
+        floorBody.shapes.add(new Polygon(Polygon.rect(0, 380, 1000, 50), floorMaterial));
 
         var floor = new Entity()
             .add(new Physics(floorBody))
@@ -70,7 +73,7 @@ class EntityCreator extends AEntityCreator {
         _engine.addEntity(hero);
 
         var oneWayBody = new Body(BodyType.STATIC);
-        oneWayBody.shapes.add(new Polygon(Polygon.rect(1000, 240, 180, 20)));
+        oneWayBody.shapes.add(new Polygon(Polygon.rect(1000, 240, 180, 20), floorMaterial));
 
         var oneWay = new Entity()
             .add(new Physics(oneWayBody))
@@ -80,7 +83,7 @@ class EntityCreator extends AEntityCreator {
         _engine.addEntity(oneWay);
 
         var floor2Body = new Body(BodyType.STATIC);
-        floor2Body.shapes.add(new Polygon(Polygon.rect(960, 340, 580, 30)));
+        floor2Body.shapes.add(new Polygon(Polygon.rect(960, 340, 580, 30), floorMaterial));
 
         var floor2 = new Entity()
             .add(new Physics(floor2Body))

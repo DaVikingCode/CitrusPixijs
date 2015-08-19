@@ -17,6 +17,7 @@ import js.html.KeyboardEvent;
 
 import nape.phys.Body;
 import nape.phys.BodyType;
+import nape.phys.Material;
 import nape.shape.Polygon;
 
 class Hero extends Entity {
@@ -31,8 +32,12 @@ class Hero extends Entity {
 
         display = new HeroView();
 
+        var material = new Material(0.65, 0.57, 1.2, 1, 0);
+        material.staticFriction = 0;
+        material.elasticity = 0;
+
         var body = new Body(BodyType.DYNAMIC);
-        body.shapes.add(new Polygon(Polygon.box(60, 120)));
+        body.shapes.add(new Polygon(Polygon.box(60, 120), material));
         body.position.setxy(x, y);
         body.allowRotation = false;
 
@@ -43,7 +48,7 @@ class Hero extends Entity {
             .add(new Player(fsm))
             .add(new Physics(body))
             .add(new Position())
-            .add(new Motion(15, 300))
+            .add(new Motion(30, 330))
             .add(new Display(display))
             .add(new Animation(display));
 
