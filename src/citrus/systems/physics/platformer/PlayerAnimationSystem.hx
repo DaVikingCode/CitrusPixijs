@@ -4,7 +4,7 @@ import ash.tools.ListIteratingSystem;
 
 import citrus.nodes.physics.AnimationNode;
 
-class AnimationSystem extends ListIteratingSystem<AnimationNode> {
+class PlayerAnimationSystem extends ListIteratingSystem<AnimationNode> {
 
     public function new() {
         super(AnimationNode, _updateNode);

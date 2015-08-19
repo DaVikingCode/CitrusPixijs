@@ -3,6 +3,7 @@ package demo.physics.patch;
 import ash.core.Engine;
 import ash.core.Entity;
 
+import citrus.components.Animation;
 import citrus.components.Camera;
 import citrus.components.Display;
 import citrus.components.physics.Nape;
@@ -11,6 +12,7 @@ import citrus.components.physics.Physics;
 import citrus.components.Position;
 import citrus.core.AEntityCreator;
 import citrus.math.Rectangle;
+import citrus.physics.NapeDebugView;
 
 import demo.physics.patch.entities.Hero;
 
@@ -34,7 +36,7 @@ class EntityCreator extends AEntityCreator {
     public function createGame() {
 
         var bg = new Entity()
-            .add(new Position(0, 0, 0))
+            .add(new Position())
             .add(new Display(new Sprite(Texture.fromImage("background.jpg"))));
 
         _engine.addEntity(bg);
@@ -43,6 +45,15 @@ class EntityCreator extends AEntityCreator {
             .add(new Nape(new Vec2(0, 450)));
 
         _engine.addEntity(nape);
+
+        var napeDebugView = new NapeDebugView(nape.get(Nape).space);
+
+        var napeDebug = new Entity()
+            .add(new Position())
+            .add(new Display(napeDebugView))
+            .add(new Animation(napeDebugView));
+
+        _engine.addEntity(napeDebug);
 
         var floorMaterial = new Material(0.65, 0.57, 1.2, 1, 0);
         floorMaterial.elasticity = 0;
@@ -73,7 +84,7 @@ class EntityCreator extends AEntityCreator {
         _engine.addEntity(hero);
 
         var oneWayBody = new Body(BodyType.STATIC);
-        oneWayBody.shapes.add(new Polygon(Polygon.rect(1000, 240, 180, 20), floorMaterial));
+        oneWayBody.shapes.add(new Polygon(Polygon.rect(1015, 240, 180, 20), floorMaterial));
 
         var oneWay = new Entity()
             .add(new Physics(oneWayBody))
