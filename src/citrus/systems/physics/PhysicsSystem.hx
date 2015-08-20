@@ -30,23 +30,23 @@ class PhysicsSystem extends System {
 
     function _addToNape(node:PhysicsNode) {
 
-        var nape = _napes.head;
+        var nape = _napes.head.nape;
 
-        node.physics.body.space = nape.nape.space;
+        node.physics.body.space = nape.space;
     }
 
     function _removeFromNape(node:PhysicsNode) {
 
-        var nape = _napes.head;
+        var nape = _napes.head.nape;
 
-        nape.nape.space.bodies.remove(node.physics.body);
+        nape.space.bodies.remove(node.physics.body);
     }
 
     override public function update(time:Float) {
 
-        var nape = _napes.head;
+        var nape = _napes.head.nape;
 
-        nape.nape.space.step(nape.nape.deltaTime, nape.nape.velocityIterations, nape.nape.positionIterations);
+        nape.space.step(nape.deltaTime, nape.velocityIterations, nape.positionIterations);
 
         for (physicsObject in _physicsObjects) {
 
@@ -61,9 +61,9 @@ class PhysicsSystem extends System {
 
     override public function removeFromEngine(engine:Engine) {
 
-        var nape = _napes.head;
+        var nape = _napes.head.nape;
 
-        nape.nape.space.clear();
+        nape.space.clear();
 
         _napes = null;
         _physicsObjects = null;
