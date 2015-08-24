@@ -1,16 +1,16 @@
-package citrus.systems.physics.platformer;
+package demo.physics.patch.systems;
 
 import ash.tools.ListIteratingSystem;
 
-import citrus.nodes.physics.AnimationNode;
+import demo.physics.patch.nodes.PlayerAnimationNode;
 
-class PlayerAnimationSystem extends ListIteratingSystem<AnimationNode> {
+class PlayerAnimationSystem extends ListIteratingSystem<PlayerAnimationNode> {
 
     public function new() {
-        super(AnimationNode, _updateNode);
+        super(PlayerAnimationNode, _updateNode);
     }
 
-    function _updateNode(node:AnimationNode, time:Float) {
+    function _updateNode(node:PlayerAnimationNode, time:Float) {
 
         var physics = node.physics;
         var motion = node.motion;

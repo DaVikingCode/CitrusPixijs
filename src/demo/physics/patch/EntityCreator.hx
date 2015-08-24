@@ -14,6 +14,7 @@ import citrus.core.AEntityCreator;
 import citrus.math.Rectangle;
 import citrus.physics.NapeDebugView;
 
+import demo.physics.patch.entities.BadGuy;
 import demo.physics.patch.entities.Hero;
 
 import nape.geom.Vec2;
@@ -82,6 +83,9 @@ class EntityCreator extends AEntityCreator {
 
         var hero = new Hero(50, 100);
         _engine.addEntity(hero);
+
+        var badGuy = new BadGuy(750, 300);
+        _engine.addEntity(badGuy);
 
         var oneWayBody = new Body(BodyType.STATIC);
         oneWayBody.shapes.add(new Polygon(Polygon.rect(1015, 240, 180, 20), floorMaterial));

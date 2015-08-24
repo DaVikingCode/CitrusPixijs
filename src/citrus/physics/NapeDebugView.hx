@@ -6,6 +6,9 @@ import nape.space.Space;
 
 import pixi.core.graphics.Graphics;
 
+/**
+* A dummy Nape debug view
+**/
 class NapeDebugView extends AAnimatable {
 
     var _space:Space;

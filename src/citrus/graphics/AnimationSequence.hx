@@ -60,6 +60,9 @@ class AnimationSequence extends Container {
 
         removeChild(oldMc);
 
+        if (!_mcSequences.exists(animation))
+            trace("no animation: " + animation);
+
         var mc = _mcSequences.get(animation);
         mc.play();
 

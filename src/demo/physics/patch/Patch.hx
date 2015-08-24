@@ -6,9 +6,10 @@ import citrus.systems.CameraSystem;
 import citrus.systems.physics.MotionControlSystem;
 import citrus.systems.physics.OneWaySystem;
 import citrus.systems.physics.PhysicsSystem;
-import citrus.systems.physics.platformer.PlayerAnimationSystem;
 import citrus.systems.RenderSystem;
 import citrus.systems.SystemPriorities;
+
+import demo.physics.patch.systems.PlayerAnimationSystem;
 
 class Patch extends Scene {
 
