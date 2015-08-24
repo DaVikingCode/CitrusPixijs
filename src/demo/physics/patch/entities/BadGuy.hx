@@ -4,6 +4,7 @@ import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 
 import citrus.components.Animation;
+import citrus.components.Direction;
 import citrus.components.Display;
 import citrus.components.Motion;
 import citrus.components.physics.Physics;
@@ -45,6 +46,7 @@ class BadGuy extends Entity {
             .add(new Physics(body))
             .add(new Position())
             .add(new Motion(-20, 0, 200))
+            .add(new Direction(false, true))
             .add(new Display(display))
             .add(new Animation(display));
 

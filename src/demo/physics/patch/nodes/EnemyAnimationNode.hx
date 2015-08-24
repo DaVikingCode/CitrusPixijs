@@ -2,14 +2,14 @@ package demo.physics.patch.nodes;
 
 import ash.core.Node;
 
-import citrus.components.Player;
 import citrus.components.Animation;
+import citrus.components.Enemy;
 import citrus.components.Motion;
 import citrus.components.physics.Physics;
 
-class PlayerAnimationNode extends Node<PlayerAnimationNode> {
+class EnemyAnimationNode extends Node<EnemyAnimationNode> {
 
-    public var player:Player;
+    public var enemy:Enemy;
     public var animation:Animation;
     public var motion:Motion;
     public var physics:Physics;
