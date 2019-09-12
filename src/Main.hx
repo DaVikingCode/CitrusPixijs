@@ -10,6 +10,11 @@ import pixi.loaders.Loader;
 
 class Main extends CitrusJS {
 
+	static function main()
+	{
+		new Main();
+	}
+
 	public function new() {
 		super();
 		
@@ -58,9 +63,5 @@ class Main extends CitrusJS {
 		loader.load(function() {
 			scene = new Patch();
 		});
-	}
-
-	static public function main() {
-		new Main();
 	}
 }

@@ -39,13 +39,13 @@ class Asteroids extends Scene {
 		CollisionCategories.add("Enemy");
 		
 		var gunSound:HowlOptions = {};
-		gunSound.urls = ["assets/spaceshooter/sound/sfx_laser1.ogg"];
+		gunSound.src = ["assets/spaceshooter/sound/sfx_laser1.ogg"];
 
 		var asteroidExplosionSound:HowlOptions = {};
-		asteroidExplosionSound.urls = ["assets/spaceshooter/sound/sfx_twoTone.ogg"];
+		asteroidExplosionSound.src = ["assets/spaceshooter/sound/sfx_twoTone.ogg"];
 
 		var shipExplosionSound:HowlOptions = {};
-		shipExplosionSound.urls = ["assets/spaceshooter/sound/sfx_lose.ogg"];
+		shipExplosionSound.src = ["assets/spaceshooter/sound/sfx_lose.ogg"];
 
 		_engine.addSystem(new WaitForStartSystem(_creator), SystemPriorities.preUpdate);
 		_engine.addSystem(new GameManager(_creator, _config), SystemPriorities.preUpdate);

@@ -16,7 +16,7 @@ class Scene extends Container {
 	public function new() {
 		super();
 
-		_citrusJS = CitrusJS.getInstance();
+		_citrusJS = CitrusJS.instance;
 	}
 	
 	public function initialize() {
@@ -27,11 +27,11 @@ class Scene extends Container {
 	
 	public function onUpdate(elapsedTime:Float) {
 
-		_engine.update(elapsedTime * 0.001);
+		_engine.update(elapsedTime);
 		_keyPoll.update();
 	}
 	
-	public function destroy() {
+	public function dispose() {
 
 		_keyPoll.destroy();
 

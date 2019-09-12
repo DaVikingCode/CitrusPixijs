@@ -7,7 +7,7 @@ import pixi.plugins.app.Application;
 
 class CitrusJS extends Application {
 	
-	static var _instance:CitrusJS;
+	public static var instance(default, null):CitrusJS;
 
 	public var playing = true;
 
@@ -20,7 +20,7 @@ class CitrusJS extends Application {
 	public function new() {
 		super();
 		
-		_instance = this;
+		instance = this;
 
 		onUpdate = _onUpdate;
 
@@ -28,11 +28,6 @@ class CitrusJS extends Application {
 			Browser.window.onfocus = _windowGetFocus;
 			Browser.window.onblur = _windowLostFocus;
 		}
-	}
-
-	static public function getInstance():CitrusJS {
-
-		return _instance;
 	}
 
 	function _windowGetFocus(evt:Event) {
@@ -45,26 +40,26 @@ class CitrusJS extends Application {
 		playing = false;
 	}
 	
-	function get_scene():Scene {
-		
+	function get_scene():Scene
+	{	
 		if (_newScene != null)
 			return _newScene;
-		else
-			return _scene;
+		
+		return _scene;
 	}
 	
-	function set_scene(value:Scene):Scene {
-		
+	function set_scene(value:Scene):Scene
+	{	
 		return _newScene = value;
 	}
 	
-	function _onUpdate(elapsedTime:Float) {
-		
+	function _onUpdate(elapsedTime:Float)
+	{	
 		if (_newScene != null) {
 			
 			if (_scene != null) {
 
-				_scene.destroy();
+				_scene.dispose();
 				stage.removeChild(_scene);
 			}
 
@@ -77,7 +72,7 @@ class CitrusJS extends Application {
 		
 		if (_scene != null && playing) {
 
-			_scene.onUpdate(elapsedTime);
+			_scene.onUpdate(elapsedTime / 60);
 		}
 	}
 }

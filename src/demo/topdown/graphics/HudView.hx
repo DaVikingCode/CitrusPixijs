@@ -37,7 +37,7 @@ class HudView extends Container {
 
     function _createTextField():Text {
 
-        var tf = new Text("", {font:'bold 18px Helvetica', fill:'white', align:'center'});
+        var tf = new Text("", {fontFamily:'Helvetica', fontSize:18, fontWeight:'bold', fill:'white', align:'center'});
 
         return tf;
     }

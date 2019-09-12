@@ -47,7 +47,7 @@ class Camera {
         if (easing != null)
             this.easing = easing;
 
-        this.lensWidth = CitrusJS.getInstance().width;
-        this.lensHeight = CitrusJS.getInstance().height;
+        this.lensWidth = CitrusJS.instance.width;
+        this.lensHeight = CitrusJS.instance.height;
     }
 }

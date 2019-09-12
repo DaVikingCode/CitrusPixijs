@@ -5,7 +5,7 @@
 -lib ash
 -lib howlerjs
 -lib pixijs
--lib nape
+-lib nape-haxe4
 -D NAPE_RELEASE_BUILD
 -dce full
 -debug

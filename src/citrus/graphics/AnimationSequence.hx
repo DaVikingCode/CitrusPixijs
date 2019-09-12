@@ -2,11 +2,11 @@ package citrus.graphics;
 
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
-import pixi.extras.MovieClip;
+import pixi.extras.AnimatedSprite;
 
 class AnimationSequence extends Container {
 
-    var _mcSequences:Map<String, MovieClip>;
+    var _mcSequences:Map<String, AnimatedSprite>;
     var _previousAnimation:String;
 
     var _animations:Array<AnimationData>;
@@ -14,7 +14,7 @@ class AnimationSequence extends Container {
 
     public function new(animations:Array<AnimationData>, firstAnimation:String) {
         super();
-        _mcSequences = new Map<String, MovieClip>();
+        _mcSequences = new Map<String, AnimatedSprite>();
 
         _animations = animations;
         _previousAnimation = _firstAnimation = firstAnimation;
@@ -24,13 +24,13 @@ class AnimationSequence extends Container {
         untyped __js__('for (var index in PIXI.utils.TextureCache)
             textureCache.push(index);');
 
-        var mc:MovieClip;
+        var mc:AnimatedSprite;
         var textures:Array<Texture>;
         for (animation in animations) {
 
             textures = _getTexturesForName(textureCache, animation.name);
 
-            mc = new MovieClip(textures);
+            mc = new AnimatedSprite(textures);
             mc.anchor = animation.anchor;
             mc.animationSpeed = animation.animationSpeed;
             mc.loop = animation.loop;

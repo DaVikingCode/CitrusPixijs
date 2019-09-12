@@ -6,7 +6,7 @@ import citrus.core.CitrusJS;
 
 import pixi.core.display.Container;
 import pixi.core.text.Text;
-import pixi.interaction.EventTarget;
+import pixi.interaction.InteractionEvent;
 
 class WaitForStartView extends Container {
 
@@ -25,7 +25,7 @@ class WaitForStartView extends Container {
 		_clickToStart = _createClickToStart();
 		addChild(_clickToStart);
 
-		_stage = CitrusJS.getInstance().stage;
+		_stage = CitrusJS.instance.stage;
 
 		addListener("added", addedToStage);
 		addListener("removed", removedFromStage);
@@ -46,14 +46,14 @@ class WaitForStartView extends Container {
 		_gameOver.text = "GAME OVER";
 	}
 
-	function _onButtonDown(target:EventTarget) {
+	function _onButtonDown(target:InteractionEvent) {
 
 		clicked.dispatch();
 	}
 
 	function _createGameOver():Text {
 
-		var tf = new Text("ASTEROIDS", {font:'bold 32px Helvetica', fill:'white', align:'center'});
+		var tf = new Text("ASTEROIDS", {fontFamily:'Helvetica', fontSize:32, fontWeight:'bold', fill:'white', align:'center'});
 
 		tf.x = 285;
 		tf.y = 200;
@@ -63,7 +63,7 @@ class WaitForStartView extends Container {
 
 	function _createClickToStart():Text {
 
-		var tf = new Text("CLICK TO START", {font:'bold 18px Helvetica', fill:'white', align:'center'});
+		var tf = new Text("CLICK TO START", {fontFamily:'Helvetica', fontSize:18, fontWeight:'bold', fill:'white', align:'center'});
 
 		tf.x = 300;
 		tf.y = 250;

@@ -2,37 +2,12 @@ package citrus.math;
 
 class Rectangle extends pixi.core.math.shapes.Rectangle {
 
-    @:isVar public var left(get, null):Float;
-    @:isVar public var right(get, null):Float;
-    @:isVar public var top(get, null):Float;
-    @:isVar public var bottom(get, null):Float;
-
     public function set(x:Float, y:Float, width:Float, height:Float) {
 
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-    }
-
-    public function get_left():Float {
-
-        return left = x;
-    }
-
-    public function get_right():Float {
-
-        return right = x + width;
-    }
-
-    public function get_top():Float {
-
-        return top = y;
-    }
-
-    public function get_bottom():Float {
-
-        return bottom = y + height;
     }
 
     /**

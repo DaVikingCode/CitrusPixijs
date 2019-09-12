@@ -4,7 +4,7 @@ import citrus.graphics.AAnimatable;
 import citrus.graphics.AnimationData;
 import citrus.graphics.AnimationSequence;
 
-import pixi.core.math.Point;
+import pixi.core.math.ObservablePoint;
 
 class HeroView extends AAnimatable {
 
@@ -14,9 +14,9 @@ class HeroView extends AAnimatable {
         super();
 
         _anim = new AnimationSequence([
-            new AnimationData("Patch/walk", new Point(0.5, 0.5), true, 0.5),
-            new AnimationData("Patch/jump", new Point(0.5, 0.5), 0.5),
-            new AnimationData("Patch/idle", new Point(0.5, 0.5), 0.5)],
+            new AnimationData("Patch/walk", new ObservablePoint(0.5, 0.5), true, 0.5),
+            new AnimationData("Patch/jump", new ObservablePoint(0.5, 0.5), 0.5),
+            new AnimationData("Patch/idle", new ObservablePoint(0.5, 0.5), 0.5)],
         "Patch/idle");
 
         addChild(_anim);

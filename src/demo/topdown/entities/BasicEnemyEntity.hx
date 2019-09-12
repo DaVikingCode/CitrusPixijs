@@ -28,7 +28,7 @@ class BasicEnemyEntity extends Entity {
 
         display = new EnemyView(color);
 
-        var ce = CitrusJS.getInstance();
+        var ce = CitrusJS.instance;
 
         _addPlayingState();
 
